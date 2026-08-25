@@ -1,0 +1,56 @@
+/* ============================================================
+   tokens/colors.css — semantic design tokens
+   Single source of truth for every color the site uses.
+   Themes override these in themes.css via [data-theme].
+   ============================================================ */
+
+:root {
+  /* Safety-net fallback = Liquid Glass palette (also the default theme) */
+  --bg: #0C1626;
+  --bg-soft: #0A1220;
+  --surface: rgba(21, 35, 54, 0.75);
+  --surface-2: rgba(48, 71, 102, 0.55);
+  --text: #F2F7FF;
+  --text-muted: #D2DEEF;
+  --primary: #2D78AB;
+  --primary-contrast: #FFFFFF;
+  --accent: #7FD4FF;
+  --success: #43A047;
+  --border: rgba(217, 229, 255, 0.16);
+  --border-strong: rgba(217, 229, 255, 0.32);
+
+  /* Glass recipe */
+  --glass-blur: 18px;
+  --glass-bg: rgba(21, 35, 54, 0.55);
+  --glass-highlight: rgba(255, 255, 255, 0.14);
+
+  /* Depth */
+  --shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 12px 32px -12px rgba(0, 0, 0, 0.55);
+  --shadow-hover:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 20px 44px -16px rgba(0, 0, 0, 0.65);
+
+  /* Ambient hero glows (per-theme hues) */
+  --glow-1: rgba(45, 120, 171, 0.45);
+  --glow-2: rgba(127, 212, 255, 0.28);
+
+  /* Prism corner shapes — mirrored from the app's ui/theme/Token.kt */
+  --prism-card:   16px 8px 16px 8px;  /* TL TR BR BL */
+  --prism-tile:   12px 8px 12px 8px;
+  --prism-dialog: 20px 12px 20px 12px;
+
+  /* Spacing scale (4dp rhythm, mirrors Token.kt) */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+
+  /* Type */
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* Structure */
+  --nav-h: 68px;
+  --container: 1120px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}

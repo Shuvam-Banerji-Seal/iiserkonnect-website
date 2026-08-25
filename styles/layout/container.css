@@ -1,0 +1,52 @@
+/* ============================================================
+   layout/container.css — page shell + section rhythm
+   ============================================================ */
+
+.container {
+  width: min(var(--container), 92%);
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  padding-block: clamp(64px, 9vw, 120px);
+  scroll-margin-top: calc(var(--nav-h) + 16px);
+}
+
+.section--alt {
+  background: var(--bg-soft);
+}
+
+/* Thin gradient hairline between sections */
+.section--ruled::before {
+  content: "";
+  position: absolute;
+  inset-inline: 8%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--border-strong) 50%, transparent);
+}
+
+/* Section header block */
+.section-head {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--sp-3);
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.section-head .lead { margin-inline: auto; }
+
+/* Generic responsive grids */
+.grid {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 264px), 1fr));
+}
+
+@media (min-width: 720px) {
+  .grid--bento { grid-template-columns: repeat(3, 1fr); }
+  .span-2 { grid-column: span 2; }
+}

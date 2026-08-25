@@ -1,0 +1,27 @@
+/* ============================================================
+   main.css — cascade entry point (import order matters)
+   1 tokens → 2 base → 3 layout → 4 utilities → 5 components
+   ============================================================ */
+
+@import url("tokens/colors.css");
+@import url("tokens/themes.css");
+
+@import url("base/reset.css");
+@import url("base/typography.css");
+
+@import url("layout/container.css");
+
+@import url("utilities/animations.css");
+@import url("utilities/helpers.css");
+
+@import url("components/buttons.css");
+@import url("components/navbar.css");
+@import url("components/hero.css");
+@import url("components/phone.css");
+@import url("components/cards.css");
+@import url("components/stats.css");
+@import url("components/chat.css");
+@import url("components/themes.css");
+@import url("components/tech.css");
+@import url("components/download.css");
+@import url("components/footer.css");

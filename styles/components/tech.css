@@ -1,0 +1,69 @@
+/* ============================================================
+   components/tech.css — tech stack chips + security card
+   ============================================================ */
+
+.tech-grid {
+  display: grid;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .tech-grid { grid-template-columns: 1.1fr 0.9fr; }
+}
+
+.chip-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.chip-cloud .chip {
+  padding: 8px 15px;
+  font-size: 0.82rem;
+  transition: border-color 0.25s, color 0.25s, transform 0.25s var(--ease-out);
+}
+
+.chip-cloud .chip:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.security-card {
+  padding: var(--sp-6);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  border-radius: var(--prism-dialog);
+  box-shadow: var(--shadow);
+}
+
+.security-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--sp-4);
+}
+
+.security-card h3 svg { width: 21px; height: 21px; color: var(--primary); }
+
+.security-card ul {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.security-card li {
+  display: flex;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.security-card li svg {
+  flex: none;
+  width: 16px; height: 16px;
+  translate: 0 3px;
+  color: var(--success);
+}

@@ -1,0 +1,188 @@
+/* ============================================================
+   tokens/themes.css — the app's 9 theme modes as site themes
+   Hex values are VERBATIM from IISERKonnect ui/theme/Color.kt
+   and Theme.kt scheme definitions [read from source this session].
+   ============================================================ */
+
+/* ── Liquid Glass (app mode 8) — flagship / site default ─────── */
+[data-theme="liquid-glass"] {
+  --bg: #0C1626;
+  --bg-soft: #0A1220;
+  --surface: rgba(21, 35, 54, 0.75);
+  --surface-2: rgba(48, 71, 102, 0.55);
+  --text: #F2F7FF;
+  --text-muted: #D2DEEF;
+  --primary: #2D78AB;
+  --primary-contrast: #FFFFFF;
+  --accent: #7FD4FF;
+  --border: rgba(217, 229, 255, 0.16);
+  --border-strong: rgba(217, 229, 255, 0.34);
+  --glass-blur: 18px;
+  --glass-bg: rgba(21, 35, 54, 0.55);
+  --glass-highlight: rgba(255, 255, 255, 0.14);
+  --shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 12px 32px -12px rgba(0,0,0,.55);
+  --shadow-hover: 0 1px 0 rgba(255,255,255,.08) inset, 0 20px 44px -16px rgba(0,0,0,.65);
+  --glow-1: rgba(45, 120, 171, 0.45);
+  --glow-2: rgba(127, 212, 255, 0.28);
+}
+
+/* ── Dark — warm cocoa (app mode 0, the app default) ─────────── */
+[data-theme="dark"] {
+  --bg: #1E1714;
+  --bg-soft: #17110E;
+  --surface: #2A211C;
+  --surface-2: #362B24;
+  --text: #F0E6D8;
+  --text-muted: #CDBEB0;
+  --primary: #7DD4B2;          /* warm mint */
+  --primary-contrast: #0D3B2F;
+  --accent: #F5D060;           /* light warm gold */
+  --success: #43A047;
+  --border: rgba(240, 230, 216, 0.14);
+  --border-strong: rgba(240, 230, 216, 0.30);
+  --glass-blur: 12px;
+  --glass-bg: rgba(42, 33, 28, 0.6);
+  --glass-highlight: rgba(245, 208, 96, 0.08);
+  --shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 32px -14px rgba(0,0,0,.5);
+  --shadow-hover: 0 1px 0 rgba(255,255,255,.06) inset, 0 20px 44px -16px rgba(0,0,0,.6);
+  --glow-1: rgba(125, 212, 178, 0.22);
+  --glow-2: rgba(230, 168, 23, 0.20);
+}
+
+/* ── Light — warm cream (app mode 1) ─────────────────────────── */
+[data-theme="light"] {
+  --bg: #FFF8F0;
+  --bg-soft: #F7EEE1;
+  --surface: #FFFFFF;
+  --surface-2: #F2E8DC;
+  --text: #2D1F10;
+  --text-muted: #5C4F3D;
+  --primary: #1B5E4A;          /* warm forest teal */
+  --primary-contrast: #FFFFFF;
+  --accent: #E6A817;           /* honey amber */
+  --success: #2E7D32;
+  --border: rgba(45, 31, 16, 0.14);
+  --border-strong: rgba(45, 31, 16, 0.30);
+  --glass-blur: 12px;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 12px 28px -14px rgba(45,31,16,.25);
+  --shadow-hover: 0 1px 0 rgba(255,255,255,.9) inset, 0 20px 40px -18px rgba(45,31,16,.3);
+  --glow-1: rgba(27, 94, 74, 0.16);
+  --glow-2: rgba(230, 168, 23, 0.20);
+}
+
+/* ── Catppuccin Mocha (app mode 3) ───────────────────────────── */
+[data-theme="catppuccin-mocha"] {
+  --bg: #1E1E2E;
+  --bg-soft: #181825;
+  --surface: #313244;
+  --surface-2: #45475A;
+  --text: #CDD6F4;
+  --text-muted: #A6ADC8;
+  --primary: #CBA6F7;          /* mauve */
+  --primary-contrast: #11111B;
+  --accent: #94E2D5;           /* teal */
+  --success: #A6E3A1;
+  --border: rgba(205, 214, 244, 0.14);
+  --border-strong: rgba(205, 214, 244, 0.30);
+  --glass-blur: 12px;
+  --glass-bg: rgba(49, 50, 68, 0.6);
+  --glass-highlight: rgba(203, 166, 247, 0.10);
+  --shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 32px -14px rgba(0,0,0,.5);
+  --shadow-hover: 0 1px 0 rgba(255,255,255,.06) inset, 0 20px 44px -16px rgba(0,0,0,.6);
+  --glow-1: rgba(203, 166, 247, 0.26);
+  --glow-2: rgba(148, 226, 213, 0.20);
+}
+
+/* ── Catppuccin Latte (app mode 4) ───────────────────────────── */
+[data-theme="catppuccin-latte"] {
+  --bg: #EFF1F5;
+  --bg-soft: #E6E9EF;
+  --surface: #FFFFFF;
+  --surface-2: #CCD0DA;
+  --text: #4C4F69;
+  --text-muted: #6C6F85;
+  --primary: #8839EF;          /* mauve */
+  --primary-contrast: #FFFFFF;
+  --accent: #179299;           /* teal */
+  --success: #40A02B;
+  --border: rgba(76, 79, 105, 0.16);
+  --border-strong: rgba(76, 79, 105, 0.34);
+  --glass-blur: 12px;
+  --glass-bg: rgba(255, 255, 255, 0.66);
+  --glass-highlight: rgba(255, 255, 255, 0.92);
+  --shadow: 0 1px 0 rgba(255,255,255,.85) inset, 0 12px 28px -14px rgba(76,79,105,.28);
+  --shadow-hover: 0 1px 0 rgba(255,255,255,.95) inset, 0 20px 40px -18px rgba(76,79,105,.34);
+  --glow-1: rgba(136, 57, 239, 0.18);
+  --glow-2: rgba(23, 146, 153, 0.18);
+}
+
+/* ── Tokyo Night (app mode 5) ────────────────────────────────── */
+[data-theme="tokyo-night"] {
+  --bg: #1A1B26;
+  --bg-soft: #16161E;
+  --surface: #292E42;
+  --surface-2: #343A55;
+  --text: #C0CAF5;
+  --text-muted: #A9B1D6;
+  --primary: #7AA2F7;          /* blue */
+  --primary-contrast: #16161E;
+  --accent: #BB9AF7;           /* magenta */
+  --success: #9ECE6A;
+  --border: rgba(192, 202, 245, 0.15);
+  --border-strong: rgba(192, 202, 245, 0.32);
+  --glass-blur: 12px;
+  --glass-bg: rgba(41, 46, 66, 0.62);
+  --glass-highlight: rgba(122, 162, 247, 0.12);
+  --shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 12px 32px -14px rgba(0,0,0,.55);
+  --shadow-hover: 0 1px 0 rgba(255,255,255,.07) inset, 0 20px 44px -16px rgba(0,0,0,.65);
+  --glow-1: rgba(122, 162, 247, 0.30);
+  --glow-2: rgba(187, 154, 247, 0.24);
+}
+
+/* ── Coffee Green (app mode 6) ───────────────────────────────── */
+[data-theme="coffee-green"] {
+  --bg: #F7F3ED;
+  --bg-soft: #EDE7DC;
+  --surface: #FCFAF6;
+  --surface-2: #EDE7DC;
+  --text: #2C2417;
+  --text-muted: #5C4F3D;
+  --primary: #2D5F3C;          /* deep forest green */
+  --primary-contrast: #FFFFFF;
+  --accent: #8B6F47;           /* warm coffee brown */
+  --success: #2D5F3C;
+  --border: rgba(44, 36, 23, 0.15);
+  --border-strong: rgba(44, 36, 23, 0.32);
+  --glass-blur: 12px;
+  --glass-bg: rgba(252, 250, 246, 0.7);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 12px 28px -14px rgba(44,36,23,.24);
+  --shadow-hover: 0 1px 0 rgba(255,255,255,.9) inset, 0 20px 40px -18px rgba(44,36,23,.3);
+  --glow-1: rgba(45, 95, 60, 0.18);
+  --glow-2: rgba(139, 111, 71, 0.22);
+}
+
+/* ── Neon Contrast (app mode 7) ──────────────────────────────── */
+[data-theme="neon"] {
+  --bg: #000000;
+  --bg-soft: #050505;
+  --surface: #0A0A0A;
+  --surface-2: #121212;
+  --text: #EEEEEE;
+  --text-muted: #AAAAAA;
+  --primary: #FFEB3B;          /* neon yellow */
+  --primary-contrast: #000000;
+  --accent: #39FF14;           /* electric green */
+  --success: #39FF14;
+  --border: rgba(255, 235, 59, 0.28);
+  --border-strong: rgba(255, 235, 59, 0.55);
+  --glass-blur: 8px;
+  --glass-bg: rgba(10, 10, 10, 0.72);
+  --glass-highlight: rgba(255, 235, 59, 0.10);
+  --shadow: 0 0 0 1px rgba(255,235,59,.12) inset, 0 0 28px -6px rgba(255,235,59,.14);
+  --shadow-hover: 0 0 0 1px rgba(255,235,59,.22) inset, 0 0 44px -8px rgba(255,235,59,.24);
+  --glow-1: rgba(255, 235, 59, 0.20);
+  --glow-2: rgba(0, 255, 255, 0.16);
+}

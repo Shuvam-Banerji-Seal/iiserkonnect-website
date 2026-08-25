@@ -1,0 +1,83 @@
+/* ============================================================
+   components/themes.css — theme showcase + <theme-picker>
+   ============================================================ */
+
+.theme-showcase__grid {
+  display: grid;
+  gap: clamp(32px, 4vw, 48px);
+  justify-items: center;
+}
+
+.theme-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-5);
+  border-radius: var(--prism-dialog);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.swatch {
+  --sw-a: #888;
+  --sw-b: #aaa;
+  --sw-c: #ccc;
+  position: relative; /* anchor for the active-check ::after */
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 6px;
+  border-radius: var(--prism-tile);
+  transition: transform 0.25s var(--ease-out), background-color 0.2s;
+}
+
+.swatch:hover { transform: translateY(-3px); background: var(--surface-2); }
+
+.swatch__dot {
+  position: relative;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 30%, var(--sw-c) 0 26%, transparent 27%),
+    linear-gradient(135deg, var(--sw-a) 0 55%, var(--sw-b) 56%);
+  border: 2px solid var(--border-strong);
+  transition: box-shadow 0.25s, border-color 0.25s;
+}
+
+.swatch[aria-pressed="true"] .swatch__dot {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 35%, transparent);
+}
+
+.swatch[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: var(--primary) url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>') center/10px no-repeat;
+}
+
+.swatch__label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.swatch[aria-pressed="true"] .swatch__label { color: var(--primary); }
+
+/* Mini phone preview strip under the picker */
+.theme-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.theme-note svg { width: 15px; height: 15px; color: var(--primary); }

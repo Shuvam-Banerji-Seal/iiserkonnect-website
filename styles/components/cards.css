@@ -1,0 +1,62 @@
+/* ============================================================
+   components/cards.css — feature cards (rendered by
+   <feature-card> from scripts/data/features.js)
+   ============================================================ */
+
+.feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  border: 1px solid var(--border);
+  border-radius: var(--prism-card);
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out);
+}
+
+/* top glass highlight */
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, var(--glass-highlight), transparent 36%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: var(--shadow-hover);
+}
+
+.feature-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.feature-card h3 {
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.feature-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

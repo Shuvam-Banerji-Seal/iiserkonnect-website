@@ -1,0 +1,49 @@
+/* ============================================================
+   utilities/animations.css — scroll reveals + keyframes
+   ============================================================ */
+
+/* Scroll reveal (progressive enhancement: visible by default when
+   JS is off, because .js-reveal class is only added by script) */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.7s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js-reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal { opacity: 1; transform: none; }
+}
+
+/* Keyframes */
+@keyframes float-slow {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(0, -26px, 0) scale(1.05); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 55%, transparent); }
+  60%      { box-shadow: 0 0 0 9px transparent; }
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes bounce-cue {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(7px); }
+}

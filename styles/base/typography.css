@@ -1,0 +1,64 @@
+/* ============================================================
+   base/typography.css — fluid type scale
+   ============================================================ */
+
+.display-1 {
+  font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.h2 {
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.h3 {
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.lead {
+  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+  color: var(--text-muted);
+  max-width: 62ch;
+}
+
+.body-muted { color: var(--text-muted); }
+
+.small { font-size: 0.85rem; }
+.tiny  { font-size: 0.76rem; }
+
+.mono {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  font-size: 0.86em;
+}
+
+.text-gradient {
+  background: linear-gradient(92deg, var(--primary) 10%, var(--accent) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}

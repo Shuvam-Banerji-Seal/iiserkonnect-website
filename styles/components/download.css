@@ -1,0 +1,97 @@
+/* ============================================================
+   components/download.css — get-the-app section
+   ============================================================ */
+
+.download-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: clamp(28px, 4vw, 44px);
+  padding: clamp(28px, 5vw, 56px);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--prism-dialog);
+  box-shadow: var(--shadow);
+}
+
+.download-card::after {
+  content: "";
+  position: absolute;
+  width: 420px; height: 420px;
+  right: -160px; top: -160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--glow-1), transparent 65%);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+@media (min-width: 880px) {
+  .download-card { grid-template-columns: 1.05fr 0.95fr; }
+}
+
+.download-card h2 { margin-bottom: var(--sp-3); }
+
+.req-list {
+  display: grid;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.req-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.req-list svg {
+  flex: none;
+  width: 16px; height: 16px;
+  color: var(--primary);
+}
+
+/* Steps */
+.steps {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--sp-3);
+  align-content: center;
+}
+
+.step {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: flex-start;
+  padding: var(--sp-4);
+  border-radius: var(--prism-tile);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid var(--border);
+}
+
+.step__num {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--primary-contrast);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+}
+
+.step strong { display: block; font-size: 0.92rem; }
+.step span   { font-size: 0.8rem; color: var(--text-muted); }
+
+.step a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--primary) 45%, transparent);
+  text-underline-offset: 3px;
+}

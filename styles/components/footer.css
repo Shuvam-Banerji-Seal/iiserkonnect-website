@@ -1,0 +1,94 @@
+/* ============================================================
+   components/footer.css — <site-footer> + back-to-top
+   ============================================================ */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-soft);
+  padding: clamp(40px, 6vw, 64px) 0 var(--sp-6);
+}
+
+.footer-grid {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+@media (min-width: 760px) {
+  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+}
+
+.footer-brand p {
+  margin-top: var(--sp-3);
+  max-width: 34ch;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.footer-col h4 {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-3);
+}
+
+.footer-col ul { display: grid; gap: var(--sp-2); }
+
+.footer-col a,
+.footer-col button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.footer-col a:hover,
+.footer-col button:hover { color: var(--primary); }
+
+.footer-col svg { width: 15px; height: 15px; }
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* Back to top */
+.to-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s var(--ease-out);
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.to-top:hover { border-color: var(--primary); color: var(--primary); }
+
+.to-top svg { width: 19px; height: 19px; }

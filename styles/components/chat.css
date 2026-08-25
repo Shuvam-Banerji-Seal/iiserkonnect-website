@@ -1,0 +1,109 @@
+/* ============================================================
+   components/chat.css — Campus Chat spotlight section
+   ============================================================ */
+
+.chat-spotlight__grid {
+  display: grid;
+  gap: clamp(36px, 5vw, 56px);
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .chat-spotlight__grid { grid-template-columns: 1.05fr 0.95fr; }
+}
+
+/* E2E crypto pipeline */
+.pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.pipeline__step {
+  flex: 1 1 150px;
+  display: grid;
+  gap: 3px;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--prism-tile);
+  background: var(--glass-bg);
+  border: 1px solid color-mix(in srgb, var(--primary) 32%, transparent);
+}
+
+.pipeline__step strong {
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  letter-spacing: 0.02em;
+  color: var(--primary);
+}
+
+.pipeline__step span {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.pipeline__arrow {
+  align-self: center;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+/* Discovery triad */
+.discovery {
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+@media (min-width: 620px) {
+  .discovery { grid-template-columns: repeat(3, 1fr); }
+}
+
+.discovery__card {
+  display: grid;
+  gap: 5px;
+  padding: var(--sp-4);
+  border-radius: var(--prism-card);
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--border);
+}
+
+.discovery__card svg {
+  width: 20px; height: 20px;
+  color: var(--primary);
+}
+
+.discovery__card strong { font-size: 0.88rem; }
+.discovery__card span   { font-size: 0.76rem; color: var(--text-muted); }
+
+/* Feature checklist */
+.checklist {
+  display: grid;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.checklist li::before {
+  content: "✓";
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 19px; height: 19px;
+  translate: 0 3px;
+  border-radius: 50%;
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--primary-contrast);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+}
