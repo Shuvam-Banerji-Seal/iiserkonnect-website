@@ -1,3 +1,6 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# local verification artifacts
+plans/screenshots/

@@ -10,8 +10,8 @@ const SCRIPT = [
   { dir: "out", delay: 1100, html: `Yep, just joined. Chat's running` },
   { dir: "in",  delay: 900,  html: `Sending the DS notes…` },
   { dir: "out", delay: 700,  type: "file", html: `<span class="file-pill">📄 DS-Unit4.pdf</span><span class="meta">2.1 MB · transferred <span class="ticks read">✓✓</span></span>` },
-  { dir: "in",  delay: 1000, html: `Got it — **thanks a lot!** 🙌` },
-  { dir: "out", delay: 800,  html: `Btw mess menu has *biryani* today 👀`, meta: true },
+  { dir: "in",  delay: 1000, html: `Got it — thanks a lot! 🙌` },
+  { dir: "out", delay: 800,  html: `Btw mess menu has biryani today 👀`, meta: true },
 ];
 
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
