@@ -3,278 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>IISERKonnect — Campus tools. Faster access. Less friction.</title>
-  <meta name="description" content="IISERKonnect is an open, all-in-one Android app for IISER Kolkata: WeLearn with offline deep cache, E2E-encrypted P2P campus chat, mess menu & budget tracking, grades, attendance, network dashboard and more." />
+  <title>IISERKonnect Web</title>
+  <meta name="description" content="Web version of IISERKonnect — the IISER Kolkata campus app. WeLearn, mess, calendar, library, research, network dashboard and serverless P2P chat." />
   <meta name="theme-color" content="#0C1626" />
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
-
-  <!-- Social -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="IISERKonnect — the IISER Kolkata campus app" />
-  <meta property="og:description" content="25+ campus tools in one native Android app: WeLearn deep cache, E2E P2P chat, mess budgeting, network dashboard and more." />
-  <meta name="twitter:card" content="summary" />
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Styles: single cascade entry point -->
   <link rel="stylesheet" href="./styles/main.css" />
 </head>
-
 <body id="top">
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#outlet">Skip to content</a>
 
-  <site-navbar></site-navbar>
-
-  <main id="main">
-
-    <!-- ══════════════════ HERO ══════════════════ -->
-    <header class="hero">
-      <div class="hero__glow hero__glow--1"></div>
-      <div class="hero__glow hero__glow--2"></div>
-
-      <div class="container hero__inner">
-        <div class="hero__copy" data-reveal>
-          <div class="hero__badges">
-            <span class="chip chip--accent">Android 8.0+</span>
-            <span class="chip chip--accent">Kotlin · Jetpack Compose</span>
-            <span class="chip">Material 3</span>
-          </div>
-
-          <h1 class="display-1">
-            Your campus,
-            <span class="text-gradient">one app.</span>
-          </h1>
-
-          <p class="lead">
-            IISERKonnect packs WeLearn, an end-to-end-encrypted P2P chat, mess
-            budgeting, grades, attendance and a live network dashboard into one
-            native Android app — built for the IISER Kolkata community.
-          </p>
-
-          <div class="hero__ctas">
-            <a class="btn btn--primary" href="#download">
-              Get the App
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            </a>
-            <a class="btn btn--ghost" href="#features">Explore features</a>
-          </div>
-
-          <p class="hero__meta">
-            <strong>25+ features</strong>
-            <span class="dot-sep"></span> works offline
-            <span class="dot-sep"></span> zero cloud servers
-            <span class="dot-sep"></span> no trackers
-          </p>
-        </div>
-
-        <!-- CSS-only phone running the live chat demo -->
-        <div class="phone" data-reveal aria-hidden="true">
-          <div class="phone__screen">
-            <div class="phone__notch"></div>
-            <div class="phone__status"><span>9:41</span><span>LTE ▮▮▮</span></div>
-
-            <div class="chat-head">
-              <div class="chat-head__avatar">SB</div>
-              <div>
-                <div class="chat-head__name">Campus Chat</div>
-                <div class="chat-head__sub">● online — E2E encrypted</div>
-              </div>
-            </div>
-
-            <div class="chat-body"><!-- fed by chat-demo-loop.js --></div>
-
-            <div class="chat-input">
-              <span>Type a message…</span>
-              <span class="send">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              </span>
-            </div>
-
-            <div class="phone__fab">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <span class="phone__badge">3</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <a class="scroll-cue" href="#stats" aria-label="Scroll to overview">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+  <div class="shell">
+    <!-- Sidebar (desktop) -->
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#/home">
+        <svg class="brand__mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <defs><linearGradient id="bm-g" x1="6" y1="4" x2="42" y2="44">
+            <stop offset="0" stop-color="var(--primary)"/><stop offset="1" stop-color="var(--accent)"/>
+          </linearGradient></defs>
+          <rect x="5" y="5" width="38" height="38" rx="12" fill="url(#bm-g)"/>
+          <path d="M15 20.5c0-3.6 4-6 9-6s9 2.4 9 6-4 6-9 6h-.8L18 31v-4.9c-1.9-1.1-3-2.7-3-4.6Z"
+                fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"/>
+        </svg>
+        <span>IISER<em>Konnect</em> <sup class="tiny body-muted">web</sup></span>
       </a>
-    </header>
-
-    <!-- ══════════════════ STATS ══════════════════ -->
-    <section class="section section--alt section--ruled" id="stats" aria-label="Project stats">
-      <div class="container">
-        <div class="stats glass" data-reveal>
-          <stat-counter value="25" suffix="+" label="Features"></stat-counter>
-          <stat-counter value="9" label="Theme modes"></stat-counter>
-          <stat-counter value="420" suffix="+" label="Unit tests"></stat-counter>
-          <stat-counter value="100" suffix="%" label="Offline-capable core"></stat-counter>
-        </div>
+      <nav class="side-nav" aria-label="Primary"><!-- filled by main.js --></nav>
+      <div class="sidebar__foot">
+        <button class="side-link" id="theme-btn" type="button">🎨 Theme</button>
+        <a class="side-link" href="#/about">ℹ️ About</a>
       </div>
-    </section>
+    </aside>
 
-    <!-- ══════════════════ FEATURES ══════════════════ -->
-    <section class="section" id="features">
-      <div class="container">
-
-        <section-heading
-          eyebrow="Everything it does"
-          title="One app for the whole campus day"
-          sub="Three feature families, twenty-five tools — every one of them built around the real services students use.">
-        </section-heading>
-
-        <h3 class="h3" style="margin-bottom:16px" data-reveal>🎓 Academics</h3>
-        <div class="grid grid--bento" id="grid-academics" style="margin-bottom:48px"></div>
-
-        <h3 class="h3" style="margin-bottom:16px" data-reveal>🏛️ Campus life</h3>
-        <div class="grid grid--bento" id="grid-campus" style="margin-bottom:48px"></div>
-
-        <h3 class="h3" style="margin-bottom:16px" data-reveal>🛠️ Tools &amp; network</h3>
-        <div class="grid grid--bento" id="grid-tools"></div>
-      </div>
-    </section>
-
-    <!-- ══════════════════ CAMPUS CHAT ══════════════════ -->
-    <section class="section section--alt section--ruled" id="chat">
-      <div class="container">
-        <section-heading
-          eyebrow="Flagship feature"
-          title="Campus Chat — private by design"
-          sub="Peer-to-peer messaging over local WiFi. No server ever sees your messages: keys are exchanged on-device and every text is end-to-end encrypted.">
-        </section-heading>
-
-        <div class="chat-spotlight__grid">
-          <div data-reveal>
-            <crypto-pipeline></crypto-pipeline>
-
-            <p class="body-muted small" style="margin-top:20px">
-              <strong>How peers find each other</strong> — three redundant
-              channels, so discovery survives strict routers and VPN tunnels:
-            </p>
-            <div class="discovery" id="discovery-mount"></div>
-          </div>
-
-          <div class="glass prism-dialog" style="padding:clamp(24px,4vw,40px)" data-reveal>
-            <h3 class="h3" style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
-              <span class="icon-bubble" style="width:38px;height:38px">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </span>
-              Everything chat can do
-            </h3>
-            <ul class="checklist" id="checklist-mount"></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════ THEMES ══════════════════ -->
-    <section class="section" id="themes">
-      <div class="container theme-showcase__grid">
-        <section-heading
-          eyebrow="Make it yours"
-          title="Nine themes. Try them right here."
-          sub="Every palette below ships in the app — including Liquid Glass, a physics-based frosted theme with Fresnel edge glow and sensor-driven caustics. Tap a swatch to re-theme this entire page.">
-        </section-heading>
-
-        <theme-picker data-reveal></theme-picker>
-
-        <p class="theme-note" data-reveal>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          Your pick is remembered for this site — the app remembers yours too.
-        </p>
-      </div>
-    </section>
-
-    <!-- ══════════════════ TECH ══════════════════ -->
-    <section class="section section--alt section--ruled" id="tech">
-      <div class="container">
-        <section-heading
-          eyebrow="Under the hood"
-          title="Modern Android, done properly"
-          sub="A single-activity Compose app with Hilt dependency injection, two Room databases, WorkManager sync and a scraping layer tuned for campus services.">
-        </section-heading>
-
-        <div class="tech-grid">
-          <div data-reveal>
-            <div class="chip-cloud" id="chip-cloud-mount"></div>
-            <p class="small body-muted" style="margin-top:20px">
-              minSdk 26 · targetSdk 35 · Java 17 · 400+ JVM unit tests plus an
-              on-device two-peer chat E2E test.
-            </p>
-          </div>
-
-          <div class="security-card" data-reveal>
-            <h3>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-              Security &amp; privacy posture
-            </h3>
-            <ul id="security-list-mount"></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════ DOWNLOAD ══════════════════ -->
-    <section class="section" id="download">
-      <div class="container">
-        <div class="download-card" data-reveal>
-          <div>
-            <span class="eyebrow">Get started</span>
-            <h2 class="h2" style="margin-top:12px">Ready in three steps</h2>
-            <ul class="req-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> An Android phone running 8.0 (Oreo) or newer</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Your IISERK LDAP credentials for sign-in</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Campus WiFi or the in-app VPN for intranet features</li>
-            </ul>
-          </div>
-
-          <div class="steps">
-            <div class="step">
-              <span class="step__num">1</span>
-              <div><strong>Grab the latest APK</strong>
-                <span>Both debug &amp; release builds ship on every release.</span></div>
-            </div>
-            <div class="step">
-              <span class="step__num">2</span>
-              <div><strong>Install &amp; sign in once</strong>
-                <span>Credentials are shared across WeLearn, ERP, VPN and chat.</span></div>
-            </div>
-            <div class="step">
-              <span class="step__num">3</span>
-              <div><strong>Pick a theme and go</strong>
-                <span>Nine looks — try Liquid Glass with your phone's sensors.</span></div>
-            </div>
-            <a class="btn btn--primary" href="https://github.com/Shuvam-Banerji-Seal/IISERKonnect/releases/latest"
-               target="_blank" rel="noopener noreferrer">
-              Download latest release
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            </a>
-            <p class="tiny body-muted">
-              Source repo is private; campus members can request access via
-              <a href="mailto:sbs22ms076@iiserkol.ac.in" style="color:var(--primary)">email</a>.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <site-footer></site-footer>
-
-  <noscript>
-    <div style="position:fixed;inset:auto 0 0 0;z-index:99;padding:14px;text-align:center;
-                background:#B3261E;color:#fff;font-family:sans-serif;font-size:.9rem">
-      This showcase needs JavaScript for its interactive demos — the app itself
-      runs fully native.
+    <!-- Main column -->
+    <div class="main-col">
+      <header class="topbar">
+        <button class="nav-burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
+        <span class="topbar__title" id="topbar-title">IISERKonnect</span>
+        <span class="proxy-dot" id="proxy-dot" title="Companion proxy status"></span>
+      </header>
+      <main class="outlet container" id="outlet"></main>
     </div>
-  </noscript>
+  </div>
 
-  <script type="module" src="./scripts/main.js"></script>
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="drawer"><!-- filled by main.js --></div>
+
+  <script type="module" src="./scripts/main.js?v=4"></script>
 </body>
 </html>

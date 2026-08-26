@@ -15,13 +15,17 @@
 @import url("utilities/helpers.css");
 
 @import url("components/buttons.css");
-@import url("components/navbar.css");
-@import url("components/hero.css");
-@import url("components/phone.css");
-@import url("components/cards.css");
-@import url("components/stats.css");
-@import url("components/chat.css");
+@import url("");
+@import url("");
+@import url("");
+@import url("");
+@import url("");
+@import url("");
 @import url("components/themes.css");
-@import url("components/tech.css");
-@import url("components/download.css");
-@import url("components/footer.css");
+@import url("");
+@import url("");
+@import url("");
+
+/* app shell + data components (web-app version) */
+@import url("components/shell.css");
+@import url("components/data.css");

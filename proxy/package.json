@@ -1,0 +1,2 @@
+{ "name": "iiserkonnect-proxy", "private": true, "type": "module",
+  "scripts": { "start": "node server.mjs", "mock": "node server.mjs --mock" } }
