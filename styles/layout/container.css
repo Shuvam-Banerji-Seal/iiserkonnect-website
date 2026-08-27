@@ -1,52 +1,59 @@
-/* ============================================================
-   layout/container.css — page shell + section rhythm
-   ============================================================ */
+/* layout/container.css — app layout: sidebar offset, content max */
 
 .container {
-  width: min(var(--container), 92%);
+  width: min(var(--content-max), 100% - 32px);
   margin-inline: auto;
+}
+
+@media (min-width: 980px) {
+  .container { width: min(var(--content-max), 100% - 48px); }
 }
 
 .section {
   position: relative;
-  padding-block: clamp(64px, 9vw, 120px);
-  scroll-margin-top: calc(var(--nav-h) + 16px);
+  padding-block: 48px;
+  scroll-margin-top: calc(var(--topbar-h) + 12px);
 }
+.section:first-child { padding-top: 32px; }
 
-.section--alt {
-  background: var(--bg-soft);
-}
-
-/* Thin gradient hairline between sections */
-.section--ruled::before {
-  content: "";
-  position: absolute;
-  inset-inline: 8%;
-  top: 0;
-  height: 1px;
-  background: linear-gradient(90deg,
-    transparent, var(--border-strong) 50%, transparent);
-}
-
-/* Section header block */
 .section-head {
   display: grid;
-  justify-items: center;
-  text-align: center;
-  gap: var(--sp-3);
-  margin-bottom: clamp(40px, 6vw, 64px);
+  gap: 10px;
+  margin-bottom: 28px;
+  max-width: 640px;
+}
+.section-head .lead { margin: 0; }
+
+/* App page header — not marketing */
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.page-header__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.page-header__desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
 }
 
-.section-head .lead { margin-inline: auto; }
-
-/* Generic responsive grids */
+/* Grids */
 .grid {
   display: grid;
-  gap: var(--sp-4);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 264px), 1fr));
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
-
-@media (min-width: 720px) {
-  .grid--bento { grid-template-columns: repeat(3, 1fr); }
-  .span-2 { grid-column: span 2; }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 720px) {
+  .grid--2, .grid--3 { grid-template-columns: 1fr; }
 }

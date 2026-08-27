@@ -1,64 +1,58 @@
-/* ============================================================
-   base/typography.css — fluid type scale
-   ============================================================ */
+/* base/typography.css — app type scale: compact, precise */
 
-.display-1 {
-  font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+.display {
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
   font-weight: 700;
   letter-spacing: -0.03em;
+  line-height: 1.1;
 }
 
 .h2 {
-  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
-  font-weight: 700;
+  font-size: 1.375rem;
+  font-weight: 650;
   letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .h3 {
-  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: -0.01em;
+  line-height: 1.4;
 }
 
 .lead {
-  font-size: clamp(1.02rem, 1.6vw, 1.18rem);
-  color: var(--text-muted);
-  max-width: 62ch;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 56ch;
 }
 
-.body-muted { color: var(--text-muted); }
-
-.small { font-size: 0.85rem; }
-.tiny  { font-size: 0.76rem; }
-
+.body-muted { color: var(--text-secondary); }
+.small { font-size: 0.8125rem; line-height: 1.5; }
+.tiny { font-size: 0.75rem; line-height: 1.5; letter-spacing: 0.01em; }
 .mono {
-  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
-  font-size: 0.86em;
-}
-
-.text-gradient {
-  background: linear-gradient(92deg, var(--primary) 10%, var(--accent) 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.8125em;
+  letter-spacing: -0.01em;
 }
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: var(--sp-2);
-  font-family: var(--font-display);
-  font-size: 0.78rem;
+  gap: 8px;
+  font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--text-tertiary);
 }
-
 .eyebrow::before {
   content: "";
-  width: 22px;
-  height: 2px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  width: 16px; height: 1.5px;
+  border-radius: 1px;
+  background: var(--primary);
+  opacity: 0.9;
 }
+
+.text-gradient { color: var(--text); }

@@ -1,28 +1,34 @@
 ## Session Summary
 | Field | Value |
 |-------|-------|
-| Session # | 1 (website build) |
-| Phase | COMPLETE — deployed & double-verified |
-| What I did | Designed modular architecture → built 40-file static site → Playwright-verified desktop+mobile → fixed 3 bugs → created PUBLIC repo → enabled GitHub Pages → verified live deploy |
-| What worked | Layered tokens/components/modules split; data-driven content; real Color.kt palettes; Playwright click-through caught the theme-sync bug eyeballs missed |
-| What failed | git commit via inline `-c user.name` hung (timeout) → retried with global config + core.editor=true, OK |
-| Errors remaining | none |
-| Next priorities | optional: og-image.png, custom domain, add real app screenshots when available |
+| Session # | 2 (web-app pivot) |
+| Phase | COMPLETE — deployed, E2E-verified in mock mode |
+| What I did | Pivoted repo from showcase → functional web version: Node companion proxy (cookie jars, allow-list, mock fixtures), core layer (net/session/router/html), 7 service modules (1:1 Kotlin scraper ports), 15 page modules, WebRTC chat; E2E-verified via Playwright in mock mode; pushed |
+| What worked | DOMParser ports of every Kotlin parser; proxy cookie-jar design; captcha pass-through; mock-mode fixtures for offline E2E; localStorage as cross-tab signaling channel in tests |
+| What failed | (1) mock matcher precedence `u.host + path.includes()` → always-first-match; (2) matcher shadowing (`/my` ⊃ `/myprofile`, `/view/divisions/` ⊂ specific); (3) python http.server stale-module cache → wrote serve.py no-store; (4) SDP snapshotted before ICE gather → gatherComplete wait; (5) answer-side srflx quirk in headless → STUN toggle + loopback verification |
+| Errors remaining | none blocking; headless mDNS cross-tab limitation documented (real browsers fine) |
+| Next priorities | course-selection module; attendance polish; real-network smoke test on campus/VPN; og-image |
 | Blockers | none |
-| Audit status | DOUBLE_PASS (local wave + live wave, both clean) |
+| Audit status | PASS (all modules E2E-verified in mock; live Pages serves frontend) |
+
+## Verified modules (mock E2E)
+login→WeLearn courses/files · deadlines path · attendance parser · mess stats/tables ·
+menu ★specials · academic week grid · events parser · library search→detail→availability ·
+research latest/divisions/years/papers/detail · PYQ exam/sem/dept · notices · VoIP ·
+TCP captcha (34,654 + devices) · grades captcha (10 sems) · WebRTC handshake + delivery
 
 ## File Manifest
 | File | Status |
 |------|--------|
-| index.html | current (composition root) |
-| styles/** (17 css) | current |
-| scripts/** (18 js) | current |
-| README.md / LICENSE / .gitignore / .nojekyll / assets/favicon.svg | current |
-| plans/00,02,03,05 | current |
-| plans/screenshots/* (11 verification shots) | current, gitignored |
+| proxy/server.mjs + package.json | current (mock + real modes) |
+| index.html / serve.py / README.md | current |
+| scripts/core/* (5) | current |
+| scripts/services/* (7) | current |
+| scripts/pages/* (13 files, 15 renders) | current |
+| styles (tokens/base/layout/utilities/components) | current |
+| plans/* | current |
 
 ## Continuation Prompt Hints
-- Repo: https://github.com/Shuvam-Banerji-Seal/iiserkonnect-website
-- Live: https://shuvam-banerji-seal.github.io/iiserkonnect-website/
-- To add content: edit scripts/data/*.js only. To add a theme: themes.css + site-themes.js.
-- Local dev: `python3 -m http.server 8080` (ES modules need http).
+- Run: `node proxy/server.mjs --mock` + `python3 serve.py 8123`
+- Real mode needs campus/VPN on the proxy host; captcha flows render real captchas
+- Add modules: service in scripts/services + page in scripts/pages + route in main.js

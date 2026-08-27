@@ -1,0 +1,10 @@
+/* home dashboard polish — icon sizing and card finesse */
+.home-links a svg { width: 16px; height: 16px; flex: none; stroke-width: 1.75; }
+.stat svg { width: 18px; height: 18px; flex: none; }
+.app-card__header svg { width: 16px; height: 16px; flex: none; }
+#outlet .app-card svg.icon--muted { width: 16px; height: 16px; color: var(--text-tertiary); }
+.btn__icon { width: 14px !important; height: 14px !important; }
+.icon-sm { width: 16px; height: 16px; flex: none; }
+.icon--muted { width: 16px; height: 16px; flex: none; color: var(--text-tertiary); }
+.chip svg { width: 12px; height: 12px; flex: none; }
+.stat .chip svg { width: 12px; height: 12px; }

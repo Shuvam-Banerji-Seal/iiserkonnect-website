@@ -1,7 +1,4 @@
-/* ============================================================
-   main.css — cascade entry point (import order matters)
-   1 tokens → 2 base → 3 layout → 4 utilities → 5 components
-   ============================================================ */
+/* main.css — cascade: tokens → base → layout → utilities → components */
 
 @import url("tokens/colors.css");
 @import url("tokens/themes.css");
@@ -15,17 +12,7 @@
 @import url("utilities/helpers.css");
 
 @import url("components/buttons.css");
-@import url("");
-@import url("");
-@import url("");
-@import url("");
-@import url("");
-@import url("");
-@import url("components/themes.css");
-@import url("");
-@import url("");
-@import url("");
-
-/* app shell + data components (web-app version) */
 @import url("components/shell.css");
 @import url("components/data.css");
+@import url("components/themes.css");
+@import url("components/home-fix.css");
