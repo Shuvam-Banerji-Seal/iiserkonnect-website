@@ -2,24 +2,24 @@
  * main.js — app bootstrap: routes, shell, proxy status, theme
  */
 
-import { registerRoute, setOutlet, startRouter, onRouted } from "./core/router.js?v=7";
-import { probeProxy } from "./core/net.js?v=7";
-import "./modules/theme-manager.js?v=7";
-import { icon } from "./components/icons.js?v=7";
+import { registerRoute, setOutlet, startRouter, onRouted } from "./core/router.js?v=8";
+import { probeProxy } from "./core/net.js?v=8";
+import "./modules/theme-manager.js?v=8";
+import { icon } from "./components/icons.js?v=8";
 
-import { render as home } from "./pages/home.page.js?v=7";
-import { render as settings } from "./pages/settings.page.js?v=7";
-import { render as welearn } from "./pages/welearn.page.js?v=7";
-import { render as mess } from "./pages/mess.page.js?v=7";
-import { render as menu } from "./pages/menu.page.js?v=7";
-import { render as calendar } from "./pages/calendar.page.js?v=7";
-import { render as library } from "./pages/library.page.js?v=7";
-import { render as research } from "./pages/research.page.js?v=7";
-import { render as netmon } from "./pages/netmon.page.js?v=7";
-import { renderTcp, renderGrades } from "./pages/gateway.page.js?v=7";
-import { renderPyq, renderNotices, renderVoip } from "./pages/misc.page.js?v=7";
-import { render as chat } from "./pages/chat.page.js?v=7";
-import { render as about } from "./pages/about.page.js?v=7";
+import { render as home } from "./pages/home.page.js?v=8";
+import { render as settings } from "./pages/settings.page.js?v=8";
+import { render as welearn } from "./pages/welearn.page.js?v=8";
+import { render as mess } from "./pages/mess.page.js?v=8";
+import { render as menu } from "./pages/menu.page.js?v=8";
+import { render as calendar } from "./pages/calendar.page.js?v=8";
+import { render as library } from "./pages/library.page.js?v=8";
+import { render as research } from "./pages/research.page.js?v=8";
+import { render as netmon } from "./pages/netmon.page.js?v=8";
+import { renderTcp, renderGrades } from "./pages/gateway.page.js?v=8";
+import { renderPyq, renderNotices, renderVoip } from "./pages/misc.page.js?v=8";
+import { render as chat } from "./pages/chat.page.js?v=8";
+import { render as about } from "./pages/about.page.js?v=8";
 
 const ROUTES = [
   { id: "home",     title: "Home",        icon: "home",     group: null,       render: home },
