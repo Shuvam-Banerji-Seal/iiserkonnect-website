@@ -4,3 +4,4 @@ Thumbs.db
 
 # local verification artifacts
 plans/screenshots/
+__pycache__/

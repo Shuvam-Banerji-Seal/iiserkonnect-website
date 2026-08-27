@@ -1,7 +1,8 @@
 /**
- * core/net.js — the browser's stand-in for the app's OkHttp layer.
- * Every campus request goes through the local companion proxy, which owns
- * the cookie jars (per X-SID session) exactly like CookieStore.kt did.
+ * core/net.js — campus fetch via the unified serve.py proxy.
+ * On campus, just `python3 serve.py` — the page and the proxy are the
+ * same origin, so no CORS and no extra config. Off-campus, the proxy
+ * still works if you run it locally (or point proxyBase at a campus box).
  */
 
 import { store } from "./store.js";
@@ -35,30 +36,42 @@ export const C = {
   TIMETABLE_PDF: "https://www.iiserkol.ac.in/web/assets/images/ck_editor_image/1769612117_Time-Table-Spring-2026_28.01.2026.pdf",
 };
 
-export function proxyBase() {
-  return (store.get("proxyBase") || "http://localhost:8787").replace(/\/$/, "");
-}
-
 function sid() {
   let s = store.get("sid");
   if (!s) { s = crypto.randomUUID(); store.set("sid", s); }
   return s;
 }
 
+/* Resolve the proxy base: same-origin first (serve.py unified), then stored, then legacy */
+function candidates() {
+  const list = [];
+  // same-origin — works when served via `python3 serve.py` (on campus, no config)
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") list.push(location.origin);
+  const stored = store.get("proxyBase");
+  if (stored) list.push(stored.replace(/\/$/, ""));
+  list.push("http://localhost:8787", "http://localhost:8123");
+  return [...new Set(list)];
+}
+let resolvedBase = null;
+
+export function proxyBase() {
+  return (resolvedBase || store.get("proxyBase") || candidates()[0]).replace(/\/$/, "");
+}
+
 async function proxyFetch(path, init = {}) {
-  const res = await fetch(proxyBase() + path + (path.includes("?") ? "&" : "?") + "_=" + Date.now(), {
+  const base = proxyBase();
+  const res = await fetch(base + path + (path.includes("?") ? "&" : "?") + "_=" + Date.now(), {
     ...init,
     cache: "no-store",
     headers: { "X-SID": sid(), ...(init.headers || {}) },
   });
-  if (res.status === 0 || (!res.ok && res.status >= 500 && res.headers.get("content-type")?.includes("json"))) {
+  if (!res.ok && res.status >= 500 && res.headers.get("content-type")?.includes("json")) {
     const j = await res.json().catch(() => ({}));
     throw new Error(j.error || `proxy ${res.status}`);
   }
   return res;
 }
 
-/** GET a campus URL through the proxy → { ok, status, url, doc|text } */
 export async function get(url) {
   const res = await proxyFetch(`/fetch?url=${encodeURIComponent(url)}`);
   const finalUrl = res.headers.get("X-Final-URL") || url;
@@ -66,7 +79,6 @@ export async function get(url) {
   return { ok: res.ok, status: res.status, url: finalUrl, text };
 }
 
-/** POST a urlencoded form through the proxy → same shape as get() */
 export async function postForm(url, fields) {
   const res = await proxyFetch("/fetch", {
     method: "POST",
@@ -78,25 +90,26 @@ export async function postForm(url, fields) {
   return { ok: res.ok, status: res.status, url: finalUrl, text };
 }
 
-/** Blob for images (captchas) fetched with the session's cookies. */
 export async function getBlob(url) {
   const res = await proxyFetch(`/fetch?url=${encodeURIComponent(url)}`);
   return res.blob();
 }
 
-/** Direct download link (proxy streams it as an attachment). */
 export function fileUrl(url) {
   const s = store.get("sid") || sid();
   return `${proxyBase()}/file?url=${encodeURIComponent(url)}&sid=${s}`;
 }
 
-/** Probe the companion. Returns {ok, mock} or {ok:false}. */
+/* Probe: try same-origin first, then fallbacks; remember the winner */
 export async function probeProxy() {
-  try {
-    const r = await fetch(proxyBase() + "/ping", { signal: AbortSignal.timeout(2500) });
-    const j = await r.json();
-    return { ok: !!j.ok, mock: !!j.mock };
-  } catch { return { ok: false }; }
+  for (const base of candidates()) {
+    try {
+      const r = await fetch(base + "/ping?_=" + Date.now(), { signal: AbortSignal.timeout(2000), cache: "no-store" });
+      const j = await r.json();
+      if (j.ok) { resolvedBase = base; return { ok: true, mock: !!j.mock, base }; }
+    } catch {}
+  }
+  return { ok: false };
 }
 
 export async function clearServerSession() {
