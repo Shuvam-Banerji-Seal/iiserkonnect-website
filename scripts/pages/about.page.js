@@ -10,7 +10,7 @@ export async function render(el) {
       ${card(`
         <h3 class="h3">Architecture in one paragraph</h3>
         <p class="small body-muted">A static frontend (this site) + a zero-dependency Node companion
-        (<code class="mono">proxy/server.mjs</code>) that performs campus logins with per-session cookie
+        (<code class="mono">serve.py</code>) that performs campus logins with per-session cookie
         jars — the same job OkHttp did natively. Every scraper is a 1:1 port of the Kotlin parsers
         (Jsoup → DOMParser). Campus Chat uses WebRTC data channels instead of raw TCP, so it stays
         serverless and DTLS-encrypted end-to-end. Captcha-gated flows (grades, gateway) render the

@@ -85,7 +85,7 @@ export async function render(el) {
     } catch { onCampus = false; }
   }
   const proxyLabel = !probe.ok ? "Offline" : probe.mock ? "Demo" : onCampus ? "On Campus" : "Live";
-  const campusHint = !probe.ok ? "Start proxy/server.mjs" : probe.mock ? "Demo fixtures" : onCampus ? "On campus network — no VPN needed" : "Companion connected — VPN may be needed for intranet";
+  const campusHint = !probe.ok ? "Start python3 serve.py" : probe.mock ? "Demo fixtures" : onCampus ? "On campus network — no VPN needed" : "Companion connected — VPN may be needed for intranet";
 
   el.innerHTML = `
     <!-- Greeting header — like GreetingHeader in Compose -->
@@ -116,7 +116,7 @@ export async function render(el) {
     </div>` : ""}
     ${!probe.ok ? `<div class="app-card" style="display:flex;align-items:center;gap:12px;padding:12px 16px;margin-bottom:16px;border-color:color-mix(in srgb, var(--warning) 30%, transparent)">
       <span style="width:32px;height:32px;border-radius:8px;background:var(--warning);color:#000;display:grid;place-items:center;flex:none">${icon("plug", "icon-sm")}</span>
-      <div style="flex:1"><div style="font-weight:600;font-size:0.875rem">Companion offline</div><div class="tiny" style="color:var(--text-secondary)">Run <code class="mono">node proxy/server.mjs --mock</code> for demo, or without flag on campus/VPN.</div></div>
+      <div style="flex:1"><div style="font-weight:600;font-size:0.875rem">Companion offline</div><div class="tiny" style="color:var(--text-secondary)">Run <code class="mono">python3 serve.py --mock</code> for demo, or without flag on campus/VPN.</div></div>
       <a class="btn btn--ghost btn--sm" href="#/settings">Settings</a>
     </div>` : ""}
 

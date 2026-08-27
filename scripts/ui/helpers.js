@@ -69,9 +69,9 @@ export async function requireProxy() {
     html: emptyState("🔌", "Companion proxy not detected",
       `This web app talks to campus services through a tiny local proxy (the browser
        itself is not allowed to — CORS). Start it, then reload:`,
-      `<code class="mono">node proxy/server.mjs</code>
+      `<code class="mono">python3 serve.py</code>
        <p class="tiny body-muted" style="margin-top:8px">Expected at <code>${esc(proxyBase())}</code> —
-       change it in Settings. Demo mode: <code>node proxy/server.mjs --mock</code></p>`),
+       change it in Settings. Demo mode: <code>python3 serve.py --mock</code></p>`),
   };
 }
 
