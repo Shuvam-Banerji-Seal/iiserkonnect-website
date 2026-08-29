@@ -3,12 +3,10 @@
 import { fetchTransactions, allocateItemCosts, parseItems, formatDateTime,
          totalDebited, totalCredited, lastBalance } from "../services/canteen.service.js";
 import { store } from "../core/store.js";
-import { pageHead, card, esc, emptyState, errorState, requireProxy, requireCreds, barChart } from "../ui/helpers.js";
+import { pageHead, card, esc, emptyState, errorState, requireCreds, barChart } from "../ui/helpers.js";
 
 export async function render(el) {
   el.innerHTML = pageHead("Mess", "Transactions & budget", "Full canteen ERP history with ERP-authoritative cost allocation.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
   const credsOk = requireCreds();
   if (!credsOk.ok) return el.insertAdjacentHTML("beforeend", credsOk.html);
 

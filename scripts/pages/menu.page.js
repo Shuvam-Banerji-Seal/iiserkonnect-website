@@ -1,12 +1,10 @@
 /** pages/menu.page.js — today's canteen menu. */
 
 import { fetchMenu } from "../services/canteen.service.js";
-import { pageHead, card, esc, emptyState, errorState, requireProxy } from "../ui/helpers.js";
+import { pageHead, card, esc, emptyState, errorState } from "../ui/helpers.js";
 
 export async function render(el) {
   el.innerHTML = pageHead("Mess Menu", "Today's menu", "Live from the canteen ERP — the same parser the app uses.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
 
   const mount = document.createElement("div");
   el.appendChild(mount);

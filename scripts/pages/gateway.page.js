@@ -3,7 +3,7 @@
 import { gatewayLoginPage, gatewaySubmit, captchaBlob, gradesLoginPage, gradesSubmit, ensureGrades } from "../core/session.js";
 import { parseGatewayDevices } from "../services/intranet.service.js";
 import { fetchGrades } from "../services/library.service.js";
-import { pageHead, card, esc, errorState, requireProxy, requireCreds, toast } from "../ui/helpers.js";
+import { pageHead, card, esc, errorState, requireCreds, toast } from "../ui/helpers.js";
 
 function captchaForm(id, hint) {
   return `
@@ -39,8 +39,6 @@ function wireCaptcha(root, id, loadPage, submit, onSuccess) {
 /* ── TCP counter ───────────────────────────────────────────────── */
 export async function renderTcp(el) {
   el.innerHTML = pageHead("TCP Counter", "Gateway & devices", "Campus TCP count and your registered MACs (captcha login).");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
   const credsOk = requireCreds();
   if (!credsOk.ok) return el.insertAdjacentHTML("beforeend", credsOk.html);
 
@@ -69,8 +67,6 @@ export async function renderTcp(el) {
 /* ── Grades ────────────────────────────────────────────────────── */
 export async function renderGrades(el) {
   el.innerHTML = pageHead("Grades", "Grade cards", "SGPA / CGPA for every semester (captcha login).");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
   const credsOk = requireCreds();
   if (!credsOk.ok) return el.insertAdjacentHTML("beforeend", credsOk.html);
 

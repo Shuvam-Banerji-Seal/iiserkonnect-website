@@ -1,8 +1,7 @@
 /**
- * ui/helpers.js — page scaffolding shared by every screen.
+ * ui/helpers.js — page scaffolding, no backend required.
  */
 
-import { probeProxy, proxyBase } from "../core/net.js";
 import { store } from "../core/store.js";
 
 export const esc = (s) => String(s ?? "")
@@ -33,9 +32,15 @@ export function emptyState(icon, title, hint, action = "") {
     </div>`;
 }
 
-export function errorState(msg, retryHash) {
-  return emptyState("⚠️", "Couldn't load this", esc(msg),
-    retryHash ? `<a class="btn btn--ghost btn--sm" href="#/${retryHash}">Retry</a>` : "");
+export function errorState(msg, retryHash, originalUrl) {
+  const hint = /Failed to fetch|NetworkError|CORS|mixed content|blocked/i.test(msg)
+    ? `Your browser blocked the request (CORS / mixed-content). When on campus this content loads directly — otherwise open the original site.`
+    : esc(msg);
+  const actions = [
+    originalUrl ? `<a class="btn btn--primary btn--sm" href="${esc(originalUrl)}" target="_blank" rel="noopener">Open original site ↗</a>` : "",
+    retryHash ? `<a class="btn btn--ghost btn--sm" href="#/${retryHash}">Retry</a>` : "",
+  ].filter(Boolean).join(" ");
+  return emptyState("⚠️", "Couldn't load this", hint, actions);
 }
 
 export function loading(label = "Loading…") {
@@ -60,21 +65,7 @@ export function toast(msg, kind = "info") {
   setTimeout(() => { el.classList.add("out"); setTimeout(() => el.remove(), 350); }, 3200);
 }
 
-/** Guard used by every campus-backed page: is the companion reachable? */
-export async function requireProxy() {
-  const probe = await probeProxy();
-  if (probe.ok) return { ok: true, mock: probe.mock };
-  return {
-    ok: false,
-    html: emptyState("🔌", "Companion proxy not detected",
-      `This web app talks to campus services through a tiny local proxy (the browser
-       itself is not allowed to — CORS). Start it, then reload:`,
-      `<code class="mono">python3 serve.py</code>
-       <p class="tiny body-muted" style="margin-top:8px">Expected at <code>${esc(proxyBase())}</code> —
-       change it in Settings. Demo mode: <code>python3 serve.py --mock</code></p>`),
-  };
-}
-
+/** No gate — the site is just a rerouter. Always "ok". */
 export function requireCreds() {
   if (store.get("ldap")) return { ok: true };
   return {
@@ -85,7 +76,6 @@ export function requireCreds() {
   };
 }
 
-/** simple bar chart (pure divs) */
 export function barChart(pairs, fmt = (v) => String(v)) {
   if (!pairs.length) return `<p class="body-muted small">No data yet.</p>`;
   const max = Math.max(...pairs.map(([, v]) => v), 1);

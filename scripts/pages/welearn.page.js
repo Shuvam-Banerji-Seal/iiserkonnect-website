@@ -1,14 +1,12 @@
-/** pages/welearn.page.js — courses, files, downloads, deadlines, attendance. */
+/** pages/welearn.page.js — courses, files, downloads, deadlines, attendance */
 
 import { fetchCourses, fetchCourseFiles, downloadUrl, fetchAttendance, fetchDeadlines } from "../services/welearn.service.js";
-import { pageHead, card, esc, emptyState, errorState, requireProxy, requireCreds, toast, chip } from "../ui/helpers.js";
+import { pageHead, card, esc, emptyState, errorState, requireCreds, chip } from "../ui/helpers.js";
 
 let cache = { courses: null, files: {} };
 
 export async function render(el) {
   el.innerHTML = pageHead("WeLearn", "Courses & materials", "Moodle courses, files with one-tap download, deadlines and attendance.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
   const credsOk = requireCreds();
   if (!credsOk.ok) return el.insertAdjacentHTML("beforeend", credsOk.html);
 
@@ -34,12 +32,11 @@ export async function render(el) {
     mount.querySelectorAll(".tab").forEach((b) =>
       b.onclick = () => {
         mount.querySelectorAll(".tab").forEach((x) => x.classList.remove("active"));
-        b.classList.add("active");
-        show(b.dataset.tab);
+        b.classList.add("active"); show(b.dataset.tab);
       });
     show("files");
   } catch (e) {
-    mount.innerHTML = errorState(e.message, "welearn");
+    mount.innerHTML = errorState(e.message, "welearn", "https://welearn.iiserkol.ac.in/my/");
   }
 }
 
@@ -71,7 +68,8 @@ async function renderFiles(body) {
             </li>`).join("")}</ul>`
         : `<p>No files listed.</p>`;
     } catch (e) {
-      slot.innerHTML = `<p class="err-text">${esc(e.message)}</p>`;
+      slot.innerHTML = `<p class="err-text">${esc(e.message)}</p>
+        <a class="btn btn--ghost btn--sm" href="https://welearn.iiserkol.ac.in/course/view.php?id=${esc(id)}" target="_blank">Open in WeLearn ↗</a>`;
     }
   }
 }
@@ -92,8 +90,9 @@ async function renderDeadlines(body) {
     body.innerHTML = list.length
       ? `<div class="app-card"><table class="datatable"><thead><tr><th>Course</th><th>Assignment</th><th>Due</th></tr></thead>
          <tbody>${list.map((d) => `<tr><td>${esc(d.course)}</td><td>${esc(d.name)}</td><td>${esc(d.due || "—")}</td></tr>`).join("")}</tbody></table></div>`
-      : emptyState("🗓️", "No assignments found", "No /mod/assign pages on your enrolled courses.");
-  } catch (e) { body.innerHTML = errorState(e.message, "welearn"); }
+      : emptyState("🗓️", "No assignments found", "No /mod/assign pages on your enrolled courses.",
+          `<a class="btn btn--ghost btn--sm" href="https://welearn.iiserkol.ac.in/my/" target="_blank">Open WeLearn ↗</a>`);
+  } catch (e) { body.innerHTML = errorState(e.message, "welearn", "https://welearn.iiserkol.ac.in/my/"); }
 }
 
 async function renderAttendance(body) {
@@ -114,6 +113,7 @@ async function renderAttendance(body) {
             <span class="barchart__value">${a.summary.pct}%</span>
           </div>
         </div>`)}
-    `).join("") : emptyState("🧾", "No attendance modules", "None of your courses have a Moodle attendance activity.");
-  } catch (e) { body.innerHTML = errorState(e.message, "welearn"); }
+    `).join("") : emptyState("🧾", "No attendance modules", "None of your courses have a Moodle attendance activity.",
+        `<a class="btn btn--ghost btn--sm" href="https://welearn.iiserkol.ac.in/my/" target="_blank">Open WeLearn ↗</a>`);
+  } catch (e) { body.innerHTML = errorState(e.message, "welearn", "https://welearn.iiserkol.ac.in/my/"); }
 }

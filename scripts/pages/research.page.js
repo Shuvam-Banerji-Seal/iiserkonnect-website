@@ -2,12 +2,10 @@
 
 import * as eprints from "../services/eprints.service.js";
 import { downloadUrl } from "../services/welearn.service.js";
-import { pageHead, esc, errorState, requireProxy } from "../ui/helpers.js";
+import { pageHead, esc, errorState } from "../ui/helpers.js";
 
 export async function render(el) {
   el.innerHTML = pageHead("Research", "ePrints repository", "Latest deposits and division-wise browse — public, no login.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
 
   el.insertAdjacentHTML("beforeend", `
     <div class="tabbar">

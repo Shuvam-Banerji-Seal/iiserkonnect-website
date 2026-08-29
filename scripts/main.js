@@ -1,25 +1,25 @@
 /**
- * main.js — app bootstrap: routes, shell, proxy status, theme
+ * main.js — app bootstrap: routes, shell, theme.
+ * No proxy, no backend. On campus the browser fetches campus directly.
  */
 
-import { registerRoute, setOutlet, startRouter, onRouted } from "./core/router.js?v=8";
-import { probeProxy } from "./core/net.js?v=8";
-import "./modules/theme-manager.js?v=8";
-import { icon } from "./components/icons.js?v=8";
+import { registerRoute, setOutlet, startRouter, onRouted } from "./core/router.js?v=9";
+import "./modules/theme-manager.js?v=9";
+import { icon } from "./components/icons.js?v=9";
 
-import { render as home } from "./pages/home.page.js?v=8";
-import { render as settings } from "./pages/settings.page.js?v=8";
-import { render as welearn } from "./pages/welearn.page.js?v=8";
-import { render as mess } from "./pages/mess.page.js?v=8";
-import { render as menu } from "./pages/menu.page.js?v=8";
-import { render as calendar } from "./pages/calendar.page.js?v=8";
-import { render as library } from "./pages/library.page.js?v=8";
-import { render as research } from "./pages/research.page.js?v=8";
-import { render as netmon } from "./pages/netmon.page.js?v=8";
-import { renderTcp, renderGrades } from "./pages/gateway.page.js?v=8";
-import { renderPyq, renderNotices, renderVoip } from "./pages/misc.page.js?v=8";
-import { render as chat } from "./pages/chat.page.js?v=8";
-import { render as about } from "./pages/about.page.js?v=8";
+import { render as home } from "./pages/home.page.js?v=9";
+import { render as settings } from "./pages/settings.page.js?v=9";
+import { render as welearn } from "./pages/welearn.page.js?v=9";
+import { render as mess } from "./pages/mess.page.js?v=9";
+import { render as menu } from "./pages/menu.page.js?v=9";
+import { render as calendar } from "./pages/calendar.page.js?v=9";
+import { render as library } from "./pages/library.page.js?v=9";
+import { render as research } from "./pages/research.page.js?v=9";
+import { render as netmon } from "./pages/netmon.page.js?v=9";
+import { renderTcp, renderGrades } from "./pages/gateway.page.js?v=9";
+import { renderPyq, renderNotices, renderVoip } from "./pages/misc.page.js?v=9";
+import { render as chat } from "./pages/chat.page.js?v=9";
+import { render as about } from "./pages/about.page.js?v=9";
 
 const ROUTES = [
   { id: "home",     title: "Home",        icon: "home",     group: null,       render: home },
@@ -64,11 +64,9 @@ const navHtml = () => {
 document.getElementById("sidebar").querySelector(".side-nav").innerHTML = navHtml();
 document.getElementById("drawer").innerHTML = navHtml();
 
-/* update foot theme button with icon */
+/* theme button icon */
 const themeBtn = document.getElementById("theme-btn");
-if (themeBtn) {
-  themeBtn.innerHTML = `${icon("settings")}<span>Theme</span>`;
-}
+if (themeBtn) themeBtn.innerHTML = `${icon("settings")}<span>Theme</span>`;
 
 /* mobile drawer */
 const burger = document.getElementById("burger");
@@ -88,26 +86,6 @@ drawer.addEventListener("click", (e) => {
   }
 });
 
-/* proxy pill */
-async function refreshProxy() {
-  const el = document.getElementById("proxy-pill");
-  if (!el) return;
-  const r = await probeProxy();
-  const label = r.ok ? (r.mock ? "Demo" : "Live") : "Offline";
-  const dotClass = r.ok ? (r.mock ? "mock" : "on") : "off";
-  el.className = `proxy-pill ${dotClass}`;
-  el.innerHTML = `<span class="proxy-pill__dot"></span>${label}`;
-  el.title = r.ok ? `Companion ${r.mock ? "demo mode" : "connected"} — ${r.ok ? "campus reachable via proxy" : ""}` : "Companion offline — start proxy/server.mjs";
-  // keep legacy dot in sync if present
-  const legacy = document.getElementById("proxy-dot");
-  if (legacy) {
-    legacy.className = `proxy-dot ${dotClass}`;
-    legacy.title = el.title;
-  }
-}
-refreshProxy();
-setInterval(refreshProxy, 12000);
-
 /* breadcrumb + title */
 onRouted((id) => {
   const r = ROUTES.find((x) => x.id === id);
@@ -123,7 +101,7 @@ onRouted((id) => {
   document.title = `${title} · IISERKonnect Web`;
 });
 
-/* cmd+k → settings search focus */
+/* cmd+k → focus search */
 document.addEventListener("keydown", (e) => {
   if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
     e.preventDefault();

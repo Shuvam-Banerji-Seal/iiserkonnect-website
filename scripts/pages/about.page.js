@@ -8,13 +8,13 @@ export async function render(el) {
       "The browser sibling of the IISERKonnect Android app.")}
     <div class="home-grid">
       ${card(`
-        <h3 class="h3">Architecture in one paragraph</h3>
-        <p class="small body-muted">A static frontend (this site) + a zero-dependency Node companion
-        (<code class="mono">serve.py</code>) that performs campus logins with per-session cookie
-        jars — the same job OkHttp did natively. Every scraper is a 1:1 port of the Kotlin parsers
-        (Jsoup → DOMParser). Campus Chat uses WebRTC data channels instead of raw TCP, so it stays
-        serverless and DTLS-encrypted end-to-end. Captcha-gated flows (grades, gateway) render the
-        real captcha through the proxy for you to solve.</p>`)}
+        <h3 class="h3">How it works</h3>
+        <p class="small body-muted">A pure frontend — no backend, no proxy. On IISERK WiFi or VPN
+        the browser fetches campus pages directly and parses them with DOMParser,
+        the same selectors the Android app uses with Jsoup. Every scraper is a
+        1:1 port of the Kotlin parsers. Campus Chat uses WebRTC data channels
+        so it stays serverless and DTLS-encrypted. Captcha images are fetched
+        directly for you to solve.</p>`)}
       ${card(`
         <h3 class="h3">Credits</h3>
         <p class="small body-muted">App, parsers and design by <strong>Shuvam Banerji Seal</strong> ·

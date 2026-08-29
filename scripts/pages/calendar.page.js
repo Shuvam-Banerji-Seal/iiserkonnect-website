@@ -2,12 +2,10 @@
 
 import { buildCalendarUrl, fetchAcademicWeek, fetchEventsWeek } from "../services/calendar.service.js";
 import { store } from "../core/store.js";
-import { pageHead, esc, errorState, requireProxy } from "../ui/helpers.js";
+import { pageHead, esc, errorState } from "../ui/helpers.js";
 
 export async function render(el) {
   el.innerHTML = pageHead("Calendar", "Week views", "Academic timetable and campus events — navigable week by week.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
 
   const mount = document.createElement("div");
   el.appendChild(mount);

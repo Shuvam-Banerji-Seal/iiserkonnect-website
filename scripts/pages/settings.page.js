@@ -1,58 +1,39 @@
-/** pages/settings.page.js — credentials, companion, theme, session. */
+/** pages/settings.page.js — credentials + theme + session (no proxy config) */
 
 import { store } from "../core/store.js";
 import { creds } from "../core/session.js";
-import { probeProxy, clearServerSession as clearJar } from "../core/net.js";
-import { pageHead, card, esc, toast } from "../ui/helpers.js";
-import "./../components/theme-picker-module.js";
+import { pageHead, card } from "../ui/helpers.js";
 
 export async function render(el) {
-  const probe = await probeProxy();
   const ldap = creds.get();
 
   el.innerHTML = `
-    ${pageHead("Settings", "One login, every feature",
-      "Credentials are stored only in this browser and sent only to your local companion proxy.")}
+    <div class="page-head" style="margin-bottom:20px">
+      <div>
+        <div class="eyebrow">Settings</div>
+        <h2 class="h2">One login, every feature</h2>
+        <p class="small body-muted">Credentials stored only in this browser. Shared by WeLearn, ERP, canteen, VPN &amp; chat — just like the app.</p>
+      </div>
+    </div>
 
     <div class="settings-grid">
       ${card(`
         <h3 class="h3">Campus account</h3>
-        <p class="body-muted small">Shared by WeLearn, ERP, canteen, VPN & chat — same as the app.</p>
         <label class="field"><span>LDAP username</span>
-          <input id="f-user" class="input" value="${esc(ldap?.u || "")}" placeholder="e.g. sbs22ms076" autocomplete="username"></label>
+          <input id="f-user" class="input" value="${ldap?.u || ""}" placeholder="e.g. sbs22ms076" autocomplete="username"></label>
         <label class="field"><span>Password</span>
-          <input id="f-pass" class="input" type="password" value="${esc(ldap?.p || "")}" autocomplete="current-password"></label>
+          <input id="f-pass" class="input" type="password" value="${ldap?.p || ""}" autocomplete="current-password"></label>
         <div class="row-gap">
           <button class="btn btn--primary btn--sm" id="save-creds">Save</button>
-          <button class="btn btn--ghost btn--sm" id="clear-creds">Sign out & clear</button>
+          <button class="btn btn--ghost btn--sm" id="clear-creds">Sign out &amp; clear</button>
         </div>
-      `)}
-
-      ${card(`
-        <h3 class="h3">Companion proxy</h3>
-        <p class="body-muted small">The local server that talks to campus for you.</p>
-        <label class="field"><span>Base URL</span>
-          <input id="f-proxy" class="input" value="${esc(store.get("proxyBase") || "http://localhost:8787")}"></label>
-        <div class="row-gap">
-          <button class="btn btn--primary btn--sm" id="save-proxy">Save</button>
-          <button class="btn btn--ghost btn--sm" id="test-proxy">Test connection</button>
-        </div>
-        <p class="small ${probe.ok ? "ok-text" : "err-text"}" style="margin-top:10px">
-          ${probe.ok ? `● Connected${probe.mock ? " — DEMO MODE (mock fixtures)" : ""}` : "● Not detected"}
-        </p>
+        <p class="small body-muted" style="margin-top:10px">On campus this page can log in directly. Off-campus, login-protected pages show an "Open campus portal" link.</p>
       `)}
 
       ${card(`
         <h3 class="h3">Appearance</h3>
-        <p class="body-muted small">The same nine palettes that ship in the app.</p>
+        <p class="small body-muted">The same nine palettes that ship in the app.</p>
         <theme-picker></theme-picker>
-      `)}
-
-      ${card(`
-        <h3 class="h3">Server session</h3>
-        <p class="body-muted small">Cookie jars live in the proxy's memory, keyed to this browser.</p>
-        <button class="btn btn--ghost btn--sm" id="clear-jar">Clear proxy session</button>
-        <p class="tiny body-muted" style="margin-top:8px">Use this if a campus service acts logged-out.</p>
       `)}
     </div>
   `;
@@ -64,24 +45,16 @@ export async function render(el) {
     creds.save(u, p);
     toast("Credentials saved");
   };
-  el.querySelector("#clear-creds").onclick = async () => {
-    creds.clear(); await clearJar();
-    toast("Signed out — proxy session cleared");
+  el.querySelector("#clear-creds").onclick = () => {
+    creds.clear();
+    toast("Signed out");
     render(el);
   };
-  el.querySelector("#save-proxy").onclick = () => {
-    store.set("proxyBase", el.querySelector("#f-proxy").value.trim());
-    toast("Proxy URL saved"); render(el);
-  };
-  el.querySelector("#test-proxy").onclick = async () => {
-    store.set("proxyBase", el.querySelector("#f-proxy").value.trim());
-    const r = await probeProxy();
-    toast(r.ok ? `Connected${r.mock ? " (mock mode)" : ""}` : "Not reachable — is it running?", r.ok ? "ok" : "err");
-    if (r.ok) render(el);
-  };
-  el.querySelector("#clear-jar").onclick = async () => {
-    await clearJar();
-    store.set("flags", {});
-    toast("Proxy session cleared");
-  };
+}
+
+function toast(msg) {
+  let host = document.querySelector(".toast-host");
+  if (!host) { host = document.createElement("div"); host.className = "toast-host"; document.body.appendChild(host); }
+  const el = document.createElement("div"); el.className = "toast toast--info"; el.textContent = msg;
+  host.appendChild(el); setTimeout(() => { el.classList.add("out"); setTimeout(() => el.remove(), 350); }, 3200);
 }

@@ -1,11 +1,10 @@
 /**
- * core/net.js — campus fetch via the unified serve.py proxy.
- * On campus, just `python3 serve.py` — the page and the proxy are the
- * same origin, so no CORS and no extra config. Off-campus, the proxy
- * still works if you run it locally (or point proxyBase at a campus box).
+ * core/net.js — direct campus fetch. No proxy, no backend.
+ * The site is a single-page rerouter: fetch each campus URL, parse
+ * with DOMParser, render in-place. On IISERK WiFi/VPN the browser
+ * can reach campus directly; off-campus the fetch fails and the page
+ * shows a graceful "Open in browser" fallback.
  */
-
-import { store } from "./store.js";
 
 export const C = {
   WELEARN: "https://welearn.iiserkol.ac.in",
@@ -36,82 +35,33 @@ export const C = {
   TIMETABLE_PDF: "https://www.iiserkol.ac.in/web/assets/images/ck_editor_image/1769612117_Time-Table-Spring-2026_28.01.2026.pdf",
 };
 
-function sid() {
-  let s = store.get("sid");
-  if (!s) { s = crypto.randomUUID(); store.set("sid", s); }
-  return s;
-}
-
-/* Resolve the proxy base: same-origin first (serve.py unified), then stored, then legacy */
-function candidates() {
-  const list = [];
-  // same-origin — works when served via `python3 serve.py` (on campus, no config)
-  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") list.push(location.origin);
-  const stored = store.get("proxyBase");
-  if (stored) list.push(stored.replace(/\/$/, ""));
-  list.push("http://localhost:8787", "http://localhost:8123");
-  return [...new Set(list)];
-}
-let resolvedBase = null;
-
-export function proxyBase() {
-  return (resolvedBase || store.get("proxyBase") || candidates()[0]).replace(/\/$/, "");
-}
-
-async function proxyFetch(path, init = {}) {
-  const base = proxyBase();
-  const res = await fetch(base + path + (path.includes("?") ? "&" : "?") + "_=" + Date.now(), {
-    ...init,
-    cache: "no-store",
-    headers: { "X-SID": sid(), ...(init.headers || {}) },
-  });
-  if (!res.ok && res.status >= 500 && res.headers.get("content-type")?.includes("json")) {
-    const j = await res.json().catch(() => ({}));
-    throw new Error(j.error || `proxy ${res.status}`);
-  }
-  return res;
-}
-
+/**
+ * Direct browser fetch — same as curl on campus, same CORS rules.
+ * On campus (campus WiFi / VPN), the browser CAN reach campus hosts
+ * when they send CORS headers (most do). Off-campus it fails gracefully.
+ */
 export async function get(url) {
-  const res = await proxyFetch(`/fetch?url=${encodeURIComponent(url)}`);
-  const finalUrl = res.headers.get("X-Final-URL") || url;
+  const res = await fetch(url, { credentials: "include", cache: "no-store" });
   const text = await res.text();
-  return { ok: res.ok, status: res.status, url: finalUrl, text };
+  return { ok: res.ok, status: res.status, url: res.url || url, text };
 }
 
 export async function postForm(url, fields) {
-  const res = await proxyFetch("/fetch", {
+  const body = new URLSearchParams(fields).toString();
+  const res = await fetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url, form: fields, method: "POST" }),
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body,
+    credentials: "include",
+    cache: "no-store",
   });
-  const finalUrl = res.headers.get("X-Final-URL") || url;
   const text = await res.text();
-  return { ok: res.ok, status: res.status, url: finalUrl, text };
+  return { ok: res.ok, status: res.status, url: res.url || url, text };
 }
 
 export async function getBlob(url) {
-  const res = await proxyFetch(`/fetch?url=${encodeURIComponent(url)}`);
+  const res = await fetch(url, { credentials: "include", cache: "no-store" });
   return res.blob();
 }
 
-export function fileUrl(url) {
-  const s = store.get("sid") || sid();
-  return `${proxyBase()}/file?url=${encodeURIComponent(url)}&sid=${s}`;
-}
-
-/* Probe: try same-origin first, then fallbacks; remember the winner */
-export async function probeProxy() {
-  for (const base of candidates()) {
-    try {
-      const r = await fetch(base + "/ping?_=" + Date.now(), { signal: AbortSignal.timeout(2000), cache: "no-store" });
-      const j = await r.json();
-      if (j.ok) { resolvedBase = base; return { ok: true, mock: !!j.mock, base }; }
-    } catch {}
-  }
-  return { ok: false };
-}
-
-export async function clearServerSession() {
-  try { await fetch(proxyBase() + "/jar/clear", { method: "POST", headers: { "X-SID": sid() } }); } catch {}
-}
+export function fileUrl(url) { return url; }

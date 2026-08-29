@@ -3,13 +3,11 @@
 import { fetchPyqYears, fetchPyqYear, fetchNotices, fetchVoip } from "../services/intranet.service.js";
 import { downloadUrl } from "../services/welearn.service.js";
 import { C } from "../core/net.js";
-import { pageHead, card, esc, errorState, requireProxy, emptyState } from "../ui/helpers.js";
+import { pageHead, card, esc, errorState, emptyState } from "../ui/helpers.js";
 
 /* ── PYQ ───────────────────────────────────────────────────────── */
 export async function renderPyq(el) {
   el.innerHTML = pageHead("PYQ", "Previous year papers", "Year → exam → department, straight from the intranet wiki.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
   const mount = document.createElement("div");
   el.appendChild(mount);
   mount.innerHTML = `<div class="page-loading"><span class="spinner"></span> Loading years…</div>`;
@@ -39,8 +37,6 @@ export async function renderPyq(el) {
 /* ── Notice board ──────────────────────────────────────────────── */
 export async function renderNotices(el) {
   el.innerHTML = pageHead("Notices", "Notice boards", "Student and administration wiki notices by year.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
   const mount = document.createElement("div");
   el.appendChild(mount);
   mount.innerHTML = `
@@ -71,8 +67,6 @@ export async function renderNotices(el) {
 /* ── VoIP directory ────────────────────────────────────────────── */
 export async function renderVoip(el) {
   el.innerHTML = pageHead("VoIP", "Telephone directory", "Searchable campus extensions.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
   const mount = document.createElement("div");
   el.appendChild(mount);
   mount.innerHTML = `<div class="page-loading"><span class="spinner"></span> Loading directory…</div>`;

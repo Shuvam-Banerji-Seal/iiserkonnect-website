@@ -197,33 +197,7 @@
   flex-shrink: 0;
 }
 
-/* Proxy status — pill, not dot */
-.proxy-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 26px;
-  padding: 0 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-secondary);
-}
-.proxy-pill__dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--text-tertiary);
-  box-shadow: 0 0 0 2px transparent;
-}
-.proxy-pill.on .proxy-pill__dot { background: var(--success); box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 18%, transparent); }
-.proxy-pill.mock .proxy-pill__dot { background: #F59E0B; box-shadow: 0 0 0 3px rgba(245,158,11,0.18); }
-.proxy-pill.off .proxy-pill__dot { background: var(--danger); }
 
-/* Legacy dot compat */
-.proxy-dot { display: none; }
 
 .outlet {
   flex: 1;

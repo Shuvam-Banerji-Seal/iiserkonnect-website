@@ -2,12 +2,10 @@
 
 import { ENDPOINTS, MONITORS, MRTG_SOURCES, fetchMonitor, fetchMrtg } from "../services/netmon.service.js";
 import { get } from "../core/net.js";
-import { pageHead, card, esc, errorState, requireProxy } from "../ui/helpers.js";
+import { pageHead, card, esc, errorState } from "../ui/helpers.js";
 
 export async function render(el) {
-  el.innerHTML = pageHead("Network", "Status dashboard", "Service health, campus monitors and MRTG traffic — needs campus network/VPN on the proxy host.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
+  el.innerHTML = pageHead("Network", "Status dashboard", "Service health, campus monitors and MRTG traffic — needs campus WiFi/VPN.");
 
   el.insertAdjacentHTML("beforeend", `
     <div class="statrow" id="nm-endpoints"></div>
@@ -20,7 +18,7 @@ export async function render(el) {
   const body = el.querySelector("#nm-body");
   const endpointsEl = el.querySelector("#nm-endpoints");
 
-  // endpoint health (parallel HEAD-ish via proxy GET of tiny pages)
+  // endpoint health (direct fetch of tiny pages) of tiny pages)
   endpointsEl.innerHTML = ENDPOINTS.map((e) =>
     card(`<div class="stat"><span class="stat__value" data-e="${esc(e.url)}">…</span><span class="stat__label">${esc(e.name)}</span></div>`)).join("");
 

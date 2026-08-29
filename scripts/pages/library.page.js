@@ -1,12 +1,10 @@
 /** pages/library.page.js — catalogue search + item detail. */
 
 import { search, itemDetail } from "../services/library.service.js";
-import { pageHead, esc, errorState, requireProxy } from "../ui/helpers.js";
+import { pageHead, esc, errorState } from "../ui/helpers.js";
 
 export async function render(el) {
   el.innerHTML = pageHead("Library", "Catalogue", "Search the VTLS Chamo catalogue with live availability.");
-  const proxy = await requireProxy();
-  if (!proxy.ok) return el.insertAdjacentHTML("beforeend", proxy.html);
 
   el.insertAdjacentHTML("beforeend", `
     <form class="searchbar" id="lib-form">

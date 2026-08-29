@@ -1,8 +1,7 @@
-/** pages/home.page.js — faithful port of ui/home/HomeScreen.kt */
+/** pages/home.page.js — faithful to ui/home/HomeScreen.kt */
 
-import { probeProxy, get, C } from "../core/net.js";
 import { creds } from "../core/session.js";
-import { pageHead, card } from "../ui/helpers.js";
+import { card } from "../ui/helpers.js";
 import { icon } from "../components/icons.js";
 
 function greeting() {
@@ -23,8 +22,8 @@ function firstName(u) {
 const TILES = {
   academics: [
     { icon: "book",       label: "WeLearn",          href: "#/welearn" },
-    { icon: "book",       label: "Teaching Plans",   href: "#/research", note: "→ Teaching Plans is under Research > Browse" },
-    { icon: "edit-3",     label: "Course Selection", href: "#/grades", note: "via Grades login" },
+    { icon: "book",       label: "Teaching Plans",   href: "#/research" },
+    { icon: "edit-3",     label: "Course Selection", href: "#/grades" },
     { icon: "calendar",   label: "Timetable",        href: "#/calendar" },
     { icon: "folder",     label: "Course Material",  href: "https://drive.google.com/drive/folders/1ddxItH9bU8zvQxof3hM8h4fMNNu8UTmw?usp=drive_link", external: true },
     { icon: "award",      label: "Grade Card",       href: "#/grades" },
@@ -71,53 +70,33 @@ function section(title, tiles) {
 }
 
 export async function render(el) {
-  const probe = await probeProxy();
   const hasCreds = creds.has();
   const u = hasCreds ? creds.get().u : "";
   const name = firstName(u);
   const greet = greeting();
-  // Campus detection: if proxy is live (not mock), try intranet wiki
-  let onCampus = false;
-  if (probe.ok && !probe.mock) {
-    try {
-      const r = await get(C.LIBRARY_HOME);
-      onCampus = r.ok && r.text.includes("Library");
-    } catch { onCampus = false; }
-  }
-  const proxyLabel = !probe.ok ? "Offline" : probe.mock ? "Demo" : onCampus ? "On Campus" : "Live";
-  const campusHint = !probe.ok ? "Start python3 serve.py" : probe.mock ? "Demo fixtures" : onCampus ? "On campus network — no VPN needed" : "Companion connected — VPN may be needed for intranet";
 
   el.innerHTML = `
-    <!-- Greeting header — like GreetingHeader in Compose -->
     <div class="greeting-header">
       <div>
         <h1 class="greeting-header__greeting">${name ? `${greet}, ${name}!` : `${greet}!`}</h1>
-        <p class="greeting-header__sub">IISER Kolkata</p>
+        <p class="greeting-header__sub">IISER Kolkata — ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
       </div>
-      <span class="proxy-pill ${probe.ok ? (probe.mock ? "mock" : "on") : "off"}" title="${campusHint}">
-        <span class="proxy-pill__dot"></span>${proxyLabel}
-      </span>
     </div>
 
-    <!-- Hero — single spotlight card (like HorizontalPager with one page for web) -->
     <div class="hero-card">
       <div class="hero-card__icon">${icon("sparkles")}</div>
       <div class="hero-card__body">
-        <div class="hero-card__eyebrow">IISERK Dashboard</div>
-        <div class="hero-card__title">Campus tools. Faster access. Less friction.</div>
-        <div class="hero-card__sub">WeLearn · Mess · Calendar · Chat — one login, zero installs.</div>
+        <div class="hero-card__eyebrow">Campus tools</div>
+        <div class="hero-card__title">Faster access. Less friction.</div>
+        <div class="hero-card__sub">WeLearn · Mess · Calendar · Chat — one login, every page.</div>
       </div>
       <span class="hero-card__arrow">↗</span>
     </div>
+
     ${!hasCreds ? `<div class="app-card" style="display:flex;align-items:center;gap:12px;padding:12px 16px;margin-bottom:16px">
       <span style="width:32px;height:32px;border-radius:8px;background:var(--warning);color:#000;display:grid;place-items:center;flex:none">${icon("lock", "icon-sm")}</span>
       <div style="flex:1"><div style="font-weight:600;font-size:0.875rem">Sign in to unlock everything</div><div class="tiny" style="color:var(--text-secondary)">Your LDAP credentials unlock WeLearn, mess, grades and chat.</div></div>
       <a class="btn btn--primary btn--sm" href="#/settings">Sign in</a>
-    </div>` : ""}
-    ${!probe.ok ? `<div class="app-card" style="display:flex;align-items:center;gap:12px;padding:12px 16px;margin-bottom:16px;border-color:color-mix(in srgb, var(--warning) 30%, transparent)">
-      <span style="width:32px;height:32px;border-radius:8px;background:var(--warning);color:#000;display:grid;place-items:center;flex:none">${icon("plug", "icon-sm")}</span>
-      <div style="flex:1"><div style="font-weight:600;font-size:0.875rem">Companion offline</div><div class="tiny" style="color:var(--text-secondary)">Run <code class="mono">python3 serve.py --mock</code> for demo, or without flag on campus/VPN.</div></div>
-      <a class="btn btn--ghost btn--sm" href="#/settings">Settings</a>
     </div>` : ""}
 
     ${section("Academics", TILES.academics)}
@@ -127,7 +106,6 @@ export async function render(el) {
     ${section("Tools & Network", TILES.tools)}
   `;
 
-  // staggered reveal like AnimatedVisibility in Compose
   const sections = el.querySelectorAll(".home-section");
   sections.forEach((s, i) => {
     s.style.opacity = "0";

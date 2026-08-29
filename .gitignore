@@ -5,3 +5,5 @@ Thumbs.db
 # local verification artifacts
 plans/screenshots/
 __pycache__/
+.rigor-trash/
+__pycache__/
