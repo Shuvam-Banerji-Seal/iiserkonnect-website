@@ -11,17 +11,39 @@ import { gatewayLoggedInHtml } from "../core/session.js";
 /* ── PYQ (port of fetchPYQYears / fetchPYQForYear) ─────────────── */
 export async function fetchPyqYears() {
   const page = await get(`${C.WIKI}/Library:Home`);
+  const t = page.text.trim();
+  if (t.startsWith("{")) {
+    try { const j = JSON.parse(t); if (j.years) return j.years; } catch {}
+  }
   const doc = parse(page.text);
   const years = [];
   for (const a of qa(doc, 'a[href*="Old_Question_Papers"]')) {
     const m = /\((\d{4})\)/.exec(text(a)) || /\((\d{4})\)/.exec(attr(a, "href"));
     if (m) years.push({ year: +m[1], url: new URL(attr(a, "href"), "http://intranet.iiserkol.ac.in").href });
   }
-  return [...new Map(years.map((y) => [y.year, y])).values()].sort((a, b) => b.year - a.year);
+  if (years.length) return [...new Map(years.map((y) => [y.year, y])).values()].sort((a, b) => b.year - a.year);
+  // Fallback to static snapshot
+  try {
+    const r = await fetch("data/pyq.json", { cache: "no-store" });
+    const j = await r.json();
+    if (j.years) return j.years;
+  } catch {}
+  return years;
 }
 
 export async function fetchPyqYear(pyq) {
   const page = await get(pyq.url);
+  const pt = page.text.trim();
+  if (pt.startsWith("{")) {
+    try {
+      const j = JSON.parse(pt);
+      if (j.sections) return { year: pyq.year, sections: j.sections };
+      // pyq.json snapshot has years+sections for the sample year
+      const r = await fetch("data/pyq.json", { cache: "no-store" });
+      const jd = await r.json();
+      if (jd.sections) return { year: pyq.year, sections: jd.sections };
+    } catch {}
+  }
   const doc = parse(page.text);
   const content = q(doc, "#mw-content-text") || doc.body;
   const sections = [];
@@ -125,6 +147,16 @@ export async function fetchLibraryInfo() {
 /* ── Notice board (port of parseNoticeBoard) ───────────────────── */
 export async function fetchNotices(url) {
   const page = await get(url);
+  const pt = page.text.trim();
+  if (pt.startsWith("{")) {
+    try {
+      const j = JSON.parse(pt);
+      if (j.notices) return j.notices;
+      const r = await fetch("data/notices.json", { cache: "no-store" });
+      const jd = await r.json();
+      if (jd.notices) return jd.notices;
+    } catch {}
+  }
   const doc = parse(page.text);
   const content = q(doc, "#mw-content-text");
   if (!content) return [];
@@ -159,6 +191,16 @@ export async function fetchNotices(url) {
 /* ── VoIP (port of fetchVoipDirectory) ─────────────────────────── */
 export async function fetchVoip() {
   const page = await get(C.VOIP);
+  const pt = page.text.trim();
+  if (pt.startsWith("{")) {
+    try {
+      const j = JSON.parse(pt);
+      if (j.pilot) return { pilot: j.pilot, sections: j.sections || [] };
+      const r = await fetch("data/voip.json", { cache: "no-store" });
+      const jd = await r.json();
+      if (jd.pilot) return { pilot: jd.pilot, sections: jd.sections };
+    } catch {}
+  }
   const doc = parse(page.text);
   const pilot = (text(q(doc, "mark")).match(/\+?[\d\s-]+0000/) || ["+91-33-6136-0000"])[0].trim();
   const sections = [];

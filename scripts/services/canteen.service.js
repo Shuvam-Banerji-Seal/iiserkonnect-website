@@ -10,19 +10,38 @@ import { regex1 } from "../core/html.js";
 
 /* ── transactions ──────────────────────────────────────────────── */
 export async function fetchTransactions(full = false) {
-  if (!(await ensureCanteen())) throw new Error("Canteen ERP login failed — check credentials in Settings");
-  const page = await get(C.CANTEEN_MINI);
-  if (/not logeed in/i.test(page.text)) { throw new Error("Canteen session expired — retry"); }
-  const csrf = regex1(/csrfmiddlewaretoken[^>]*value=['"]([^'"]+)['"]/, page.text);
-  if (!csrf) throw new Error("Could not find CSRF token on ERP page");
-  const form = { csrfmiddlewaretoken: csrf, userid: userid(), submit: "Get Result" };
-  if (full) Object.assign(form, {
-    choice: "range", syear: "2000", smon: "1", sday: "1",
-    eyear: "2100", emon: "1", eday: "1",
-  });
-  else Object.assign(form, { choice: "ministatement" });
-  const res = await postForm(C.CANTEEN_MINI, form);
-  return parseTransactions(res.text);
+  // Try live ERP first when on campus
+  try {
+    if (await ensureCanteen()) {
+      const page = await get(C.CANTEEN_MINI);
+      const pt = page.text.trim();
+      if (pt.startsWith("{")) {
+        try { const j = JSON.parse(pt); if (j.transactions) return j.transactions; } catch {}
+      }
+      if (!/not logeed in/i.test(page.text)) {
+        const csrf = regex1(/csrfmiddlewaretoken[^>]*value=['"]([^'"]+)['"]/, page.text);
+        if (csrf) {
+          const form = { csrfmiddlewaretoken: csrf, userid: userid(), submit: "Get Result" };
+          if (full) Object.assign(form, { choice: "range", syear: "2000", smon: "1", sday: "1", eyear: "2100", emon: "1", eday: "1" });
+          else Object.assign(form, { choice: "ministatement" });
+          const res = await postForm(C.CANTEEN_MINI, form);
+          const rt = res.text.trim();
+          if (rt.startsWith("{")) {
+            try { const j = JSON.parse(rt); if (j.transactions) return j.transactions; } catch {}
+          }
+          const parsed = parseTransactions(res.text);
+          if (parsed.length) return parsed;
+        }
+      }
+    }
+  } catch {}
+  // Fallback to static snapshot (works off-campus, no login)
+  try {
+    const r = await fetch("data/mess.json", { cache: "no-store" });
+    const j = await r.json();
+    if (j.transactions) return j.transactions;
+  } catch {}
+  throw new Error("Could not load transactions — try on campus or open canteen ERP directly");
 }
 
 /** ERP userid = employee number, e.g. sbs22ms076 → 22MS076 (port of extractEmployeeNumber). */
@@ -87,6 +106,10 @@ export const lastBalance = (tx) => (tx.length ? [...tx].sort((a, b) => b.dateTim
 /* ── today's menu (port of parseFoodMenuFromCanteen) ───────────── */
 export async function fetchMenu() {
   const page = await get(C.CANTEEN_MENU);
+  const t = page.text.trim();
+  if (t.startsWith("{")) {
+    try { const j = JSON.parse(t); if (j.meals) return { title: j.title || "Today's Menu", meals: j.meals }; } catch {}
+  }
   const doc = parse(page.text);
   const box = q(doc, "div.tmenucon");
   if (!box) throw new Error("Menu not published right now (no div.tmenucon on the ERP page)");

@@ -16,6 +16,16 @@ export function buildCalendarUrl(courses) {
 
 export async function fetchAcademicWeek(url) {
   const page = await get(url);
+  const pt = page.text.trim();
+  if (pt.startsWith("{")) {
+    try {
+      const j = JSON.parse(pt);
+      if (j.academic) return j.academic;
+      const r = await fetch("data/calendar.json", { cache: "no-store" });
+      const jd = await r.json();
+      if (jd.academic) return jd.academic;
+    } catch {}
+  }
   const doc = parse(page.text, url);
   const popups = new Map();
   for (const dl of qa(doc, "dl.popup")) {
@@ -72,6 +82,16 @@ export async function fetchAcademicWeek(url) {
 /* ── campus events ─────────────────────────────────────────────── */
 export async function fetchEventsWeek(url = C.EVENTS_CAL) {
   const page = await get(url);
+  const pt2 = page.text.trim();
+  if (pt2.startsWith("{")) {
+    try {
+      const j = JSON.parse(pt2);
+      if (j.events) return j.events;
+      const r = await fetch("data/calendar.json", { cache: "no-store" });
+      const jd = await r.json();
+      if (jd.events) return jd.events;
+    } catch {}
+  }
   const doc = parse(page.text, url);
   const popups = new Map();
   for (const dl of qa(doc, "dl.popup")) {

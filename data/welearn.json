@@ -1,0 +1,43 @@
+{
+  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "courses": [
+    {
+      "id": "101",
+      "title": "PH4201 Quantum Mechanics",
+      "url": "https://welearn.iiserkol.ac.in/course/view.php?id=101"
+    },
+    {
+      "id": "102",
+      "title": "CS3102 Data Structures",
+      "url": "https://welearn.iiserkol.ac.in/course/view.php?id=102"
+    },
+    {
+      "id": "103",
+      "title": "MA4104 Real Analysis",
+      "url": "https://welearn.iiserkol.ac.in/course/view.php?id=103"
+    }
+  ],
+  "files": {
+    "101": [
+      {
+        "name": "Lecture 1 Notes",
+        "url": "https://welearn.iiserkol.ac.in/mod/resource/view.php?id=9001",
+        "kind": "resource"
+      }
+    ],
+    "102": [
+      {
+        "name": "Lecture 1 Notes",
+        "url": "https://welearn.iiserkol.ac.in/mod/resource/view.php?id=9001",
+        "kind": "resource"
+      }
+    ],
+    "103": [
+      {
+        "name": "Lecture 1 Notes",
+        "url": "https://welearn.iiserkol.ac.in/mod/resource/view.php?id=9001",
+        "kind": "resource"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "monitors": [
+    {
+      "name": "Core",
+      "hosts": [
+        {
+          "name": "Router",
+          "up": true,
+          "url": "http://x/1/index.html"
+        }
+      ]
+    }
+  ],
+  "mrtg": [
+    {
+      "title": "Core Router",
+      "base": "core",
+      "day": "core-day.png"
+    }
+  ]
+}

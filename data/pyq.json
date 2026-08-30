@@ -1,0 +1,21 @@
+{
+  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "years": [
+    {
+      "year": 2025,
+      "url": "http://intranet.iiserkol.ac.in/wiki/Library:Old_Question_Papers_(2025)"
+    }
+  ],
+  "sections": [
+    {
+      "exam": "Mid Semester",
+      "semester": "Autumn",
+      "depts": [
+        {
+          "name": "Physics",
+          "url": "http://intranet.iiserkol.ac.in/w/images/phy_mid_2025.pdf"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "pilot": "+91-33-6136-0000",
+  "sections": [
+    {
+      "id": "admin",
+      "title": "Administration",
+      "contacts": [
+        {
+          "name": "Dean Office",
+          "ext": "5001",
+          "location": "Admin Block"
+        }
+      ]
+    }
+  ]
+}

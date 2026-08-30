@@ -1,0 +1,21 @@
+{
+  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "latest": [
+    {
+      "id": "2157",
+      "title": "Topological Phases",
+      "year": "2025",
+      "url": "http://eprints.iiserkol.ac.in/2157/"
+    }
+  ],
+  "divisions": [
+    {
+      "id": "dps",
+      "name": "Physical Sciences"
+    },
+    {
+      "id": "dcs",
+      "name": "Chemical Sciences"
+    }
+  ]
+}

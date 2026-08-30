@@ -1,0 +1,25 @@
+{
+  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "transactions": [
+    {
+      "dateTime": "2026:08:20 13:05:11",
+      "foodItems": "Rice:1:12|Dal:1:25",
+      "totalCost": 37,
+      "type": "Debited",
+      "balanceAdded": "",
+      "modeOfTran": "",
+      "balance": 813,
+      "remarks": ""
+    },
+    {
+      "dateTime": "2026:08:19 20:10:02",
+      "foodItems": "Dinner",
+      "totalCost": 45,
+      "type": "Debited",
+      "balanceAdded": "",
+      "modeOfTran": "",
+      "balance": 850,
+      "remarks": ""
+    }
+  ]
+}

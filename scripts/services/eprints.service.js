@@ -14,6 +14,11 @@ const tag = (block, name) => regex1(new RegExp(`<${name}>(.*?)</${name}>`, "s"),
 
 export async function latest() {
   const page = await get(`${C.EPRINTS}/cgi/latest_tool?output=RSS2`);
+  const t = page.text.trim();
+  if (t.startsWith("{")) {
+    try { const j = JSON.parse(t); if (j.latest) return j.latest; } catch {}
+    try { const r = await fetch("data/research.json", { cache: "no-store" }); const j = await r.json(); if (j.latest) return j.latest; } catch {}
+  }
   const xml = page.text;
   const papers = [];
   for (const m of xml.matchAll(/<item>(.*?)<\/item>/gs)) {
@@ -25,7 +30,10 @@ export async function latest() {
     const year = regex1(/\((20\d\d)\)/, desc);
     papers.push({ id, title, year, url: `${C.EPRINTS}/${id}/` });
   }
-  return papers.filter((p, i, a) => a.findIndex((x) => x.id === p.id) === i);
+  const parsed = papers.filter((p, i, a) => a.findIndex((x) => x.id === p.id) === i);
+  if (parsed.length) return parsed;
+  try { const r = await fetch("data/research.json", { cache: "no-store" }); const j = await r.json(); if (j.latest) return j.latest; } catch {}
+  return parsed;
 }
 
 export async function divisions() {

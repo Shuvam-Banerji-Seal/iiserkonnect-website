@@ -1,0 +1,49 @@
+{
+  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "academic": {
+    "monthLabel": "August 24 – 30, 2026",
+    "days": [
+      {
+        "day": "Mon",
+        "date": "24 Aug",
+        "today": true
+      },
+      {
+        "day": "Tue",
+        "date": "25 Aug",
+        "today": false
+      }
+    ],
+    "events": [
+      {
+        "id": "pop101",
+        "title": "PH4201",
+        "start": "8:00 a.m.",
+        "end": "9:30 a.m.",
+        "venue": "LHC 201",
+        "day": 0,
+        "hour": 8
+      }
+    ]
+  },
+  "events": {
+    "monthLabel": "August 24 – 30, 2026",
+    "days": [
+      {
+        "day": "Mon",
+        "date": "24 Aug",
+        "today": true
+      }
+    ],
+    "events": [
+      {
+        "id": "pop201",
+        "title": "Physics Colloquium",
+        "time": "14:30",
+        "venue": "Asima Theatre",
+        "day": 0,
+        "hour": 14
+      }
+    ]
+  }
+}

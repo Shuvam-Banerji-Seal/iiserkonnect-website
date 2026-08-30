@@ -15,18 +15,38 @@ export const isLoginOk = (html) => {
 };
 
 export async function fetchCourses() {
-  if (!(await ensureWelearn())) throw new Error("WeLearn login failed — check credentials in Settings");
-  const dash = await get(C.WELEARN_MY);
-  const doc = parse(dash.text);
-  return qa(doc, 'a.list-group-item.list-group-item-action[href*="/course/view.php?id="]')
-    .map((a) => {
-      const url = absUrl(a, "href", C.WELEARN);
-      const id = regexId(url);
-      return { id, url, title: text(a).replace(/^Course:\s*/, "") || `course_${id}` };
-    })
-    .filter((c) => c.id)
-    .map((c, i, arr) => ({ ...c, title: c.title || arr.find(x => x.id === c.id)?.title }))
-    .filter((c, i, arr) => arr.findIndex((x) => x.id === c.id) === i);
+  // Try direct campus fetch first
+  try {
+    if (!(await ensureWelearn())) throw new Error("WeLearn login failed");
+    const dash = await get(C.WELEARN_MY);
+    // Check for JSON fallback (when off-campus, get() returns data/welearn.json)
+    const t = dash.text.trim();
+    if (t.startsWith("{") || t.startsWith("[")) {
+      try {
+        const j = JSON.parse(t);
+        if (j.courses) return j.courses;
+        if (Array.isArray(j)) return j;
+      } catch {}
+    }
+    const doc = parse(dash.text);
+    const courses = qa(doc, 'a.list-group-item.list-group-item-action[href*="/course/view.php?id="]')
+      .map((a) => {
+        const url = absUrl(a, "href", C.WELEARN);
+        const id = regexId(url);
+        return { id, url, title: text(a).replace(/^Course:\s*/, "") || `course_${id}` };
+      })
+      .filter((c) => c.id)
+      .map((c, i, arr) => ({ ...c, title: c.title || arr.find(x => x.id === c.id)?.title }))
+      .filter((c, i, arr) => arr.findIndex((x) => x.id === c.id) === i);
+    if (courses.length) return courses;
+  } catch {}
+  // Fallback to static snapshot (works off-campus, no login needed)
+  try {
+    const r = await fetch("data/welearn.json", { cache: "no-store" });
+    const j = await r.json();
+    if (j.courses) return j.courses;
+  } catch {}
+  throw new Error("Could not load courses — try on campus or open WeLearn directly");
 }
 
 const regexId = (url) => (/[?&]id=(\d+)/.exec(url) || [])[1] || null;
