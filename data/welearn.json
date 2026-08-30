@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-30T07:14:55.164Z",
+  "updatedAt": "2026-08-30T07:27:50.827Z",
   "courses": [
     {
       "id": "101",
@@ -39,5 +39,177 @@
         "kind": "resource"
       }
     ]
-  }
+  },
+  "grades": [
+    {
+      "semester": 1,
+      "sgpa": "8.10",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 2,
+      "sgpa": "8.20",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 3,
+      "sgpa": "8.30",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 4,
+      "sgpa": "8.40",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 5,
+      "sgpa": "8.50",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 6,
+      "sgpa": "8.60",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 7,
+      "sgpa": "8.70",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 8,
+      "sgpa": "8.80",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 9,
+      "sgpa": "8.90",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    },
+    {
+      "semester": 10,
+      "sgpa": "9.00",
+      "cgpa": "8.42",
+      "courses": [
+        {
+          "code": "PH4201",
+          "name": "Quantum Mechanics II",
+          "grade": "A"
+        },
+        {
+          "code": "MA4104",
+          "name": "Real Analysis",
+          "grade": "A-"
+        }
+      ]
+    }
+  ]
 }

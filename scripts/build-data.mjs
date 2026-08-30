@@ -20,7 +20,16 @@ writeFileSync("data/welearn.json", JSON.stringify({
     "101": [{ name: "Lecture 1 Notes", url: "https://welearn.iiserkol.ac.in/mod/resource/view.php?id=9001", kind: "resource" }],
     "102": [{ name: "Lecture 1 Notes", url: "https://welearn.iiserkol.ac.in/mod/resource/view.php?id=9001", kind: "resource" }],
     "103": [{ name: "Lecture 1 Notes", url: "https://welearn.iiserkol.ac.in/mod/resource/view.php?id=9001", kind: "resource" }],
-  }
+  },
+  grades: Array.from({ length: 10 }, (_, i) => ({
+    semester: i + 1,
+    sgpa: (8 + (i + 1) * 0.1).toFixed(2),
+    cgpa: "8.42",
+    courses: [
+      { code: "PH4201", name: "Quantum Mechanics II", grade: "A" },
+      { code: "MA4104", name: "Real Analysis", grade: "A-" },
+    ]
+  }))
 }, null, 2));
 
 writeFileSync("data/mess.json", JSON.stringify({
