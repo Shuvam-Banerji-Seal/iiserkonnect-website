@@ -11,8 +11,10 @@
 
 import { collection, newId } from "../core/db.js";
 import { esc, on, timeOf, isoDay, DAY_NAMES, MONTH_NAMES, sameDay } from "../ui/dom.js";
-import { icon, topBar, screen, iconBtn, button, listItem, loading, errorCard, emptyState, sampleBanner } from "../ui/components.js";
-import { sheet, toast } from "../ui/overlay.js";
+import { icon, topBar, screen, iconBtn, button, chip, listItem, loading, errorCard, emptyState, sampleBanner } from "../ui/components.js";
+import { sheet, toast, dialog } from "../ui/overlay.js";
+import { relativeDay } from "../ui/dom.js";
+import { checkNow } from "../core/notify.js";
 import { loadCampusEvents } from "../data/events.data.js";
 
 const HOURS = Array.from({ length: 13 }, (_, i) => i + 8);   // 8..20
@@ -125,6 +127,45 @@ async function addToMyCalendar(e) {
   }
 }
 
+/* "Remind me" (CampusEventsViewModel.scheduleReminder): 5, 15 or 30 minutes before. */
+const summaryLine = (e) => `${e.allDay ? "All day" : timeRange(e)}${e.venue ? " · " + e.venue : ""} · Campus`;
+async function remindMe(e) {
+  const lead = await dialog({
+    icon: "notification_add",
+    title: "Set Reminder",
+    body: `<p class="t-body-m w-bold" style="color:var(--on-surface)">${esc(e.title)}</p>
+      <p class="t-body-s">Time: ${esc(e.allDay ? "All day" : timeRange(e))}</p>${e.venue ? `<p class="t-body-s">Venue: ${esc(e.venue)}</p>` : ""}
+      <p class="t-label-m" style="margin-top:12px">Remind me:</p>`,
+    actions: [{ label: "Cancel", value: null }, { label: "5 min", value: 5 }, { label: "15 min", value: 15 }, { label: "30 min", value: 30 }],
+  });
+  if (!lead) return;
+  const now = Date.now();
+  let at;
+  if (e.allDay) { const d = new Date(e.start); at = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 8, 0).getTime(); }
+  else at = e.start - lead * 60000;
+  if (at <= now) at = e.start > now ? e.start : null;
+  if (!at) { toast("This event has already started."); return; }
+  try {
+    await collection("reminders").put({ id: newId(), title: e.title, details: summaryLine(e), triggerAtMillis: at, repeatRule: "NONE", enabled: true, createdAtMillis: now, lastFiredAtMillis: null, anchorDayOfMonth: null });
+    checkNow();
+    toast(`Reminder set: ${relativeDay(new Date(at))}, ${timeOf(new Date(at))}. It is in Reminders.`);
+  } catch { toast("The reminder could not be saved."); }
+}
+/* "Add to planner" (CampusEventsViewModel.addToPlanner): a task on the event's day, timed when it starts and ends that day. */
+async function addToPlanner(e) {
+  const s = new Date(e.start), end = e.end ? new Date(e.end) : null;
+  const timed = !e.allDay && (!end || sameDay(s, end));
+  try {
+    await collection("tasks").put({
+      id: newId(), title: e.title, details: summaryLine(e), done: false, dueDay: isoDay(s),
+      startMinute: timed ? s.getHours() * 60 + s.getMinutes() : null,
+      endMinute: timed && end ? end.getHours() * 60 + end.getMinutes() : null,
+      remindAtMillis: null, createdAtMillis: Date.now(),
+    });
+    toast("Added to your planner.");
+  } catch { toast("It could not be added to the planner."); }
+}
+
 function detailBody(e) {
   return `
     ${e.category ? `<p class="cal-sheet__cat" style="color:${colourOf(e.category)}">${esc(capitalise(e.category))}</p>` : ""}
@@ -134,11 +175,13 @@ function detailBody(e) {
       ${e.venue ? `<p>📍 ${esc(e.venue)}</p>` : ""}
       ${e.description ? `<p class="c-muted">📝 ${esc(e.description)}</p>` : ""}
     </div>
-    <div class="cal-sheet__actions">
-      ${button("Add to My Calendar", { variant: "tonal", icon: "event_available", attrs: { "data-act": "add" } })}
-      ${button("Save .ics file", { variant: "outlined", icon: "download", attrs: { "data-act": "ics" } })}
+    <div class="chips cal-sheet__actions">
+      ${chip("Remind me", { kind: "assist", icon: "notification_add", a: { "data-act": "remind" } })}
+      ${chip("Add to My Calendar", { kind: "assist", icon: "event_available", a: { "data-act": "add" } })}
+      ${chip("Add to planner", { kind: "assist", icon: "checklist", a: { "data-act": "planner" } })}
+      ${chip("Save .ics file", { kind: "assist", icon: "download", a: { "data-act": "ics" } })}
     </div>
-    <p class="fineprint">Reminders and the phone calendar app are not available in this browser. The .ics file opens in most calendar apps.</p>`;
+    <p class="fineprint">The app's "Phone calendar" button becomes a .ics file here, which opens in most calendar apps. Reminders ring while an IISERKonnect tab is open.</p>`;
 }
 
 export async function render(el) {
@@ -190,6 +233,8 @@ export async function render(el) {
       body: detailBody(e),
       onMount: (d) => {
         d.querySelector("[data-act=add]").addEventListener("click", () => addToMyCalendar(e));
+        d.querySelector("[data-act=remind]").addEventListener("click", () => { s.close(); remindMe(e); });
+        d.querySelector("[data-act=planner]").addEventListener("click", () => addToPlanner(e));
         d.querySelector("[data-act=ics]").addEventListener("click", () => saveIcs(e));
       },
     });

@@ -34,7 +34,7 @@ servers do not send the headers that let another website read them (and the intr
 | `teaching-plan` | Teaching plans | `#/teaching-plan` | partial | Sample plans. |
 | `teaching-plan/course` | Course detail | `#/teaching-plan/course` | partial | Sample detail. |
 | `calendar` | Academic calendar week | `#/calendar` | partial | Sample week, course filter, `.ics` export. |
-| `campus-events` | Event Calendar | `#/campus-events` | partial | Week grid, details, Add to My Calendar, `.ics`; sample events off campus. |
+| `campus-events` | Event Calendar | `#/campus-events` | partial | Week grid, details, Remind me, Add to My Calendar, Add to planner, `.ics` (for the phone-calendar button); sample events off campus. |
 | `profile` | My Profile | `#/profile` | partial | Sample ERP pages; editing the ERP is not possible from a browser. |
 | `profile/page/{page}` | Profile page | `#/profile/page/:page` | partial | Read-only sample rows. |
 | `macreg` | MAC registration | `#/macreg` | partial | Gateway needs a CAPTCHA sign-in on campus; sample devices + link. |
