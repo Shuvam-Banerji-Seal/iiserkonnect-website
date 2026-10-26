@@ -266,7 +266,9 @@ export async function renderDetail(el, ctx) {
     el.querySelector(".screen__scroll").scrollTop = keep;
   };
   draw();
-  document.title = sectionTitle(section) + " · IISERKonnect Web";
+  // The router sets document.title from this once the screen is in; setting
+  // document.title here was overwritten by the route's plain "Settings".
+  ctx.title = sectionTitle(section);
   const cleanups = [];
   const wire = WIRES[section];
   if (wire) cleanups.push(wire(el, draw));

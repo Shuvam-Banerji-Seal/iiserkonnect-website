@@ -95,7 +95,7 @@ const TABLE = [
   ["network-dashboard", "netmon", "render", "Network Status", "home"],
   ["sftp", "sftp", "render", "SFTP", "home"],
   ["settings", "settings", "renderHub", "Settings", "settings", true],
-  ["settings/:section", "settings", "renderDetail", "Settings", "settings"],
+  ["settings/:section", "settings", "renderDetail", (c) => c.title || "Settings", "settings"],
   ["log", "log", "render", "Logs", "settings"],
   ["budget", "budget", "renderAnalysis", "My Budget", "home"],
   ["budget/ledger", "budget", "renderLedger", "Ledger", "home"],
