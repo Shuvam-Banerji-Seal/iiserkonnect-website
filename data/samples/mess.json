@@ -1,24 +1,382 @@
 {
   "_note": "Made-up sample data for the web demo. Not anyone's real account, balance or purchases.",
-  "account": { "name": "Sample Student", "employeeNumber": "21MS999" },
+  "account": {
+    "name": "Sample Student",
+    "employeeNumber": "21MS999"
+  },
   "transactions": [
-    { "daysAgo": 0, "time": "08:12", "items": [["Aloo Paratha", 2, 20], ["Tea", 1, 8]], "total": 48, "type": "Debited", "balance": 1234 },
-    { "daysAgo": 1, "time": "20:41", "items": [["Veg Thali", 1, 55], ["Curd", 1, 10]], "total": 65, "type": "Debited", "balance": 1282 },
-    { "daysAgo": 1, "time": "17:05", "items": [["Samosa", 2, 10], ["Coffee", 1, 12]], "total": 32, "type": "Debited", "balance": 1347 },
-    { "daysAgo": 1, "time": "13:10", "items": [["Rice", 1, 15], ["Dal", 1, 15], ["Paneer Butter Masala", 1, 45]], "total": 75, "type": "Debited", "balance": 1379 },
-    { "daysAgo": 2, "time": "11:30", "items": [], "total": 0, "type": "Credited", "added": 1000, "mode": "UPI", "balance": 1454, "remarks": "Recharge" },
-    { "daysAgo": 2, "time": "08:20", "items": [["Poha", 1, 20], ["Boiled Egg", 2, 8]], "total": 36, "type": "Debited", "balance": 454 },
-    { "daysAgo": 3, "time": "21:02", "items": [["Chicken Curry", 1, 70], ["Roti", 3, 5]], "total": 85, "type": "Debited", "balance": 490 },
-    { "daysAgo": 3, "time": "13:25", "items": [["Veg Thali", 1, 55]], "total": 55, "type": "Debited", "balance": 575 },
-    { "daysAgo": 4, "time": "17:40", "items": [["Maggi", 1, 25], ["Lime Soda", 1, 20]], "total": 45, "type": "Debited", "balance": 630 },
-    { "daysAgo": 4, "time": "08:05", "items": [["Idli", 4, 6], ["Sambar", 1, 10], ["Coffee", 1, 12]], "total": 46, "type": "Debited", "balance": 675 },
-    { "daysAgo": 5, "time": "20:30", "items": [["Egg Curry", 1, 45], ["Rice", 1, 15]], "total": 60, "type": "Debited", "balance": 721 },
-    { "daysAgo": 5, "time": "13:00", "items": [["Rajma Chawal", 1, 50], ["Salad", 1, 10]], "total": 60, "type": "Debited", "balance": 781 },
-    { "daysAgo": 6, "time": "09:10", "items": [["Chole Bhature", 1, 45], ["Tea", 1, 8]], "total": 53, "type": "Debited", "balance": 841 },
-    { "daysAgo": 7, "time": "20:15", "items": [["Veg Biryani", 1, 60], ["Raita", 1, 12]], "total": 72, "type": "Debited", "balance": 894 },
-    { "daysAgo": 8, "time": "13:20", "items": [["Fish Curry", 1, 75], ["Rice", 1, 15]], "total": 90, "type": "Debited", "balance": 966 },
-    { "daysAgo": 9, "time": "17:15", "items": [["Pakora", 1, 20], ["Tea", 2, 8]], "total": 36, "type": "Debited", "balance": 1056 },
-    { "daysAgo": 10, "time": "08:30", "items": [["Bread Omelette", 1, 30], ["Banana", 2, 5]], "total": 40, "type": "Debited", "balance": 1092 },
-    { "daysAgo": 12, "time": "12:00", "items": [], "total": 0, "type": "Credited", "added": 1000, "mode": "UPI", "balance": 1132, "remarks": "Recharge" }
+    {
+      "daysAgo": 0,
+      "time": "08:12",
+      "items": [
+        [
+          "Aloo Paratha",
+          2,
+          20
+        ],
+        [
+          "Tea",
+          1,
+          8
+        ]
+      ],
+      "total": 48,
+      "type": "Debited",
+      "balance": 1234
+    },
+    {
+      "daysAgo": 1,
+      "time": "13:10",
+      "items": [
+        [
+          "Rice",
+          1,
+          15
+        ],
+        [
+          "Dal",
+          1,
+          15
+        ],
+        [
+          "Paneer Butter Masala",
+          1,
+          45
+        ]
+      ],
+      "total": 75,
+      "type": "Debited",
+      "balance": 1379
+    },
+    {
+      "daysAgo": 1,
+      "time": "17:05",
+      "items": [
+        [
+          "Samosa",
+          2,
+          10
+        ],
+        [
+          "Coffee",
+          1,
+          12
+        ]
+      ],
+      "total": 32,
+      "type": "Debited",
+      "balance": 1347
+    },
+    {
+      "daysAgo": 1,
+      "time": "20:41",
+      "items": [
+        [
+          "Veg Thali",
+          1,
+          55
+        ],
+        [
+          "Curd",
+          1,
+          10
+        ]
+      ],
+      "total": 65,
+      "type": "Debited",
+      "balance": 1282
+    },
+    {
+      "daysAgo": 2,
+      "time": "08:20",
+      "items": [
+        [
+          "Poha",
+          1,
+          20
+        ],
+        [
+          "Boiled Egg",
+          2,
+          8
+        ]
+      ],
+      "total": 36,
+      "type": "Debited",
+      "balance": 454
+    },
+    {
+      "daysAgo": 2,
+      "time": "11:30",
+      "items": [],
+      "total": 0,
+      "type": "Credited",
+      "added": 1000,
+      "mode": "UPI",
+      "balance": 1454,
+      "remarks": "Recharge"
+    },
+    {
+      "daysAgo": 3,
+      "time": "13:25",
+      "items": [
+        [
+          "Veg Thali",
+          1,
+          55
+        ]
+      ],
+      "total": 55,
+      "type": "Debited",
+      "balance": 575
+    },
+    {
+      "daysAgo": 3,
+      "time": "21:02",
+      "items": [
+        [
+          "Chicken Curry",
+          1,
+          70
+        ],
+        [
+          "Roti",
+          3,
+          5
+        ]
+      ],
+      "total": 85,
+      "type": "Debited",
+      "balance": 490
+    },
+    {
+      "daysAgo": 4,
+      "time": "08:05",
+      "items": [
+        [
+          "Idli",
+          4,
+          6
+        ],
+        [
+          "Sambar",
+          1,
+          10
+        ],
+        [
+          "Coffee",
+          1,
+          12
+        ]
+      ],
+      "total": 46,
+      "type": "Debited",
+      "balance": 675
+    },
+    {
+      "daysAgo": 4,
+      "time": "17:40",
+      "items": [
+        [
+          "Maggi",
+          1,
+          25
+        ],
+        [
+          "Lime Soda",
+          1,
+          20
+        ]
+      ],
+      "total": 45,
+      "type": "Debited",
+      "balance": 630
+    },
+    {
+      "daysAgo": 5,
+      "time": "13:00",
+      "items": [
+        [
+          "Rajma Chawal",
+          1,
+          50
+        ],
+        [
+          "Salad",
+          1,
+          10
+        ]
+      ],
+      "total": 60,
+      "type": "Debited",
+      "balance": 781
+    },
+    {
+      "daysAgo": 5,
+      "time": "20:30",
+      "items": [
+        [
+          "Egg Curry",
+          1,
+          45
+        ],
+        [
+          "Rice",
+          1,
+          15
+        ]
+      ],
+      "total": 60,
+      "type": "Debited",
+      "balance": 721
+    },
+    {
+      "daysAgo": 6,
+      "time": "09:10",
+      "items": [
+        [
+          "Chole Bhature",
+          1,
+          45
+        ],
+        [
+          "Tea",
+          1,
+          8
+        ]
+      ],
+      "total": 53,
+      "type": "Debited",
+      "balance": 841
+    },
+    {
+      "daysAgo": 6,
+      "time": "11:45",
+      "items": [],
+      "total": 0,
+      "type": "Credited",
+      "added": 500,
+      "mode": "Cash",
+      "balance": 896,
+      "remarks": "Cash top-up at counter"
+    },
+    {
+      "daysAgo": 7,
+      "time": "20:15",
+      "items": [
+        [
+          "Veg Biryani",
+          1,
+          60
+        ],
+        [
+          "Raita",
+          1,
+          12
+        ]
+      ],
+      "total": 72,
+      "type": "Debited",
+      "balance": 894
+    },
+    {
+      "daysAgo": 8,
+      "time": "13:20",
+      "items": [
+        [
+          "Fish Curry",
+          1,
+          75
+        ],
+        [
+          "Rice",
+          1,
+          15
+        ]
+      ],
+      "total": 90,
+      "type": "Debited",
+      "balance": 966
+    },
+    {
+      "daysAgo": 9,
+      "time": "10:20",
+      "items": [],
+      "total": 0,
+      "type": "Credited",
+      "added": 800,
+      "mode": "Card",
+      "balance": 1100,
+      "remarks": "Card top-up"
+    },
+    {
+      "daysAgo": 9,
+      "time": "17:15",
+      "items": [
+        [
+          "Pakora",
+          1,
+          20
+        ],
+        [
+          "Tea",
+          2,
+          8
+        ]
+      ],
+      "total": 36,
+      "type": "Debited",
+      "balance": 1056
+    },
+    {
+      "daysAgo": 10,
+      "time": "08:30",
+      "items": [
+        [
+          "Bread Omelette",
+          1,
+          30
+        ],
+        [
+          "Banana",
+          2,
+          5
+        ]
+      ],
+      "total": 40,
+      "type": "Debited",
+      "balance": 1092
+    },
+    {
+      "daysAgo": 11,
+      "time": "19:55",
+      "items": [
+        [
+          "Mutton Biryani",
+          1,
+          90
+        ],
+        [
+          "Raita",
+          1,
+          12
+        ]
+      ],
+      "total": 102,
+      "type": "Debited",
+      "balance": 1190,
+      "remarks": ""
+    },
+    {
+      "daysAgo": 12,
+      "time": "12:00",
+      "items": [],
+      "total": 0,
+      "type": "Credited",
+      "added": 1000,
+      "mode": "UPI",
+      "balance": 1132,
+      "remarks": "Recharge"
+    }
   ]
 }

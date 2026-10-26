@@ -1,40 +1,289 @@
 {
   "_note": "Made-up sample menu for the web demo.",
+  "title": "Weekly Mess Menu (sample)",
   "days": [
-    { "weekday": 1, "meals": [
-      { "type": "Breakfast", "items": ["Poha", "Boiled Egg", "Bread & Butter", "Tea / Coffee"] },
-      { "type": "Lunch", "items": ["Rice", "Dal", "★ Paneer Butter Masala", "Aloo Bhaja", "Salad", "Curd"] },
-      { "type": "Snacks", "items": ["Samosa", "Tea"] },
-      { "type": "Dinner", "items": ["Roti", "Rice", "Egg Curry", "Mixed Veg", "Kheer"] } ] },
-    { "weekday": 2, "meals": [
-      { "type": "Breakfast", "items": ["Idli", "Sambar", "Coconut Chutney", "Tea / Coffee"] },
-      { "type": "Lunch", "items": ["Rice", "Rajma", "Jeera Aloo", "Papad", "Salad"] },
-      { "type": "Snacks", "items": ["Bread Pakora", "Tea"] },
-      { "type": "Dinner", "items": ["Roti", "Rice", "★ Chicken Curry", "Paneer Curry (veg)", "Dal Fry"] } ] },
-    { "weekday": 3, "meals": [
-      { "type": "Breakfast", "items": ["Aloo Paratha", "Curd", "Pickle", "Tea / Coffee"] },
-      { "type": "Lunch", "items": ["Rice", "Dal", "Fish Curry", "Soya Chunk Curry (veg)", "Salad"] },
-      { "type": "Snacks", "items": ["Maggi", "Lime Water"] },
-      { "type": "Dinner", "items": ["Roti", "Fried Rice", "Chilli Paneer", "Manchurian", "Ice Cream"] } ] },
-    { "weekday": 4, "meals": [
-      { "type": "Breakfast", "items": ["Upma", "Boiled Egg", "Banana", "Tea / Coffee"] },
-      { "type": "Lunch", "items": ["Rice", "Chole", "Bhindi Fry", "Raita", "Salad"] },
-      { "type": "Snacks", "items": ["Veg Puff", "Coffee"] },
-      { "type": "Dinner", "items": ["Roti", "Rice", "Egg Masala", "Dal Makhani", "Gulab Jamun"] } ] },
-    { "weekday": 5, "meals": [
-      { "type": "Breakfast", "items": ["Puri", "Aloo Sabzi", "Tea / Coffee"] },
-      { "type": "Lunch", "items": ["Rice", "Dal", "Mix Veg", "Chicken Kosha", "Salad"] },
-      { "type": "Snacks", "items": ["Pakora", "Tea"] },
-      { "type": "Dinner", "items": ["★ Veg Biryani", "Chicken Biryani", "Raita", "Salan"] } ] },
-    { "weekday": 6, "meals": [
-      { "type": "Breakfast", "items": ["Chole Bhature", "Tea / Coffee"] },
-      { "type": "Lunch", "items": ["Khichdi", "Labra", "Papad", "Chutney"] },
-      { "type": "Snacks", "items": ["Jhalmuri", "Tea"] },
-      { "type": "Dinner", "items": ["Roti", "Rice", "Mutton Curry", "Paneer Do Pyaza", "Dal"] } ] },
-    { "weekday": 7, "meals": [
-      { "type": "Breakfast", "items": ["Masala Dosa", "Sambar", "Chutney", "Tea / Coffee"] },
-      { "type": "Lunch", "items": ["Rice", "Dal", "★ Fish Fry", "Aloo Posto", "Salad"] },
-      { "type": "Snacks", "items": ["Cake", "Coffee"] },
-      { "type": "Dinner", "items": ["Roti", "Rice", "Egg Curry", "Chana Masala", "Fruit Custard"] } ] }
+    {
+      "weekday": 1,
+      "meals": [
+        {
+          "type": "Breakfast",
+          "items": [
+            "Poha",
+            "Boiled Egg",
+            "Bread & Butter",
+            "Tea / Coffee"
+          ]
+        },
+        {
+          "type": "Lunch",
+          "items": [
+            "Rice",
+            "Dal",
+            "★ Paneer Butter Masala",
+            "Aloo Bhaja",
+            "Salad",
+            "Curd"
+          ]
+        },
+        {
+          "type": "Snacks",
+          "items": [
+            "Samosa",
+            "Tea"
+          ]
+        },
+        {
+          "type": "Dinner",
+          "items": [
+            "Roti",
+            "Rice",
+            "Egg Curry",
+            "Mixed Veg",
+            "Kheer"
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 2,
+      "meals": [
+        {
+          "type": "Breakfast",
+          "items": [
+            "Idli",
+            "Sambar",
+            "Coconut Chutney",
+            "Tea / Coffee"
+          ]
+        },
+        {
+          "type": "Lunch",
+          "items": [
+            "Rice",
+            "Rajma",
+            "Jeera Aloo",
+            "Papad",
+            "Salad"
+          ]
+        },
+        {
+          "type": "Snacks",
+          "items": [
+            "Bread Pakora",
+            "Tea"
+          ]
+        },
+        {
+          "type": "Dinner",
+          "items": [
+            "Roti",
+            "Rice",
+            "★ Chicken Curry",
+            "Paneer Curry (veg)",
+            "Dal Fry"
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 3,
+      "meals": [
+        {
+          "type": "Breakfast",
+          "items": [
+            "Aloo Paratha",
+            "Curd",
+            "Pickle",
+            "Tea / Coffee"
+          ]
+        },
+        {
+          "type": "Lunch",
+          "items": [
+            "Rice",
+            "Dal",
+            "Fish Curry",
+            "Soya Chunk Curry (veg)",
+            "Salad"
+          ]
+        },
+        {
+          "type": "Snacks",
+          "items": [
+            "Maggi",
+            "Lime Water"
+          ]
+        },
+        {
+          "type": "Dinner",
+          "items": [
+            "Roti",
+            "Fried Rice",
+            "Chilli Paneer",
+            "Manchurian",
+            "Ice Cream"
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 4,
+      "meals": [
+        {
+          "type": "Breakfast",
+          "items": [
+            "Upma",
+            "Boiled Egg",
+            "Banana",
+            "Tea / Coffee"
+          ]
+        },
+        {
+          "type": "Lunch",
+          "items": [
+            "Rice",
+            "Chole",
+            "Bhindi Fry",
+            "Raita",
+            "Salad"
+          ]
+        },
+        {
+          "type": "Snacks",
+          "items": [
+            "Veg Puff",
+            "Coffee"
+          ]
+        },
+        {
+          "type": "Dinner",
+          "items": [
+            "Roti",
+            "Rice",
+            "Egg Masala",
+            "Dal Makhani",
+            "Gulab Jamun"
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 5,
+      "meals": [
+        {
+          "type": "Breakfast",
+          "items": [
+            "Puri",
+            "Aloo Sabzi",
+            "Tea / Coffee"
+          ]
+        },
+        {
+          "type": "Lunch",
+          "items": [
+            "Rice",
+            "Dal",
+            "Mix Veg",
+            "Chicken Kosha",
+            "Salad"
+          ]
+        },
+        {
+          "type": "Snacks",
+          "items": [
+            "Pakora",
+            "Tea"
+          ]
+        },
+        {
+          "type": "Dinner",
+          "items": [
+            "★ Veg Biryani",
+            "Chicken Biryani",
+            "Raita",
+            "Salan"
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 6,
+      "meals": [
+        {
+          "type": "Breakfast",
+          "items": [
+            "Chole Bhature",
+            "Tea / Coffee"
+          ]
+        },
+        {
+          "type": "Lunch",
+          "items": [
+            "Khichdi",
+            "Labra",
+            "Papad",
+            "Chutney"
+          ]
+        },
+        {
+          "type": "Snacks",
+          "items": [
+            "Jhalmuri",
+            "Tea"
+          ]
+        },
+        {
+          "type": "Dinner",
+          "items": [
+            "Roti",
+            "Rice",
+            "Mutton Curry",
+            "Paneer Do Pyaza",
+            "Dal"
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 7,
+      "meals": [
+        {
+          "type": "Breakfast",
+          "items": [
+            "Masala Dosa",
+            "Sambar",
+            "Chutney",
+            "Tea / Coffee"
+          ]
+        },
+        {
+          "type": "Lunch",
+          "items": [
+            "Rice",
+            "Dal",
+            "★ Fish Fry",
+            "Aloo Posto",
+            "Salad"
+          ]
+        },
+        {
+          "type": "Snacks",
+          "items": [
+            "Cake",
+            "Coffee"
+          ]
+        },
+        {
+          "type": "Dinner",
+          "items": [
+            "Roti",
+            "Rice",
+            "Egg Curry",
+            "Chana Masala",
+            "Fruit Custard"
+          ]
+        }
+      ]
+    }
   ]
 }
