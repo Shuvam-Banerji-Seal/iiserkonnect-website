@@ -28,6 +28,8 @@ import { haptics, STRENGTHS, canVibrate } from "../ui/haptics.js";
 import { editAvatar } from "./home.page.js";
 
 export const APP_VERSION = "0.9.80";
+/** The developer contact the About page has always linked to (owner's choice). */
+const CONTACT_MAILTO = "mailto:sbs22ms076@iiserkol.ac.in";
 
 /* ── search index (SettingsSearchIndex.kt) ── */
 const HUB = "hub", HOME_CUSTOMIZE = "home_customize";
@@ -459,7 +461,7 @@ const SECTIONS = {
         <p class="t-body-s c-muted mt-sm">Access WeLearn courses, download study materials, browse the IISERK website, view your academic calendar, manage campus VPN, and more - all in one place.</p>
         <p class="t-body-s c-muted mt-sm">This web version is a pure frontend with no backend: everything personal stays in this browser. App, parsers and design by <strong>Shuvam Banerji Seal</strong> ·
           <a href="https://github.com/Shuvam-Banerji-Seal/IISERKonnect" target="_blank" rel="noopener">Android repo</a> ·
-          <a href="mailto:sbs22ms076@iiserkol.ac.in">email</a></p>
+          <a href="${CONTACT_MAILTO}">email</a></p>
         <p class="t-label-s c-muted mt-sm">Unofficial student project — not affiliated with IISER Kolkata administration. MIT License. No analytics, no trackers, no cloud.</p>
         <a class="btn btn--outlined mt-md" href="https://github.com/Shuvam-Banerji-Seal/iiserkonnect-website" target="_blank" rel="noopener noreferrer"><span>Web app source</span>${icon("open_in_new", { size: 16 })}</a>`)}
       ${card(`<h3 class="t-body-m w-semi">Account</h3>
@@ -643,7 +645,7 @@ const WIRES = {
         case "error-report": {
           const lines = readLog().slice(-40).map((l) => `${new Date(l.t).toISOString()} ${l.level}/${l.tag}: ${l.message}`).join("\n");
           const body = `Please describe the issue:\n\n\n---\nIISERKonnect Web ${APP_VERSION}\n${navigator.userAgent}\n${lines ? "\nRecent log:\n" + lines : ""}`;
-          location.href = "mailto:sbs22ms076@iiserkol.ac.in?subject=" + encodeURIComponent("IISERK Web Error Report") + "&body=" + encodeURIComponent(body.slice(0, 1800));
+          location.href = CONTACT_MAILTO + "?subject=" + encodeURIComponent("IISERK Web Error Report") + "&body=" + encodeURIComponent(body.slice(0, 1800));
           return;
         }
         case "export": return exportData();
