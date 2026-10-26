@@ -1,0 +1,24 @@
+{
+  "_note": "Made-up sample data for the web demo.",
+  "studentId": "21MS999",
+  "studentName": "Sample Student",
+  "major": "Sample Major",
+  "batch": "2024",
+  "semesterNo": "3",
+  "registeredIn": "Autumn 2026",
+  "credits": [["Registered", "18"], ["Required", "24"], ["Earned", "62"]],
+  "choices": [
+    { "index": 0, "courseType": "CORE", "selectedCourseId": "c101", "availableCourses": [
+      { "id": "c101", "label": "PH3101: Classical Mechanics" },
+      { "id": "c102", "label": "PH3102: Sample Statistical Physics" }
+    ] },
+    { "index": 1, "courseType": "ELECTIVE", "selectedCourseId": "c201", "availableCourses": [
+      { "id": "c201", "label": "BI2201: Sample Genetics" },
+      { "id": "c202", "label": "CS2201: Sample Data Structures" },
+      { "id": "c203", "label": "EC2201: Sample Circuits" }
+    ] },
+    { "index": 2, "courseType": "AUDIT", "selectedCourseId": "c301", "availableCourses": [
+      { "id": "c301", "label": "HS3001: Sample Science Writing" }
+    ] }
+  ]
+}

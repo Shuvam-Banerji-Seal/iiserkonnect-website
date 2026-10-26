@@ -1,0 +1,16 @@
+{
+  "_note": "Made-up sample data for the web demo. Paper links are empty on purpose: the real papers live on the campus intranet.",
+  "years": [
+    { "year": 2025, "sections": [
+      { "exam": "Mid Semester", "semester": "Spring", "depts": [ { "name": "Physics", "url": "" }, { "name": "Chemistry", "url": "" }, { "name": "Mathematics", "url": "" } ] },
+      { "exam": "End Semester", "semester": "Autumn", "depts": [ { "name": "Biology", "url": "" }, { "name": "Computer Science", "url": "" } ] }
+    ] },
+    { "year": 2024, "sections": [
+      { "exam": "End Semester", "semester": "Spring", "depts": [ { "name": "Physics", "url": "" }, { "name": "Earth Sciences", "url": "" } ] }
+    ] },
+    { "year": 2023, "sections": [
+      { "exam": "Mid Semester", "semester": "Autumn", "depts": [ { "name": "Mathematics", "url": "" }, { "name": "Chemistry", "url": "" } ] },
+      { "exam": "End Semester", "semester": "Autumn", "depts": [ { "name": "Physics", "url": "" } ] }
+    ] }
+  ]
+}

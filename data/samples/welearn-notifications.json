@@ -1,0 +1,9 @@
+{
+  "_note": "Made-up sample data for the web demo.",
+  "notifications": [
+    { "id": 1, "course": "PH3101", "subject": "PH3101: Problem Set 4 is posted", "body": "Problem Set 4 is now available in the course page. It is due on Thursday at 5 pm.", "hoursAgo": 5, "read": false },
+    { "id": 2, "course": "CH2201", "subject": "CH2201: Lab session moved", "body": "Thursday's calorimetry lab starts at 2 pm instead of 10 am. Bring your lab coat.", "hoursAgo": 30, "read": false },
+    { "id": 3, "course": "MA2104", "subject": "MA2104: Quiz 2 instructions", "body": "The quiz covers sections 4.1 to 5.3. It is open-book and online.", "hoursAgo": 72, "read": true },
+    { "id": 4, "course": "BI1102", "subject": "Feedback on your essay", "body": "Your essay on membrane transport has been graded. Open the assignment page for the rubric.", "hoursAgo": 200, "read": true }
+  ]
+}

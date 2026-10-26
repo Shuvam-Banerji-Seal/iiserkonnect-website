@@ -4,6 +4,13 @@
     { "id": "a1", "course": "PH3101", "courseName": "Classical Mechanics", "title": "Problem Set 4", "dueInHours": 30, "submitted": false },
     { "id": "a2", "course": "CH2201", "courseName": "Physical Chemistry", "title": "Lab Report: Calorimetry", "dueInHours": 96, "submitted": false },
     { "id": "a3", "course": "MA2104", "courseName": "Linear Algebra", "title": "Quiz 2 (online)", "dueInHours": 220, "submitted": false },
-    { "id": "a4", "course": "BI1102", "courseName": "Cell Biology", "title": "Essay: Membrane Transport", "dueInHours": -20, "submitted": true }
+    { "id": "a4", "course": "BI1102", "courseName": "Cell Biology", "title": "Essay: Membrane Transport", "dueInHours": -20, "submitted": true },
+    { "id": "a5", "course": "PH3101", "courseName": "Classical Mechanics", "title": "Problem Set 3", "dueInHours": -52, "submitted": false },
+    { "id": "a6", "course": "MA2104", "courseName": "Linear Algebra", "title": "Problem Set 2", "dueInHours": 6, "submitted": false },
+    { "id": "a7", "course": "CH2201", "courseName": "Physical Chemistry", "title": "Problem Set 1", "dueInHours": -2000, "submitted": true }
+  ],
+  "grading": [
+    { "id": "g1", "course": "BI1102", "courseName": "Cell Biology", "title": "Essay: Membrane Transport", "dueInHours": -20, "total": 12, "submitted": 10, "toGrade": 3, "notSubmitted": ["Sample Student 07", "Sample Student 11"] },
+    { "id": "g2", "course": "CH2201", "courseName": "Physical Chemistry", "title": "Problem Set 1", "dueInHours": -2000, "total": 12, "submitted": 12, "toGrade": 0, "notSubmitted": [] }
   ]
 }

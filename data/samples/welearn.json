@@ -1,0 +1,35 @@
+{
+  "_note": "Made-up sample data for the web demo.",
+  "courses": [
+    {
+      "id": "90101", "title": "PH3101: Classical Mechanics",
+      "files": [
+        { "name": "Course instructions", "kind": "note", "depth": 0, "description": "Lectures are on Tuesdays and Thursdays. Problem sets are due one week after they are posted. Use the discussion board for questions." },
+        { "name": "Lecture slides", "kind": "folder", "depth": 0, "description": "" },
+        { "name": "Lecture 01 - Newton's laws.pdf", "kind": "file", "depth": 1, "description": "" },
+        { "name": "Lecture 02 - Lagrangian mechanics.pdf", "kind": "file", "depth": 1, "description": "Includes worked examples on constraints." },
+        { "name": "Problem Set 4.pdf", "kind": "file", "depth": 0, "description": "" },
+        { "name": "Practice problems.docx", "kind": "file", "depth": 0, "description": "" }
+      ]
+    },
+    {
+      "id": "90114", "title": "CH2201: Physical Chemistry",
+      "files": [
+        { "name": "Lab manual - calorimetry.pdf", "kind": "file", "depth": 0, "description": "" },
+        { "name": "Data sheet.xlsx", "kind": "file", "depth": 0, "description": "" },
+        { "name": "Reference images", "kind": "folder", "depth": 0, "description": "" },
+        { "name": "Phase diagram.png", "kind": "file", "depth": 1, "description": "" }
+      ]
+    },
+    {
+      "id": "90127", "title": "MA2104: Linear Algebra",
+      "files": [
+        { "name": "Course outline", "kind": "note", "depth": 0, "description": "Quiz 2 is online. It opens on the Friday of week 7 and closes 24 hours later." }
+      ]
+    },
+    {
+      "id": "90139", "title": "BI1102: Cell Biology",
+      "files": []
+    }
+  ]
+}

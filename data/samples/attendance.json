@@ -1,0 +1,25 @@
+{
+  "_note": "Made-up sample data for the web demo.",
+  "courses": [
+    { "course": "PH3101: Classical Mechanics", "records": [
+      { "daysAgo": 1, "time": "10:00 AM - 11:00 AM", "description": "Lecture 07", "status": "Present", "points": "", "remarks": "" },
+      { "daysAgo": 3, "time": "10:00 AM - 11:00 AM", "description": "Lecture 06", "status": "Present", "points": "", "remarks": "" },
+      { "daysAgo": 6, "time": "10:00 AM - 11:00 AM", "description": "Tutorial 3", "status": "Late", "points": "", "remarks": "Arrived 12 min late" },
+      { "daysAgo": 8, "time": "10:00 AM - 11:00 AM", "description": "Lecture 05", "status": "Present", "points": "", "remarks": "" },
+      { "daysAgo": 10, "time": "10:00 AM - 11:00 AM", "description": "Lecture 04", "status": "Absent", "points": "", "remarks": "" },
+      { "daysAgo": 13, "time": "10:00 AM - 11:00 AM", "description": "Lecture 03", "status": "Excused", "points": "", "remarks": "Medical note" },
+      { "daysAgo": 15, "time": "10:00 AM - 11:00 AM", "description": "Lecture 02", "status": "Present", "points": "", "remarks": "" }
+    ] },
+    { "course": "CH2201: Physical Chemistry", "records": [
+      { "daysAgo": 2, "time": "2:00 PM - 5:00 PM", "description": "Lab 4: Calorimetry", "status": "Present", "points": "2", "remarks": "" },
+      { "daysAgo": 9, "time": "2:00 PM - 5:00 PM", "description": "Lab 3: Kinetics", "status": "Absent", "points": "0", "remarks": "" },
+      { "daysAgo": 16, "time": "2:00 PM - 5:00 PM", "description": "Lab 2: Titration", "status": "Late", "points": "1", "remarks": "" }
+    ] },
+    { "course": "MA2104: Linear Algebra", "records": [
+      { "daysAgo": 1, "time": "9:00 AM - 10:00 AM", "description": "Lecture 12", "status": "Present", "points": "", "remarks": "" },
+      { "daysAgo": 4, "time": "9:00 AM - 10:00 AM", "description": "Lecture 11", "status": "Present", "points": "", "remarks": "" },
+      { "daysAgo": 7, "time": "9:00 AM - 10:00 AM", "description": "Lecture 10", "status": "Present", "points": "", "remarks": "" },
+      { "daysAgo": 11, "time": "9:00 AM - 10:00 AM", "description": "Lecture 09", "status": "Absent", "points": "", "remarks": "" }
+    ] }
+  ]
+}

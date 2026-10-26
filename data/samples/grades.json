@@ -1,0 +1,23 @@
+{
+  "_note": "Made-up sample data for the web demo.",
+  "semesters": [
+    { "semesterNumber": 1, "sgpa": "8.40", "cgpa": "8.40", "courses": [
+      { "courseCode": "MA1101", "courseName": "Sample Calculus I", "grade": "A" },
+      { "courseCode": "PH1101", "courseName": "Sample Mechanics", "grade": "A-" },
+      { "courseCode": "CS1101", "courseName": "Sample Programming Basics", "grade": "A" },
+      { "courseCode": "HS1101", "courseName": "Sample Writing Lab", "grade": "B+" }
+    ] },
+    { "semesterNumber": 2, "sgpa": "7.90", "cgpa": "8.15", "courses": [
+      { "courseCode": "MA1102", "courseName": "Sample Linear Algebra", "grade": "B+" },
+      { "courseCode": "CH1101", "courseName": "Sample General Chemistry", "grade": "A-" },
+      { "courseCode": "BI1101", "courseName": "Sample Biology Basics", "grade": "B" },
+      { "courseCode": "CS1102", "courseName": "Sample Data Structures", "grade": "B+" }
+    ] },
+    { "semesterNumber": 3, "sgpa": "8.25", "cgpa": "8.19", "courses": [
+      { "courseCode": "MA2101", "courseName": "Sample Real Analysis", "grade": "A-" },
+      { "courseCode": "PH2101", "courseName": "Sample Electromagnetism", "grade": "B+" },
+      { "courseCode": "EC2101", "courseName": "Sample Circuits", "grade": "A" }
+    ] },
+    { "semesterNumber": 4, "sgpa": "0.00", "cgpa": "8.19", "courses": [] }
+  ]
+}

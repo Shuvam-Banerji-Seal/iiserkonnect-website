@@ -1,0 +1,18 @@
+{
+  "_note": "Made-up sample data for the web demo. Course codes and rooms are fictional.",
+  "slots": [
+    { "day": 1, "start": "09:00", "end": "10:00", "code": "PH3101", "title": "Lecture", "room": "LH-2", "type": "Lecture" },
+    { "day": 1, "start": "11:00", "end": "12:00", "code": "MA2104", "title": "Lecture", "room": "LH-5", "type": "Lecture" },
+    { "day": 1, "start": "14:00", "end": "17:00", "code": "CH2201", "title": "Lab", "room": "Chem Lab 3", "type": "Lab" },
+    { "day": 2, "start": "10:00", "end": "11:00", "code": "PH3101", "title": "Lecture", "room": "LH-2", "type": "Lecture" },
+    { "day": 2, "start": "12:00", "end": "13:00", "code": "BI1102", "title": "Tutorial", "room": "Seminar 1", "type": "Tutorial" },
+    { "day": 2, "start": "15:00", "end": "16:00", "code": "MA2104", "title": "Tutorial", "room": "Room 204", "type": "Tutorial" },
+    { "day": 3, "start": "09:00", "end": "10:00", "code": "MA2104", "title": "Lecture", "room": "LH-5", "type": "Lecture" },
+    { "day": 3, "start": "11:00", "end": "12:00", "code": "CH2201", "title": "Lecture", "room": "LH-1", "type": "Lecture" },
+    { "day": 3, "start": "16:00", "end": "17:00", "code": "BI1102", "title": "Lecture", "room": "LH-3", "type": "Lecture" },
+    { "day": 4, "start": "10:00", "end": "11:00", "code": "PH3101", "title": "Lecture", "room": "LH-2", "type": "Lecture" },
+    { "day": 4, "start": "14:00", "end": "15:00", "code": "BI1102", "title": "Lecture", "room": "LH-3", "type": "Lecture" },
+    { "day": 5, "start": "09:00", "end": "10:00", "code": "CH2201", "title": "Lecture", "room": "LH-1", "type": "Lecture" },
+    { "day": 5, "start": "11:00", "end": "13:00", "code": "PH3101", "title": "Tutorial", "room": "Room 118", "type": "Tutorial" }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "_note": "Made-up sample data for the web demo. Course codes, venues and holidays are fictional.",
+  "weekly": [
+    { "weekday": 0, "start": "09:00", "end": "10:00", "code": "PH3101", "title": "Lecture", "venue": "LH-2", "tutorial": false },
+    { "weekday": 0, "start": "11:00", "end": "12:00", "code": "MA2104", "title": "Lecture", "venue": "LH-5", "tutorial": false },
+    { "weekday": 1, "start": "10:00", "end": "11:00", "code": "PH3101", "title": "Lecture", "venue": "LH-2", "tutorial": false },
+    { "weekday": 1, "start": "12:00", "end": "13:00", "code": "BI1102", "title": "Tutorial", "venue": "Seminar 1", "tutorial": true },
+    { "weekday": 2, "start": "09:00", "end": "10:00", "code": "MA2104", "title": "Lecture", "venue": "LH-5", "tutorial": false },
+    { "weekday": 2, "start": "16:00", "end": "17:00", "code": "BI1102", "title": "Lecture", "venue": "LH-3", "tutorial": false },
+    { "weekday": 3, "start": "10:00", "end": "11:00", "code": "PH3101", "title": "Lecture", "venue": "LH-2", "tutorial": false },
+    { "weekday": 3, "start": "14:00", "end": "15:00", "code": "BI1102", "title": "Lecture", "venue": "LH-3", "tutorial": false },
+    { "weekday": 4, "start": "09:00", "end": "10:00", "code": "CH2201", "title": "Lecture", "venue": "LH-1", "tutorial": false },
+    { "weekday": 4, "start": "11:00", "end": "13:00", "code": "PH3101", "title": "Tutorial", "venue": "Room 118", "tutorial": true }
+  ],
+  "oneOff": [
+    { "dayOffset": 3, "start": "", "end": "", "code": "", "title": "Sample holiday", "venue": "", "tutorial": false, "category": "holiday" },
+    { "dayOffset": 9, "start": "15:00", "end": "16:30", "code": "", "title": "Sample seminar", "venue": "Auditorium", "tutorial": false, "category": "academic" }
+  ]
+}
