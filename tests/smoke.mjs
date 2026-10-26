@@ -94,7 +94,7 @@ const t0 = Date.now();
 for (const vp of VIEWPORTS) {
   for (const [mode, themeName] of THEMES) {
     const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: shotsDir ? 2 : 1 });
-    const seed = { "pref.themeMode": mode, "pref.loginSkipped": true, "pref.dataSource": "sample", "pref.profile": { name: "Sample Student", roll: "21MS999", stream: "Physical Sciences", avatar: null } };
+    const seed = { "pref.themeMode": mode, "pref.loginSkipped": true, "pref.onboarded": true, "pref.dataSource": "sample", "pref.profile": { name: "Sample Student", roll: "21MS999", stream: "Physical Sciences", avatar: null } };
     await ctx.addInitScript(`try { if (!sessionStorage.getItem("smoke-seeded")) { localStorage.setItem("iiserk-web", ${JSON.stringify(JSON.stringify(seed))}); sessionStorage.setItem("smoke-seeded", "1"); } } catch (e) {}`);
     let current = "(boot)";
     await ctx.route("**/*", (route) => {

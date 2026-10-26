@@ -1,104 +1,104 @@
 # IISERKonnect Web
 
-The **web version of IISERKonnect** — the IISER Kolkata campus app — running as a
-static frontend plus a zero-dependency local companion proxy. Same features, same
-parsers (ported 1:1 from the Kotlin/Jsoup originals), no installs, no cloud.
+The **IISERKonnect** campus app for IISER Kolkata, in a browser: the same screens, the same
+themes and the same on-device tools as the Android app, built as plain static files.
 
-> **Live frontend:** https://shuvam-banerji-seal.github.io/iiserkonnect-website/
-> The frontend is only half the app — see **Run it** below.
+> **Live:** https://shuvam-banerji-seal.github.io/iiserkonnect-website/
 
----
+There is **no backend** — no server of ours, no proxy, no accounts, no analytics. Everything you
+create (notes, tasks, reminders, events, budget, chats, settings) stays in this browser
+(IndexedDB and localStorage), and Settings → Advanced can back it up to a file or restore it.
+
+What matches the app, screen by screen, is listed in **[PARITY.md](PARITY.md)**.
+
+## What works
+
+- **The app's look**: Material 3 surfaces, the app's top bars and bottom bar (a navigation rail on
+  wide screens), and every theme — Dark, Light, System, Catppuccin Mocha and Latte, Tokyo Night,
+  Coffee Green, Neon Contrast, Liquid Glass, Neko (nine coats), E-Ink and E-Ink Dark — plus a custom
+  accent colour. Motion levels Off / Subtle / Full; `prefers-reduced-motion` and the E-Ink themes
+  always turn motion off.
+- **Home**: greeting, "Today at a glance", sections in grid / list / compact / carousel with
+  accents, live cards, and **Customize Home** with templates.
+- **Settings**: the grouped hub with search, whole-row switches and every section.
+- **Fully in the browser**: Notes, Planner, Reminders, My Calendar, Timer, Stopwatch, Focus,
+  My Budget, the digital ID card, app lock (PIN, or the device's own unlock), Customize Home,
+  themes, logs, directories and the concept tree.
+- **Campus Chat**: browser-to-browser chat over WebRTC — encrypted, direct, no server. Browsers
+  cannot discover people on the network, so you connect by swapping an invite code.
+- **Campus screens** (WeLearn, grades, attendance, mess transactions, mess menu, library, notices,
+  research, TCP count, MAC registration, network status, QR billing, …): same screens as the app.
+  They ask the campus server directly; campus servers do not answer requests from other websites,
+  so you will normally see clearly labelled **made-up sample data** instead.
+  Settings → Advanced → *Sample data only* stops every campus request.
+
+### What a browser cannot do (and the screens say so)
+
+- **Alarms** ring only while an IISERKonnect tab is open (it can be in the background), using the
+  Notifications API. A web page cannot wake itself once every tab is closed.
+- **VPN** (OpenVPN), **SFTP** and the app's **automatic chat discovery** need network access no
+  web page has. The screens are there, with an explanation and what to use instead.
+- **Screen brightness** cannot be set by a web page. QR Billing offers a white, high-contrast
+  "bright presentation" and keeps the screen awake with the Screen Wake Lock API.
+- **Haptics** work only where the browser can vibrate (e.g. Chrome on Android).
 
 ## Run it
 
 ```bash
-# 1. the companion (the app's "networking layer")
-node proxy/server.mjs            # real mode — needs campus network / VPN
-node proxy/server.mjs --mock     # demo mode — built-in fixtures, no campus needed
-
-# 2. the frontend — either GitHub Pages (above) or locally:
-python3 serve.py 8123            # no-cache dev server → http://localhost:8123
+python3 serve.py 8123        # → http://localhost:8123
 ```
 
-Then open the site → **Settings** → enter your LDAP credentials → every module works.
+Any static file server works (the site also runs from GitHub Pages under
+`/iiserkonnect-website/`). `serve.py` only adds no-cache headers, so edited modules are never
+served stale while developing. There is no build step.
 
-> Tip: `python3 -m http.server` works too but sends cache headers that can serve
-> stale ES modules while developing — `serve.py` exists to avoid that trap.
+## Test it
 
-### Verified end-to-end (mock mode, Playwright)
+```bash
+npm install                  # installs Playwright, only for the test
+npm test                     # node tests/smoke.mjs
+```
 
-login → WeLearn courses/files · mess stats & tables · menu (★ specials) ·
-calendar week grid · library search→detail→availability · research
-latest/divisions/years/papers/detail · PYQ (exam/semester/dept) · notices ·
-VoIP · TCP captcha login (34,654 count + devices) · grades captcha (10
-semesters, SGPA/CGPA) · WebRTC chat handshake + message delivery
-(loopback-verified; headless Chromium can't resolve mDNS cross-tab — real
-browsers do; the optional STUN toggle covers strict networks).
+The smoke test serves the repository on a free local port and visits every route at 390×844 and
+1280×800 in the Light, Dark, Liquid Glass, Neko and E-Ink themes, in sample-data mode. It fails
+on any console error, uncaught exception, crash screen, sideways scrolling, or **any request that
+leaves the machine**. `--quick` runs Light and Dark only; `--shots <dir>` saves screenshots.
 
-## Why a companion proxy?
-
-Browsers refuse cross-origin requests to `welearn.iiserkol.ac.in`, `newsmerp…`,
-`intranet…` (no CORS headers). The Android app did all networking natively via
-OkHttp. The proxy reproduces exactly that role:
-
-- per-browser **cookie jars** (keyed by an `X-SID` header) — sessions survive page reloads
-- **host allow-list** (campus domains only — it is not an open proxy)
-- binds to `127.0.0.1` by default; credentials go browser → localhost → campus, nowhere else
-- `/file` streams downloads as attachments with Content-Disposition preserved
-
-## Modules
-
-| Module | Backing service (ported from) |
-|---|---|
-| WeLearn courses / files / downloads | `HtmlParser`, `WeLearnRepository` |
-| Deadlines | `scrapeAssignments` |
-| Attendance (+ % summary) | `AttendanceParser` |
-| Mess transactions / budget charts | `CanteenErpService`, `allocateItemCosts` |
-| Mess menu (today, ★ specials) | `parseFoodMenuFromCanteen` |
-| Academic calendar week grid | `CalendarScraper` |
-| Campus events | `EventCalendarScraper` |
-| Grade cards (captcha) | `WeLearnMyProfileService` |
-| Course selection | — (planned) |
-| PYQ archive | `IntranetService.fetchPYQ*` |
-| Notices (student/admin) | `parseNoticeBoard` |
-| Library catalogue + availability | `LibraryCatalogService` (VTLS Chamo) |
-| Research (ePrints) | `EprintsService` |
-| VoIP directory | `fetchVoipDirectory` |
-| TCP counter / MACs (captcha) | `fetchMacRegLoginPage`, `parseTcpDevices` |
-| Network dashboard (health, Skipole, MRTG) | `Skipole/Mrtg/HostDetailParser` |
-| Campus Chat | WebRTC data channels (replaces raw-TCP `ChatNetworkManager`; DTLS-E2E, serverless, manual invite codes replace UDP/mDNS discovery; optional STUN toggle for strict NATs — media stays direct) |
-
-## Architecture
+## How it is built
 
 ```
-index.html                  app shell (sidebar / topbar / outlet)
-serve.py                    no-cache dev server (stale-module prevention)
-proxy/server.mjs            companion: cookie jars, allow-list, /fetch /file /ping, --mock fixtures
+index.html                 app shell: stage, bottom bar, navigation rail
 scripts/
-  main.js                   route table + shell wiring
-  core/                     store (localStorage), net (proxy client), session (logins/captcha),
-                            router, html (DOMParser = the Jsoup port)
-  services/                 welearn, canteen, intranet, calendar, eprints, library, netmon
-  pages/                    home, settings, welearn, mess, menu, calendar, library, research,
-                            gateway (tcp+grades), misc (pyq/notices/voip), netmon, chat, about
-  modules/theme-manager.js  the app's 9 palettes as site themes
-  components/               icons, theme picker
-styles/                     tokens → base → layout → utilities → components (shell, data, …)
+  main.js                  boot: theme → motion → app lock → router
+  app/routes.js            every route (the Android route patterns), lazily loaded
+  core/                    router, prefs (localStorage), db (IndexedDB), theme, motion,
+                           notify (alarms), applock, net (direct campus fetch), session, log
+  ui/                      components (Material 3 builders), overlay (dialogs, sheets, menus,
+                           snackbars), icons, markdown, qr, haptics
+  home/                    Home layout model, presets, greeting
+  productivity/            the productivity rules (repeats, timer, focus, events, agenda)
+  chat/engine.js           WebRTC chat
+  data/                    per-feature loaders: live campus data or labelled samples
+  services/                ports of the app's campus parsers
+  pages/*.page.js          one module per screen group
+  vendor/                  small third-party code (QR encoder)
+styles/                    base, shell, components, themes, pages/*
+data/samples/              made-up sample data (fictional people, rooms and amounts)
+tests/smoke.mjs            the smoke test
 ```
 
-**Layer rules:** `data` never touches the DOM · only `pages` render · only `core/net`
-speaks to the proxy · every page degrades to an explicit state (proxy offline /
-not signed in) instead of failing silently.
+Static ES modules, no bundler, no `node_modules` in the repository.
 
-## Security & privacy
+## Privacy
 
-- Credentials live in this browser's localStorage and are sent **only** to your
-  local proxy, which forwards them **only** to the allow-listed campus hosts.
-- No analytics, no third-party requests (fonts excepted), no cloud anything.
-- Chat has no signaling server: invite codes travel over any channel you choose,
-  media path is direct LAN WebRTC (DTLS-encrypted).
+- Your LDAP username and password, if you save them, are kept only in this browser's storage
+  (not encrypted) and are only ever sent to the campus sign-in pages, and only when this
+  browser can reach them.
+- The site loads nothing from third parties: fonts and icons are served from this repository.
+  The one exception is optional: Campus Chat's "Use public STUN" switch (off by default).
+- Third-party code and fonts: see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
 ## License
 
-MIT © Shuvam Banerji Seal. Unofficial student project — not affiliated with
-IISER Kolkata administration.
+MIT © Shuvam Banerji Seal. Unofficial student project — not affiliated with IISER Kolkata
+administration.

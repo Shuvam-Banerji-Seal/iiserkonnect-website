@@ -160,3 +160,11 @@
   padding: 24px; text-align: center;
   background: var(--background);
 }
+
+/* FirstOpenAnimationOverlay */
+.first-open {
+  position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; text-align: center; padding: 24px;
+  background: linear-gradient(180deg, #071A1B, #0F3243, #1D5B8A); color: #fff; pointer-events: none;
+}
+.first-open h1 { font-size: 24px; line-height: 32px; font-weight: 400; margin-bottom: 10px; }
+.first-open p { font-size: 14px; line-height: 20px; opacity: .92; }

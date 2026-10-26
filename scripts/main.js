@@ -7,7 +7,7 @@
 import { prefs } from "./core/prefs.js";
 import "./core/log.js";
 import { applyTheme } from "./core/theme.js";
-import { applyMotion } from "./core/motion.js";
+import { applyMotion, spec as motionSpec } from "./core/motion.js";
 import { setStage, startRouter, onRouted, beforeRoute, nav } from "./core/router.js";
 import { registerRoutes, TABS } from "./app/routes.js";
 import { icon } from "./ui/icons.js";
@@ -98,6 +98,21 @@ onRouted((route) => {
   document.getElementById("rail").hidden = route.pattern === "login";
 });
 
+/* FirstOpenAnimationOverlay (MainActivity): a short welcome, once per browser. */
+function firstOpenOverlay() {
+  if (prefs.get("onboarded")) return;
+  prefs.set("onboarded", true);
+  const o = document.createElement("div");
+  o.className = "first-open";
+  o.setAttribute("aria-hidden", "true");
+  o.innerHTML = `<div><h1>Welcome to IISERK App</h1><p>Campus tools. Faster access. Less friction.</p></div>`;
+  document.body.appendChild(o);
+  const s = motionSpec();
+  const fade = (from, to) => (s.dur ? o.animate([{ opacity: from }, { opacity: to }], { duration: s.dur, fill: "forwards" }).finished : Promise.resolve());
+  fade(0, 1).then(() => new Promise((r) => setTimeout(r, 800))).then(() => fade(1, 0)).then(() => o.remove());
+}
+
 mountChatFab();
 startNotifier();
+firstOpenOverlay();
 guardWithAppLock().then(() => startRouter());
