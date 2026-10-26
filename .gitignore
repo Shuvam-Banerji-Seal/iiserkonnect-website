@@ -1,9 +1,10 @@
 .DS_Store
 Thumbs.db
 *.log
+__pycache__/
+node_modules/
+test-results/
 
-# local verification artifacts
-plans/screenshots/
-__pycache__/
+# agent scratch, never part of the site
 .rigor-trash/
-__pycache__/
+plans/

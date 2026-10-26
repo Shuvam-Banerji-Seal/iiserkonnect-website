@@ -20,7 +20,7 @@ export async function render(el) {
       ${card(`
         <h3 class="h3">Campus account</h3>
         <label class="field"><span>LDAP username</span>
-          <input id="f-user" class="input" value="${ldap?.u || ""}" placeholder="e.g. sbs22ms076" autocomplete="username"></label>
+          <input id="f-user" class="input" value="${ldap?.u || ""}" placeholder="e.g. sbs21ms999" autocomplete="username"></label>
         <label class="field"><span>Password</span>
           <input id="f-pass" class="input" type="password" value="${ldap?.p || ""}" autocomplete="current-password"></label>
         <div class="row-gap">

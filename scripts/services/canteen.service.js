@@ -44,7 +44,7 @@ export async function fetchTransactions(full = false) {
   throw new Error("Could not load transactions — try on campus or open canteen ERP directly");
 }
 
-/** ERP userid = employee number, e.g. sbs22ms076 → 22MS076 (port of extractEmployeeNumber). */
+/** ERP userid = employee number, e.g. sbs21ms999 → 21MS999 (port of extractEmployeeNumber). */
 export function userid() {
   const u = (localStorage.getItem("iiserk-web") && JSON.parse(localStorage.getItem("iiserk-web")).ldap?.u) || "";
   const m = /^[a-zA-Z]{2,5}(\d{2})([a-z]{2})(\d{2,3})$/i.exec(u.trim());
