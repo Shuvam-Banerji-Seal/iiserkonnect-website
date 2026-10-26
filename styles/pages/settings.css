@@ -1,1 +1,106 @@
-/* settings.css */
+/* settings.css — Settings hub and sections (SettingsScreen.kt, SettingsComponents.kt) */
+
+.settings-hub, .settings-detail { display: flex; flex-direction: column; gap: 16px; padding-top: 8px; }
+.settings-detail { gap: 16px; }
+#hub-body { display: flex; flex-direction: column; gap: 16px; }
+.settings-detail > .section-header { margin-bottom: -4px; }
+
+/* profile header chip */
+.profile-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 24px 16px; border-radius: var(--prism-card);
+  background: color-mix(in srgb, var(--primary-container) 45%, var(--background));
+  --ear-bg: color-mix(in srgb, var(--primary-container) 45%, var(--background));
+}
+.profile-card__avatar {
+  width: 108px; height: 108px; border-radius: 50%; padding: 3px;
+  background: conic-gradient(from 0deg, var(--primary), var(--tertiary), var(--secondary), var(--primary));
+  display: grid; place-items: center;
+}
+.profile-card__avatar > span, .profile-card__avatar > img {
+  width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+  display: grid; place-items: center;
+  background: var(--primary-container); color: var(--on-primary-container);
+  font-size: 36px; line-height: 44px; font-weight: 700;
+}
+.profile-card__name { margin-top: 12px; font-size: 24px; line-height: 32px; font-weight: 700; color: var(--on-surface); }
+.profile-card__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
+.profile-card__chip { font-weight: 600; height: 24px; }
+.profile-card > .t-label-s { margin-top: 8px; }
+.profile-card__open { display: inline-flex; align-items: center; margin-top: 4px; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .5px; }
+.profile-card__actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; justify-content: center; }
+.is-eink .profile-card { background: transparent; }
+.is-eink .profile-card__avatar { background: var(--on-surface); }
+.is-eink .profile-card__avatar > span { background: var(--surface); color: var(--on-surface); }
+.is-eink .profile-card__chip { background: transparent; }
+.is-liquid .profile-card { background: rgb(26 38 56 / .44); }
+
+.settings-nomatch { text-align: center; padding: 24px 0; color: var(--on-surface-variant); font-size: 14px; }
+.settings-version { text-align: center; font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: .5px; color: var(--on-surface-variant); padding-bottom: 16px; }
+.switch-row__desc { white-space: pre-line; }
+
+/* QR brightness level under its switch */
+.qr-level { padding: 0 16px 12px 72px; overflow: hidden; }
+.qr-level__web { display: flex; gap: 6px; margin-top: 6px; }
+.qr-level__web .ic { flex: none; margin-top: 1px; }
+.bright-preview {
+  position: fixed; inset: 0; z-index: 90; pointer-events: none;
+  background: #fff; opacity: calc(0.15 + (var(--level, 1) - .3) * 1.1);
+  mix-blend-mode: screen;
+}
+
+/* section cards (SettingsCard) */
+.settings-card {
+  padding: 16px; border-radius: var(--prism-card);
+  background: color-mix(in srgb, var(--surface-variant) 50%, transparent);
+  --ear-bg: color-mix(in srgb, var(--surface-variant) 50%, var(--background));
+  color: var(--on-surface);
+}
+.is-neko .settings-card { background: var(--ear-bg); }
+.is-eink .settings-card { background: transparent; border: 1px solid var(--outline); }
+.is-liquid .settings-card { background-color: rgb(26 38 56 / .28); }
+.settings-card--primary { background: var(--primary-container); color: var(--on-primary-container); --ear-bg: var(--primary-container); }
+.settings-card--tint { background: color-mix(in srgb, var(--primary) 8%, transparent); }
+.settings-card__title { font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: .25px; }
+.settings-card__sub { margin-top: 4px; font-size: 12px; line-height: 16px; letter-spacing: .4px; color: var(--on-surface-variant); }
+.settings-note { padding: 0 4px; }
+.settings-override { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; padding: 10px 12px; border-radius: var(--r-md); background: var(--tertiary-container); color: var(--on-tertiary-container); }
+.settings-override .ic { flex: none; margin-top: 2px; }
+.settings-indent { margin-left: 64px; margin-bottom: 4px; }
+.settings-danger { color: var(--error) !important; border-color: var(--error) !important; }
+.settings-danger-fill { background: var(--error) !important; color: var(--on-error) !important; }
+.btn.is-disabled { background: color-mix(in srgb, var(--on-surface) 12%, transparent); color: color-mix(in srgb, var(--on-surface) 38%, transparent); pointer-events: none; }
+
+.dropdown {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  min-height: 40px; padding: 0 12px 0 24px; border: 1px solid var(--outline); border-radius: var(--prism-tile);
+  color: var(--on-surface); font-size: 14px; letter-spacing: .25px; text-align: left;
+}
+.coat-list { display: flex; flex-direction: column; }
+.coat { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: var(--prism-tile); text-align: left; color: var(--on-surface); }
+.coat:hover { background: color-mix(in srgb, var(--on-surface) 6%, transparent); }
+.coat__plate { position: relative; width: 34px; height: 29px; margin-top: 5px; border-radius: 10px; background: var(--fur); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--ears) 45%, transparent); flex: none; }
+.coat__plate::before, .coat__plate::after { content: ""; position: absolute; top: -5px; width: 7px; height: 6px; background: var(--fur); clip-path: polygon(0 100%, 50% 0, 100% 100%); }
+.coat__plate::before { left: 4px; } .coat__plate::after { right: 4px; }
+.coat__plate i { position: absolute; left: 50%; bottom: 7px; width: 11px; height: 11px; margin-left: -5.5px; border-radius: 50%; background: var(--nose); }
+.coat__label { display: block; font-size: 14px; line-height: 20px; }
+.coat.is-on .coat__label { font-weight: 700; }
+.coat__blurb { display: block; font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: .5px; color: var(--on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.color-dot { width: 26px; height: 26px; border-radius: 50%; flex: none; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .12); }
+.color-dot--lg { width: 40px; height: 40px; }
+.color-dot--btn { width: 32px; height: 32px; }
+.picker { display: flex; flex-direction: column; gap: 4px; color: var(--on-surface); }
+.slider--hue::-webkit-slider-runnable-track { background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); }
+.slider--hue::-moz-range-track { background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); }
+
+.idcard-preview { display: block; padding: 16px; border-radius: var(--prism-card); background: var(--surface); color: var(--on-surface); text-decoration: none !important; box-shadow: var(--elev-1); --ear-bg: var(--surface); }
+.idcard-preview .ic { color: var(--on-surface-variant); }
+.idcard-preview__strip { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 12px; border-radius: 8px; background: #fff; border: 1px solid var(--outline-variant); color: #1c1b1f; }
+.idcard-preview__photo { width: 48px; height: 48px; border-radius: 4px; overflow: hidden; display: grid; place-items: center; background: #ece6f0; color: #1b5e4a; font-weight: 700; flex: none; }
+.idcard-preview__photo img { width: 100%; height: 100%; object-fit: cover; }
+.idcard-preview__name { display: block; font-weight: 700; font-size: 14px; }
+.idcard-preview__id { display: block; font-size: 12px; color: #49454f; }
+.idcard-preview__dept { display: block; font-size: 12px; color: #1b5e4a; }
+.account-row { display: flex; align-items: center; gap: 12px; padding: 8px; border-radius: var(--prism-tile); }
+.account-row.is-active { background: color-mix(in srgb, var(--primary-container) 45%, transparent); }
+.netdebug { margin: 0; padding: 12px; border-radius: var(--prism-tile); background: var(--surface); color: var(--on-surface); font: 12px/18px var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }

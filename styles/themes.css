@@ -49,13 +49,12 @@
 .is-neko .neko-ears::after { right: 10%; }
 .is-neko .tile.neko-ears { height: calc(var(--tile-h) - 14px); }
 .is-neko .settings-group__card { overflow: visible; }
-.is-neko .settings-group__card.neko-ears { margin-top: 26px; }
 .is-neko .paw {
   position: absolute; right: 3px; bottom: 2px; width: 22px; height: 22px;
   color: var(--primary); opacity: .16; pointer-events: none;
 }
 .is-neko .tile { box-shadow: var(--elev-2); }
-.is-neko .icon-tile, .is-neko .tile__icon { border-radius: 50%; }
+.is-neko .tile__icon { border-radius: 50%; }
 .is-neko .btn { border-radius: 22px; }
 .is-neko .nav-item__ind { border-radius: 16px 16px 12px 12px; }
 

@@ -81,7 +81,7 @@ export const iconTile = (ic, accent = "primary", size = 40) =>
 export function settingsGroup(title, rows, { a = {} } = {}) {
   return `<section class="settings-group"${attrs(a)}>
     ${title ? `<h2 class="settings-group__title">${esc(title)}</h2>` : ""}
-    <div class="settings-group__card">${rows}</div>
+    <div class="settings-group__card neko-ears glass-med">${rows}</div>
   </section>`;
 }
 export const groupDivider = (inset = true) => `<div class="group-divider${inset ? " group-divider--inset" : ""}" role="separator"></div>`;

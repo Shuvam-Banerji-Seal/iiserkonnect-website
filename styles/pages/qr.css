@@ -1,1 +1,37 @@
-/* qr.css */
+/* qr.css — QR Billing (QrBillingScreen.kt) and its bright presentation */
+
+.qr-page { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
+.qr-ready { display: flex; gap: 12px; align-items: flex-start; padding: 16px; border-radius: var(--prism-card); }
+.qr-ready h2 { font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: .1px; }
+.qr-ready p { font-size: 12px; line-height: 16px; letter-spacing: .4px; }
+.qr-ready .ic { flex: none; margin-top: 8px; }
+.qr-ready--off { background: var(--error-container); color: var(--on-error-container); }
+.qr-ready--on { background: var(--primary-container); color: var(--on-primary-container); }
+.qr-ready__web { margin-top: 4px; opacity: .85; }
+.qr-primary { min-height: 52px; margin-top: 4px; }
+.qr-anyway { font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px; padding: 8px 0; align-self: flex-start; }
+.qr-card, .qr-bright { padding: 16px; border-radius: var(--prism-card); background: var(--surface-container-high); color: var(--on-surface); --ear-bg: var(--surface-container-high); }
+.qr-card__title { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 14px; line-height: 20px; font-weight: 600; letter-spacing: .1px; }
+.qr-card .olist li, .qr-card .ulist li { font-size: 14px; line-height: 20px; letter-spacing: .25px; }
+.qr-pilot { padding: 16px; border-radius: var(--prism-card); background: var(--surface-container-high); color: var(--on-surface-variant); font-size: 12px; line-height: 16px; letter-spacing: .4px; --ear-bg: var(--surface-container-high); }
+.is-eink :is(.qr-card, .qr-bright, .qr-pilot) { background: transparent; border: 1px solid var(--outline); }
+
+/* bright presentation: white, high contrast, independent of the theme */
+.qr-present {
+  position: fixed; inset: 0; z-index: 95;
+  display: grid; place-items: center; padding: 24px;
+  /* the chosen level sets how white the panel is (30% → light grey, 100% → pure white);
+     black ink keeps at least 6:1 contrast at the lowest level */
+  --shade: calc(255 * (0.55 + 0.45 * (var(--level) - 0.3) / 0.7));
+  background: rgb(var(--shade) var(--shade) var(--shade));
+  color: #000;
+  color-scheme: light;
+}
+.qr-present__inner { max-width: 420px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.qr-present__sun { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: #000; color: #fff; }
+.qr-present h2 { font-size: 24px; line-height: 32px; font-weight: 700; }
+.qr-present p { font-size: 16px; line-height: 24px; }
+.qr-present__open { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 28px; border-radius: 26px; background: #000; color: #fff !important; font-size: 16px; font-weight: 600; text-decoration: none !important; }
+.qr-present__lock { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #000; padding: 6px 10px; border-radius: 8px; border: 1px solid #000; }
+.qr-present__exit { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #000; padding: 10px 16px; border-radius: 20px; }
+.qr-present__exit:focus-visible, .qr-present__lock:focus-visible, .qr-present__open:focus-visible { outline: 3px solid #000; outline-offset: 3px; }

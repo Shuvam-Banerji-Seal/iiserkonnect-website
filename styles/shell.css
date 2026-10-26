@@ -63,7 +63,7 @@
 }
 .topbar--root { padding-left: 16px; }
 .topbar__nav { width: 44px; height: 44px; }
-.topbar__titles { flex: 1 1 auto; min-width: 0; padding-left: 4px; display: flex; flex-direction: column; justify-content: center; }
+.topbar__titles { flex: 1 1 auto; min-width: 0; padding-left: 8px; display: flex; flex-direction: column; justify-content: center; }
 .topbar__title {
   font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: 0;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; outline: none;

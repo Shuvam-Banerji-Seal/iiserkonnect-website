@@ -24,7 +24,9 @@ function closeAnimated(d, kind) {
   const frames = kind === "sheet"
     ? [{ transform: "none" }, { transform: "translateY(100%)" }]
     : [{ opacity: 1, transform: "none" }, { opacity: 0, transform: `scale(${s.pop})` }];
-  return motion.animate(d, frames, { duration: Math.round(s.dur * 0.7) }).then(() => { d.close(); d.remove(); });
+  // Closed now, removed a moment later: code awaiting the dialog can still
+  // read the values typed into it.
+  return motion.animate(d, frames, { duration: Math.round(s.dur * 0.7) }).then(() => { d.close(); setTimeout(() => d.remove(), 0); });
 }
 
 function openAnimated(d, kind) {
