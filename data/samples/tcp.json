@@ -1,0 +1,33 @@
+{
+  "_note": "Made-up sample data for the web demo. Not read from the gateway.",
+  "user": "21MS999",
+  "tcpCount": 37,
+  "totalDevices": 3,
+  "maxAllowed": 5,
+  "devices": [
+    {
+      "slNo": "1",
+      "macAddress": "02:00:00:4A:1C:01",
+      "deviceType": "Laptop",
+      "location": "Sample Hostel, Block A",
+      "validFromDaysAgo": 120,
+      "validTillInDays": 245
+    },
+    {
+      "slNo": "2",
+      "macAddress": "02:00:00:4A:1C:02",
+      "deviceType": "Phone",
+      "location": "Sample Hostel, Block A",
+      "validFromDaysAgo": 60,
+      "validTillInDays": 305
+    },
+    {
+      "slNo": "3",
+      "macAddress": "02:00:00:9F:07:11",
+      "deviceType": "Desktop",
+      "location": "Sample lab, Room 000",
+      "validFromDaysAgo": 10,
+      "validTillInDays": 355
+    }
+  ]
+}

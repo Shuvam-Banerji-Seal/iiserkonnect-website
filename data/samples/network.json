@@ -1,0 +1,322 @@
+{
+  "_note": "Made-up sample data for the web demo. Browsers cannot ping campus hosts, so these are not live checks.",
+  "updatedMinutesAgo": 3,
+  "endpoints": [
+    {
+      "name": "WeLearn (Moodle)",
+      "host": "welearn.iiserkol.ac.in",
+      "up": true,
+      "ms": 182
+    },
+    {
+      "name": "IISERK Website",
+      "host": "www.iiserkol.ac.in",
+      "up": true,
+      "ms": 131
+    },
+    {
+      "name": "Samarth Portal",
+      "host": "iiserkol.samarth.edu.in",
+      "up": true,
+      "ms": 540
+    },
+    {
+      "name": "Intranet",
+      "host": "intranet.iiserkol.ac.in",
+      "up": true,
+      "ms": 96
+    },
+    {
+      "name": "Calendar",
+      "host": "calendar.iiserkol.ac.in",
+      "up": true,
+      "ms": 210
+    },
+    {
+      "name": "TCP Counter / Gateway",
+      "host": "gw.iiserkol.ac.in",
+      "up": true,
+      "ms": 75
+    },
+    {
+      "name": "Canteen ERP",
+      "host": "newsmerp.iiserkol.ac.in",
+      "up": true,
+      "ms": 260
+    },
+    {
+      "name": "Helpdesk",
+      "host": "helpdesk.iiserkol.ac.in",
+      "up": false,
+      "ms": null
+    },
+    {
+      "name": "Library (via VPN)",
+      "host": "intranet.iiserkol.ac.in/wiki",
+      "up": true,
+      "ms": 118
+    },
+    {
+      "name": "ERP Dashboard",
+      "host": "www.iiserkol.ac.in/myprofile/dashboard/",
+      "up": true,
+      "ms": 149
+    }
+  ],
+  "monitors": [
+    {
+      "name": "Campus Network (LAN)",
+      "campusOnly": false,
+      "minutesAgo": 4,
+      "groups": [
+        {
+          "name": "Core",
+          "alert": false,
+          "hosts": [
+            {
+              "name": "gw-core-1",
+              "up": true
+            },
+            {
+              "name": "gw-core-2",
+              "up": true
+            }
+          ]
+        },
+        {
+          "name": "Hostels",
+          "alert": true,
+          "hosts": [
+            {
+              "name": "hostel-a-sw",
+              "up": true
+            },
+            {
+              "name": "hostel-b-sw",
+              "up": false
+            },
+            {
+              "name": "hostel-c-sw",
+              "up": true
+            }
+          ]
+        },
+        {
+          "name": "Academic blocks",
+          "alert": false,
+          "hosts": [
+            {
+              "name": "block-1-sw",
+              "up": true
+            },
+            {
+              "name": "block-2-sw",
+              "up": true
+            },
+            {
+              "name": "block-3-sw",
+              "up": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Switches",
+      "campusOnly": true
+    },
+    {
+      "name": "Access Points",
+      "campusOnly": true
+    },
+    {
+      "name": "ONU Devices",
+      "campusOnly": true
+    },
+    {
+      "name": "Switch Ports",
+      "campusOnly": true
+    },
+    {
+      "name": "Computer Centre Lab",
+      "campusOnly": true
+    }
+  ],
+  "mrtg": [
+    {
+      "name": "Core Router (gw)",
+      "targets": [
+        {
+          "title": "Uplink 1",
+          "in": [
+            49.3,
+            55.7,
+            58.1,
+            56.7,
+            53.1,
+            49.8,
+            48.1,
+            48.1,
+            48.2,
+            46.4,
+            41.8,
+            34.9,
+            27.8,
+            23.2,
+            22.9,
+            26.9,
+            33.6,
+            40.3,
+            44.9,
+            46.7,
+            46.8,
+            47.1,
+            49.1,
+            52.9
+          ],
+          "out": [
+            42.1,
+            40.6,
+            37.6,
+            34.9,
+            33.4,
+            33.2,
+            33.1,
+            31.7,
+            28.4,
+            23.6,
+            18.9,
+            16.2,
+            16.7,
+            20.2,
+            25.4,
+            30.3,
+            33.5,
+            34.6,
+            34.5,
+            34.5,
+            35.7,
+            38.1,
+            40.5,
+            41.3
+          ]
+        },
+        {
+          "title": "Uplink 2",
+          "in": [
+            22.2,
+            20.3,
+            19.4,
+            19.3,
+            19.0,
+            17.6,
+            15.0,
+            11.8,
+            9.2,
+            8.3,
+            9.8,
+            13.0,
+            16.9,
+            20.1,
+            21.9,
+            22.2,
+            21.8,
+            21.8,
+            22.6,
+            24.1,
+            25.2,
+            24.9,
+            22.7,
+            18.9
+          ],
+          "out": [
+            12.6,
+            12.4,
+            12.2,
+            11.5,
+            9.9,
+            7.7,
+            5.9,
+            5.2,
+            6.1,
+            8.4,
+            11.3,
+            13.8,
+            15.2,
+            15.5,
+            15.1,
+            14.9,
+            15.2,
+            16.0,
+            16.7,
+            16.6,
+            15.2,
+            12.6,
+            9.5,
+            7.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Switches (intranet)",
+      "targets": [
+        {
+          "title": "Access switch 3, port 12",
+          "in": [
+            5.9,
+            5.7,
+            5.0,
+            3.9,
+            2.7,
+            2.0,
+            2.2,
+            3.4,
+            5.0,
+            6.7,
+            7.9,
+            8.3,
+            8.2,
+            7.9,
+            7.8,
+            8.1,
+            8.5,
+            8.7,
+            8.1,
+            6.8,
+            5.0,
+            3.4,
+            2.3,
+            2.2
+          ],
+          "out": [
+            3.3,
+            2.6,
+            1.9,
+            1.4,
+            1.5,
+            2.2,
+            3.4,
+            4.5,
+            5.4,
+            5.7,
+            5.6,
+            5.4,
+            5.2,
+            5.3,
+            5.5,
+            5.6,
+            5.3,
+            4.5,
+            3.4,
+            2.2,
+            1.5,
+            1.4,
+            1.8,
+            2.6
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "_note": "Made-up sample data for the web demo. Not read from the ERP.",
+  "erp": {
+    "fullName": "Sample Student",
+    "email": "sample.student@example.com",
+    "idNumber": "21MS999",
+    "profileCompletion": 62,
+    "sections": [
+      {
+        "title": "Academics",
+        "modules": [
+          {
+            "name": "Course Selection",
+            "description": "Sample entry"
+          },
+          {
+            "name": "Grade Card",
+            "description": "Sample entry"
+          },
+          {
+            "name": "Attendance",
+            "description": "Sample entry"
+          }
+        ]
+      },
+      {
+        "title": "Services",
+        "modules": [
+          {
+            "name": "Helpdesk",
+            "description": "Sample entry"
+          },
+          {
+            "name": "Canteen",
+            "description": "Sample entry"
+          },
+          {
+            "name": "Library",
+            "description": "Sample entry"
+          },
+          {
+            "name": "Devices",
+            "description": "Sample entry"
+          }
+        ]
+      }
+    ],
+    "fields": [
+      [
+        "Department",
+        "Sample Department"
+      ],
+      [
+        "Hostel",
+        "Sample Hostel"
+      ],
+      [
+        "Programme",
+        "Sample programme"
+      ],
+      [
+        "Joined",
+        "July 2021"
+      ]
+    ]
+  },
+  "pages": {
+    "home": {
+      "rows": [
+        [
+          "Name",
+          "Sample Student"
+        ],
+        [
+          "Roll number",
+          "21MS999"
+        ],
+        [
+          "Department",
+          "Sample Department"
+        ],
+        [
+          "Programme",
+          "Sample programme"
+        ]
+      ]
+    },
+    "personal": {
+      "rows": [
+        [
+          "Date of birth",
+          "01 Jan 2003"
+        ],
+        [
+          "Blood group",
+          "O+"
+        ],
+        [
+          "Nationality",
+          "Sample nationality"
+        ]
+      ]
+    },
+    "contact": {
+      "rows": [
+        [
+          "Emergency number",
+          "+91 00000 00000"
+        ],
+        [
+          "Mobile number",
+          "+91 00000 00001"
+        ],
+        [
+          "Alternate email",
+          "sample.alt@example.com"
+        ]
+      ]
+    },
+    "present_address": {
+      "rows": [
+        [
+          "Address line 1",
+          "Sample Hostel, Room 000"
+        ],
+        [
+          "Address line 2",
+          "Sample Campus Road"
+        ],
+        [
+          "City",
+          "Sample City"
+        ],
+        [
+          "PIN code",
+          "000000"
+        ],
+        [
+          "State",
+          "Sample State"
+        ],
+        [
+          "Country",
+          "India"
+        ]
+      ]
+    },
+    "permanent_address": {
+      "rows": [
+        [
+          "Address line 1",
+          "12 Sample Street"
+        ],
+        [
+          "City",
+          "Sample Town"
+        ],
+        [
+          "PIN code",
+          "000000"
+        ],
+        [
+          "State",
+          "Sample State"
+        ],
+        [
+          "Country",
+          "India"
+        ]
+      ]
+    },
+    "education12": {
+      "rows": [
+        [
+          "Level",
+          "Higher Secondary"
+        ],
+        [
+          "Board / University",
+          "Sample Board"
+        ],
+        [
+          "Institution",
+          "Sample School"
+        ],
+        [
+          "Year of passing",
+          "2021"
+        ],
+        [
+          "Percentage",
+          "00.0"
+        ]
+      ]
+    },
+    "father_mother": {
+      "rows": [
+        [
+          "Relationship",
+          "Father"
+        ],
+        [
+          "Full name",
+          "Sample Parent"
+        ],
+        [
+          "Phone number",
+          "+91 00000 00002"
+        ],
+        [
+          "Profession",
+          "Sample profession"
+        ],
+        [
+          "Dependent",
+          "Yes"
+        ]
+      ]
+    },
+    "bank_account": {
+      "rows": [
+        [
+          "Account holder",
+          "Sample Student"
+        ],
+        [
+          "Bank",
+          "Sample Bank"
+        ],
+        [
+          "Branch",
+          "Sample Branch"
+        ],
+        [
+          "Account number",
+          "XXXXXX0000"
+        ],
+        [
+          "IFSC code",
+          "SAMP0000000"
+        ]
+      ]
+    },
+    "summer_project": {
+      "rows": [
+        [
+          "Project",
+          "Sample summer project"
+        ],
+        [
+          "Year",
+          "2024"
+        ]
+      ]
+    }
+  }
+}
