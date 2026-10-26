@@ -8,7 +8,7 @@
  * milliseconds; days are local "YYYY-MM-DD" strings (the app's epoch days).
  */
 
-import { isoDay, fromIsoDay, startOfDay } from "../ui/dom.js";
+import { isoDay, fromIsoDay, startOfDay, timeOf, sameDay, DAY_NAMES, MONTH_NAMES } from "../ui/dom.js";
 
 /* ── RepeatRule ─────────────────────────────────────────────────── */
 export const REPEAT_RULES = ["NONE", "DAILY", "WEEKLY", "MONTHLY"];
@@ -204,13 +204,31 @@ export function buildEventTimes({ startDay, endDay, startMinute, endMinute, allD
   return { startMillis: start, endMillis: end };
 }
 
+/** Jump a repeating series close to `fromMs` (without walking every step), always a little before it. */
+function jumpNear(ev, fromMs, rule, anchor) {
+  const s = new Date(ev.startMillis), f = new Date(fromMs);
+  if (rule === "DAILY" || rule === "WEEKLY") {
+    const step = rule === "DAILY" ? 1 : 7;
+    const n = Math.floor((startOfDay(f) - startOfDay(s)) / 86400000 / step) - 1;
+    if (n > 0) return new Date(s.getFullYear(), s.getMonth(), s.getDate() + n * step, s.getHours(), s.getMinutes(), s.getSeconds()).getTime();
+  } else if (rule === "MONTHLY") {
+    const months = (f.getFullYear() - s.getFullYear()) * 12 + (f.getMonth() - s.getMonth()) - 1;
+    if (months > 0) {
+      const tot = s.getMonth() + months, y = s.getFullYear() + Math.floor(tot / 12), m = tot % 12;
+      const day = Math.min(anchor || s.getDate(), daysInMonth(y, m));
+      return new Date(y, m, day, s.getHours(), s.getMinutes(), s.getSeconds()).getTime();
+    }
+  }
+  return ev.startMillis;
+}
+
 /** Expand an event into occurrences overlapping [fromMs, toMs). */
 export function occurrences(ev, fromMs, toMs) {
   const dur = (ev.endMillis ?? ev.startMillis + 3600_000) - ev.startMillis;
-  const out = [];
   const rule = parseRule(ev.repeatRule);
   const anchor = new Date(ev.startMillis).getDate();
-  let t = ev.startMillis;
+  const out = [];
+  let t = rule === "NONE" ? ev.startMillis : jumpNear(ev, fromMs - dur, rule, anchor);
   for (let i = 0; i < 5000 && t < toMs; i++) {
     if (t + dur > fromMs) out.push({ ...ev, occStart: t, occEnd: t + dur });
     if (rule === "NONE") break;
@@ -218,6 +236,20 @@ export function occurrences(ev, fromMs, toMs) {
     if (t == null) break;
   }
   return out;
+}
+/** Local day keys ("YYYY-MM-DD") that any occurrence of any event covers in a month (for the grid dots). */
+export function markedDaysInMonth(events, year, month) {
+  const from = new Date(year, month, 1).getTime(), to = new Date(year, month + 1, 1).getTime();
+  const days = new Set();
+  for (const e of events) for (const o of occurrences(e, from, to)) {
+    let d = startOfDay(new Date(Math.max(o.occStart, from)));
+    const end = Math.min(o.occEnd, to);
+    for (let i = 0; i < 40 && d.getTime() < end; i++) {
+      days.add(isoDay(d));
+      d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+    }
+  }
+  return days;
 }
 export function occurrencesOnDay(events, day) {
   const d = fromIsoDay(day);
@@ -264,4 +296,83 @@ export function agendaReminderAt(entry, now = Date.now()) {
   if (entry.allDay) { const d = new Date(entry.start); t = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 8, 0).getTime(); }
   else t = entry.start - 15 * 60000;
   return t <= now ? entry.start : t;
+}
+
+/* ── Labels (TimeLabels / ReminderTimeText) ────────────────────── */
+const MON3 = (d) => MONTH_NAMES[d.getMonth()].slice(0, 3);
+/** Today, Tomorrow, Yesterday, a short weekday within the week, else "d Mon" (+ year when it differs). */
+export function dayWord(d, now = new Date()) {
+  const diff = Math.round((startOfDay(d) - startOfDay(now)) / 86400000);
+  if (diff === 0) return "Today";
+  if (diff === 1) return "Tomorrow";
+  if (diff === -1) return "Yesterday";
+  if (diff >= 2 && diff <= 6) return DAY_NAMES[d.getDay()].slice(0, 3);
+  return d.getFullYear() === now.getFullYear() ? `${d.getDate()} ${MON3(d)}` : `${d.getDate()} ${MON3(d)} ${d.getFullYear()}`;
+}
+/** "Tomorrow 9:00 AM" (ReminderTimeText.format). */
+export const reminderTimeText = (ms, now = Date.now(), h24 = undefined) => {
+  const d = new Date(ms);
+  return `${dayWord(d, new Date(now))} ${timeOf(d, h24)}`;
+};
+/** A planner day, from its "YYYY-MM-DD" key. */
+export const dayKeyWord = (iso, now = new Date()) => dayWord(fromIsoDay(iso), now);
+/** "All day", or "9:00 AM–10:00 AM" (TimeLabels.eventRange). */
+export function eventRangeText(startMs, endMs, allDay, h24 = undefined) {
+  if (allDay) return "All day";
+  const a = timeOf(new Date(startMs), h24);
+  return endMs == null ? a : `${a}\u2013${timeOf(new Date(endMs), h24)}`;
+}
+/** Planner time block: "9:00–10:30", "9:00", or "" (TimeLabels.taskBlock). */
+export function taskBlockText(start, end, h24 = undefined) {
+  if (start == null) return "";
+  const base = (m) => timeOf(new Date(2000, 0, 1, Math.floor(m / 60), m % 60), h24);
+  return end == null ? base(start) : `${base(start)}\u2013${base(end)}`;
+}
+/** The reminder time a "Remind me about…" pick gets when the entry has no reminder time (defaultTriggerMillis). */
+export function defaultTriggerMillis(now = Date.now()) {
+  const plusHour = new Date(now + 3600_000);
+  const roundedMinutes = (Math.floor(plusHour.getMinutes() / 5) + 1) * 5;
+  const base = new Date(plusHour.getFullYear(), plusHour.getMonth(), plusHour.getDate(), plusHour.getHours(), 0, 0, 0);
+  return base.getTime() + roundedMinutes * 60000;
+}
+/** Alarm label for a note: "Alarm passed · 9:00 AM", "Alarm · …", "Alarm off · …" (NotesScreen.alarmLabel). */
+export function noteAlarmLabel(note, now = Date.now(), h24 = undefined) {
+  const when = reminderTimeText(note.alarmAtMillis, now, h24);
+  if (note.alarmAtMillis <= now) return `Alarm passed  \u00b7  ${when}`;
+  return note.alarmEnabled ? `Alarm  \u00b7  ${when}` : `Alarm off  \u00b7  ${when}`;
+}
+
+/* ── Calendar entries → reminders, notes, tasks (Agenda) ────────── */
+/** Agenda.summaryLine: "Thu 3 Sep  ·  11:00 AM–12:00 PM  ·  LHC 101". */
+export function entrySummary(entry, h24 = undefined) {
+  const d = new Date(entry.start);
+  const day = `${DAY_NAMES[d.getDay()].slice(0, 3)} ${d.getDate()} ${MON3(d)}`;
+  const time = eventRangeText(entry.start, entry.end, entry.allDay, h24);
+  return [day, time, (entry.location || "").trim()].filter(Boolean).join("  \u00b7  ");
+}
+/** Agenda.noteBody: the summary, then the details, each after a blank line. */
+export function entryNoteBody(entry, h24 = undefined) {
+  const summary = entrySummary(entry, h24);
+  const details = (entry.details || "").trim();
+  return details ? `${summary}\n\n${details}\n\n` : `${summary}\n\n`;
+}
+/** Agenda.taskFields: the day, and a time block only for a timed entry that starts and ends the same day. */
+export function entryTaskFields(entry) {
+  const d = new Date(entry.start);
+  const dueDay = isoDay(d);
+  if (entry.allDay) return { dueDay, startMinute: null, endMinute: null };
+  const startMinute = d.getHours() * 60 + d.getMinutes();
+  let endMinute = null;
+  if (entry.end != null) {
+    const e = new Date(entry.end);
+    const m = e.getHours() * 60 + e.getMinutes();
+    if (sameDay(e, d) && m > startMinute) endMinute = m;
+  }
+  return { dueDay, startMinute, endMinute };
+}
+/** Entries of both calendars that fall on one local day ("YYYY-MM-DD"), all-day first. */
+export function entriesOnDay(entries, iso) {
+  const from = fromIsoDay(iso).getTime();
+  const to = new Date(fromIsoDay(iso).getFullYear(), fromIsoDay(iso).getMonth(), fromIsoDay(iso).getDate() + 1).getTime();
+  return entries.filter((e) => e.start < to && (e.end ?? e.start + 3600_000) > from).sort((a, b) => (b.allDay - a.allDay) || (a.start - b.start));
 }
