@@ -22,12 +22,6 @@ export async function fetchPyqYears() {
     if (m) years.push({ year: +m[1], url: new URL(attr(a, "href"), "http://intranet.iiserkol.ac.in").href });
   }
   if (years.length) return [...new Map(years.map((y) => [y.year, y])).values()].sort((a, b) => b.year - a.year);
-  // Fallback to static snapshot
-  try {
-    const r = await fetch("data/pyq.json", { cache: "no-store" });
-    const j = await r.json();
-    if (j.years) return j.years;
-  } catch {}
   return years;
 }
 
@@ -38,10 +32,6 @@ export async function fetchPyqYear(pyq) {
     try {
       const j = JSON.parse(pt);
       if (j.sections) return { year: pyq.year, sections: j.sections };
-      // pyq.json snapshot has years+sections for the sample year
-      const r = await fetch("data/pyq.json", { cache: "no-store" });
-      const jd = await r.json();
-      if (jd.sections) return { year: pyq.year, sections: jd.sections };
     } catch {}
   }
   const doc = parse(page.text);
@@ -152,9 +142,6 @@ export async function fetchNotices(url) {
     try {
       const j = JSON.parse(pt);
       if (j.notices) return j.notices;
-      const r = await fetch("data/notices.json", { cache: "no-store" });
-      const jd = await r.json();
-      if (jd.notices) return jd.notices;
     } catch {}
   }
   const doc = parse(page.text);
@@ -196,9 +183,6 @@ export async function fetchVoip() {
     try {
       const j = JSON.parse(pt);
       if (j.pilot) return { pilot: j.pilot, sections: j.sections || [] };
-      const r = await fetch("data/voip.json", { cache: "no-store" });
-      const jd = await r.json();
-      if (jd.pilot) return { pilot: jd.pilot, sections: jd.sections };
     } catch {}
   }
   const doc = parse(page.text);

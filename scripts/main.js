@@ -1,115 +1,103 @@
 /**
- * main.js — app bootstrap: routes, shell, theme.
- * No proxy, no backend. On campus the browser fetches campus directly.
+ * main.js — boot: theme → motion → shell → app lock → router.
+ * Pure frontend: no backend, no build step. Everything personal stays in
+ * this browser (localStorage + IndexedDB).
  */
 
-import { registerRoute, setOutlet, startRouter, onRouted } from "./core/router.js?v=9";
-import "./modules/theme-manager.js?v=9";
-import { icon } from "./components/icons.js?v=9";
+import { prefs } from "./core/prefs.js";
+import "./core/log.js";
+import { applyTheme } from "./core/theme.js";
+import { applyMotion } from "./core/motion.js";
+import { setStage, startRouter, onRouted, beforeRoute, nav } from "./core/router.js";
+import { registerRoutes, TABS } from "./app/routes.js";
+import { icon } from "./ui/icons.js";
+import { haptics } from "./ui/haptics.js";
+import { mountChatFab } from "./app/chatfab.js";
+import { guardWithAppLock } from "./core/applock.js";
+import { startNotifier } from "./core/notify.js";
 
-import { render as home } from "./pages/home.page.js?v=9";
-import { render as settings } from "./pages/settings.page.js?v=9";
-import { render as welearn } from "./pages/welearn.page.js?v=9";
-import { render as mess } from "./pages/mess.page.js?v=9";
-import { render as menu } from "./pages/menu.page.js?v=9";
-import { render as calendar } from "./pages/calendar.page.js?v=9";
-import { render as library } from "./pages/library.page.js?v=9";
-import { render as research } from "./pages/research.page.js?v=9";
-import { render as netmon } from "./pages/netmon.page.js?v=9";
-import { renderTcp, renderGrades } from "./pages/gateway.page.js?v=9";
-import { renderPyq, renderNotices, renderVoip } from "./pages/misc.page.js?v=9";
-import { render as chat } from "./pages/chat.page.js?v=9";
-import { render as about } from "./pages/about.page.js?v=9";
+applyTheme();
+applyMotion();
+prefs.on("themeMode", applyTheme);
+prefs.on("nekoCoat", applyTheme);
+prefs.on("customPrimaryHex", applyTheme);
 
-const ROUTES = [
-  { id: "home",     title: "Home",        icon: "home",     group: null,       render: home },
-  { id: "welearn",  title: "WeLearn",     icon: "book",     group: "Academics", render: welearn },
-  { id: "grades",   title: "Grades",      icon: "award",    group: "Academics", render: renderGrades },
-  { id: "pyq",      title: "PYQ",         icon: "archive",  group: "Academics", render: renderPyq },
-  { id: "calendar", title: "Calendar",    icon: "calendar", group: "Campus",    render: calendar },
-  { id: "mess",     title: "Mess",        icon: "receipt",  group: "Campus",    render: mess },
-  { id: "menu",     title: "Mess Menu",   icon: "utensils", group: "Campus",    render: menu },
-  { id: "notices",  title: "Notices",     icon: "megaphone",group: "Campus",    render: renderNotices },
-  { id: "library",  title: "Library",     icon: "library",  group: "Campus",    render: library },
-  { id: "research", title: "Research",    icon: "flask",    group: "Campus",    render: research },
-  { id: "voip",     title: "VoIP",        icon: "phone",    group: "Tools",     render: renderVoip },
-  { id: "tcp",      title: "TCP Counter", icon: "activity", group: "Tools",     render: renderTcp },
-  { id: "netmon",   title: "Network",     icon: "radar",    group: "Tools",     render: netmon },
-  { id: "chat",     title: "Campus Chat", icon: "chat",     group: "Tools",     render: chat },
-  { id: "settings", title: "Settings",    icon: "settings", group: null,        render: settings },
-  { id: "about",    title: "About",       icon: "info",     group: null,        render: about },
-];
+/* ── NavigationBar / NavigationRail ── */
+const navItem = (t) => `<a class="nav-item" href="${t.href}" data-tab="${t.id}" data-replace="false">
+  <span class="nav-item__ind">${icon(t.icon)}<span class="nav-item__badge"></span></span>
+  <span class="nav-item__label">${t.label}</span></a>`;
+document.getElementById("bottom-nav").innerHTML = TABS.map(navItem).join("");
+document.getElementById("rail").innerHTML =
+  `<a class="rail__brand" href="#/home" aria-label="IISERKonnect home">${brandMark()}</a>` +
+  TABS.map(navItem).join("") +
+  `<div class="rail__spacer"></div><div class="rail__foot">IISERKonnect<br>web</div>`;
 
-for (const r of ROUTES) registerRoute(r.id, r);
+function brandMark() {
+  return `<svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M8 12.5c0-3 3.4-5 7.5-5S23 9.5 23 12.5s-3.4 5-7.5 5h-.7L10.2 21v-4.2C8.8 15.9 8 14.3 8 12.5Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
+}
 
-/* ── shell nav ── */
-setOutlet(document.getElementById("outlet"));
+function setActiveTab(tab) {
+  document.querySelectorAll(".nav-item").forEach((a) => {
+    if (a.dataset.tab === tab) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+}
 
-const navLink = (r) =>
-  `<a class="side-link" data-nav="${r.id}" href="#/${r.id}">${icon(r.icon)}<span>${r.title}</span></a>`;
+/* Tapping the tab you are already on does nothing (MainActivity). */
+document.addEventListener("click", (e) => {
+  const a = e.target.closest(".nav-item");
+  if (!a) return;
+  haptics.tap();
+  const cur = nav.current();
+  if (cur && cur.route.isTab && cur.route.tab === a.dataset.tab) { e.preventDefault(); e.stopImmediatePropagation(); }
+}, true);
 
-const navHtml = () => {
-  const groups = [...new Set(ROUTES.map((r) => r.group).filter(Boolean))];
-  return (
-    navLink(ROUTES[0]) +
-    groups.map((g) =>
-      `<div class="side-group"><div class="side-group__label">${g}</div>${
-        ROUTES.filter((r) => r.group === g).map(navLink).join("")}</div>`).join("") +
-    `<div class="side-group"><div class="side-group__label">System</div>` +
-    [ROUTES.find((r) => r.id === "settings"), ROUTES.find((r) => r.id === "about")].map(navLink).join("") +
-    `</div>`
-  );
-};
-
-document.getElementById("sidebar").querySelector(".side-nav").innerHTML = navHtml();
-document.getElementById("drawer").innerHTML = navHtml();
-
-/* theme button icon */
-const themeBtn = document.getElementById("theme-btn");
-if (themeBtn) themeBtn.innerHTML = `${icon("settings")}<span>Theme</span>`;
-
-/* mobile drawer */
-const burger = document.getElementById("burger");
-const drawer = document.getElementById("drawer");
-burger.onclick = () => {
-  const open = drawer.classList.toggle("open");
-  burger.setAttribute("aria-expanded", String(open));
-  burger.innerHTML = open
-    ? `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
-    : `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
-};
-drawer.addEventListener("click", (e) => {
-  if (e.target.closest("a")) {
-    drawer.classList.remove("open");
-    burger.setAttribute("aria-expanded", "false");
-    burger.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+/* Top-bar back arrows anywhere: <button data-back> */
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-back]");
+  if (b) { e.preventDefault(); nav.back(b.dataset.back || "home"); return; }
+  const c = e.target.closest("[data-clear-search]");
+  if (c) {
+    const input = c.parentElement.querySelector("input");
+    input.value = "";
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.focus();
+    return;
   }
+  if (e.target.closest(".tile, .tile-chip, .tile-row, .btn, .fab")) haptics.tap();
+});
+/* keep the search clear button in sync */
+document.addEventListener("input", (e) => {
+  const s = e.target.closest && e.target.closest(".search");
+  if (s) s.classList.toggle("has-value", !!e.target.value);
 });
 
-/* breadcrumb + title */
-onRouted((id) => {
-  const r = ROUTES.find((x) => x.id === id);
-  const title = r ? r.title : "IISERKonnect";
-  const crumb = document.getElementById("topbar-breadcrumb");
-  if (crumb) {
-    crumb.innerHTML = r && r.group
-      ? `<span>${r.group}</span><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg><strong>${title}</strong>`
-      : `<strong>${title}</strong>`;
+/* ── routing ── */
+setStage(document.getElementById("stage"));
+registerRoutes();
+
+let startupJumpDone = false;
+beforeRoute((m, path) => {
+  const signedIn = prefs.get("signedIn") || prefs.get("loginSkipped");
+  if (!signedIn && m && m.route.pattern !== "login") return "login";
+  // "Open on the mess menu": once per visit, only from Home, only when signed in.
+  if (!startupJumpDone) {
+    startupJumpDone = true;
+    if (signedIn && prefs.get("jumpToMessMenu") && m && m.route.pattern === "home" && path === "home") {
+      history.replaceState({ depth: 0 }, "", "#/home");
+      setTimeout(() => nav.go("foodmenu"), 0);
+    }
   }
-  const t = document.getElementById("topbar-title");
-  if (t) t.textContent = title;
-  document.title = `${title} · IISERKonnect Web`;
+  return null;
 });
 
-/* cmd+k → focus search */
-document.addEventListener("keydown", (e) => {
-  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
-    e.preventDefault();
-    const input = document.querySelector("#outlet input[type='search'], #outlet input[placeholder*='Search' i], #lib-q, #voip-q");
-    if (input) input.focus();
-    else location.hash = "#/settings";
-  }
+onRouted((route) => {
+  setActiveTab(route.tab);
+  document.body.classList.toggle("no-nav", route.pattern === "login");
+  document.getElementById("bottom-nav").hidden = route.pattern === "login";
+  document.getElementById("rail").hidden = route.pattern === "login";
 });
 
-/* boot */
-startRouter();
+mountChatFab();
+startNotifier();
+guardWithAppLock().then(() => startRouter());

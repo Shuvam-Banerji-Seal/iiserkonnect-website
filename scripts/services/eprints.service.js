@@ -17,7 +17,6 @@ export async function latest() {
   const t = page.text.trim();
   if (t.startsWith("{")) {
     try { const j = JSON.parse(t); if (j.latest) return j.latest; } catch {}
-    try { const r = await fetch("data/research.json", { cache: "no-store" }); const j = await r.json(); if (j.latest) return j.latest; } catch {}
   }
   const xml = page.text;
   const papers = [];
@@ -31,8 +30,6 @@ export async function latest() {
     papers.push({ id, title, year, url: `${C.EPRINTS}/${id}/` });
   }
   const parsed = papers.filter((p, i, a) => a.findIndex((x) => x.id === p.id) === i);
-  if (parsed.length) return parsed;
-  try { const r = await fetch("data/research.json", { cache: "no-store" }); const j = await r.json(); if (j.latest) return j.latest; } catch {}
   return parsed;
 }
 

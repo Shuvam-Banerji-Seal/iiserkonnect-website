@@ -1,18 +1,23 @@
 /**
  * core/store.js — tiny reactive key-value store over localStorage.
  * store.get(k, d) / store.set(k, v) / store.subscribe(k, fn)
+ *
+ * Falls back to memory when storage is unavailable (private windows, blocked
+ * site data), so every screen still works for the length of the visit.
  */
 
 const KEY = "iiserk-web";
 const listeners = new Map();
+let memory = {};
 
 function readAll() {
   try { return JSON.parse(localStorage.getItem(KEY) || "{}"); }
-  catch { return {}; }
+  catch { return memory; }
 }
 
 function writeAll(obj) {
-  localStorage.setItem(KEY, JSON.stringify(obj));
+  memory = obj;
+  try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch { /* memory only */ }
 }
 
 export const store = {
@@ -22,7 +27,8 @@ export const store = {
   },
   set(k, v) {
     const all = readAll();
-    all[k] = v;
+    if (v === null || v === undefined) delete all[k];
+    else all[k] = v;
     writeAll(all);
     (listeners.get(k) || []).forEach((fn) => { try { fn(v); } catch {} });
   },
@@ -34,4 +40,7 @@ export const store = {
       arr.splice(arr.indexOf(fn), 1);
     };
   },
+  /** Everything, for export / reset. */
+  dump() { return readAll(); },
+  clearAll() { writeAll({}); },
 };

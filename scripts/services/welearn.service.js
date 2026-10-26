@@ -3,7 +3,7 @@
  * AttendanceParser. All selectors mirror the Kotlin originals.
  */
 
-import { get, postForm, C, fileUrl } from "../core/net.js";
+import { get, postForm, C, fileUrl, CampusUnavailable } from "../core/net.js";
 import { ensureWelearn } from "../core/session.js";
 import { parse, q, qa, text, attr, absUrl } from "../core/html.js";
 
@@ -39,14 +39,8 @@ export async function fetchCourses() {
       .map((c, i, arr) => ({ ...c, title: c.title || arr.find(x => x.id === c.id)?.title }))
       .filter((c, i, arr) => arr.findIndex((x) => x.id === c.id) === i);
     if (courses.length) return courses;
-  } catch {}
-  // Fallback to static snapshot (works off-campus, no login needed)
-  try {
-    const r = await fetch("data/welearn.json", { cache: "no-store" });
-    const j = await r.json();
-    if (j.courses) return j.courses;
-  } catch {}
-  throw new Error("Could not load courses — try on campus or open WeLearn directly");
+  } catch (e) { if (e && e.name === "CampusUnavailable") throw e; }
+  throw new CampusUnavailable("login", C.WELEARN_MY);
 }
 
 const regexId = (url) => (/[?&]id=(\d+)/.exec(url) || [])[1] || null;

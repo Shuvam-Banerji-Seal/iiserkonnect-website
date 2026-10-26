@@ -1,0 +1,11 @@
+{
+  "_note": "Made-up sample campus events for the web demo. Speakers and venues are fictional.",
+  "events": [
+    { "id": "e1", "title": "Colloquium", "dayOffset": 0, "start": "17:00", "end": "18:00", "venue": "LH-1", "category": "seminar", "description": "Departmental colloquium (sample event)." },
+    { "id": "e2", "title": "Astronomy Club: Night Sky Watch", "dayOffset": 1, "start": "19:30", "end": "21:00", "venue": "Rooftop, Library", "category": "club", "description": "Bring a jacket. Telescopes provided (sample event)." },
+    { "id": "e3", "title": "Career Talk: Research Internships", "dayOffset": 2, "start": "16:00", "end": "17:00", "venue": "Seminar Hall", "category": "talk", "description": "How to find and apply for summer internships (sample event)." },
+    { "id": "e4", "title": "Inter-hostel Football", "dayOffset": 3, "start": "16:30", "end": "18:30", "venue": "Main Ground", "category": "sports", "description": "Semi-finals (sample event)." },
+    { "id": "e5", "title": "Movie Night", "dayOffset": 4, "start": "21:00", "end": "23:30", "venue": "LH-2", "category": "club", "description": "Film club screening (sample event)." },
+    { "id": "e6", "title": "Blood Donation Camp", "dayOffset": 5, "start": "10:00", "end": "15:00", "venue": "Health Centre", "category": "social", "description": "Organised with the health centre (sample event)." }
+  ]
+}

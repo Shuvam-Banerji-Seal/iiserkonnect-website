@@ -1,0 +1,9 @@
+{
+  "_note": "Made-up sample assignments for the web demo.",
+  "assignments": [
+    { "id": "a1", "course": "PH3101", "courseName": "Classical Mechanics", "title": "Problem Set 4", "dueInHours": 30, "submitted": false },
+    { "id": "a2", "course": "CH2201", "courseName": "Physical Chemistry", "title": "Lab Report: Calorimetry", "dueInHours": 96, "submitted": false },
+    { "id": "a3", "course": "MA2104", "courseName": "Linear Algebra", "title": "Quiz 2 (online)", "dueInHours": 220, "submitted": false },
+    { "id": "a4", "course": "BI1102", "courseName": "Cell Biology", "title": "Essay: Membrane Transport", "dueInHours": -20, "submitted": true }
+  ]
+}

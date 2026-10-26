@@ -1,0 +1,162 @@
+/* shell.css — the app frame: NavigationBar (phone) / NavigationRail (desktop),
+   the screen stage, AppTopBar, FAB placement. */
+
+.app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--background);
+}
+
+.stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* each route is one .screen; during a transition two overlap */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  will-change: transform, opacity;
+}
+.screen--leaving { pointer-events: none; z-index: 0; }
+.screen:not(.screen--leaving) { z-index: 1; }
+.screen__scroll {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-padding-top: 8px;
+}
+.screen__body {
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 8px 16px 32px;
+}
+.screen__body--wide { max-width: var(--content-wide); }
+.screen__body--flush { padding: 0; max-width: none; }
+
+/* ── AppTopBar ─────────────────────────────────────────────────── */
+.topbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: var(--bar-h);
+  min-height: var(--bar-h);
+  padding: 0 4px;
+  background: color-mix(in srgb, var(--primary-container) 30%, var(--background));
+  color: var(--on-surface);
+  position: relative;
+  z-index: 2;
+}
+.topbar--root { padding-left: 16px; }
+.topbar__nav { width: 44px; height: 44px; }
+.topbar__titles { flex: 1 1 auto; min-width: 0; padding-left: 4px; display: flex; flex-direction: column; justify-content: center; }
+.topbar__title {
+  font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; outline: none;
+}
+.topbar__subtitle { font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: .5px; color: var(--on-surface-variant); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.topbar__actions { display: flex; align-items: center; gap: 0; flex: none; }
+
+/* ── NavigationBar (phone) ─────────────────────────────────────── */
+.bottom-nav {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: var(--nav-h);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--surface-container);
+  position: relative;
+  z-index: 5;
+}
+.nav-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  color: var(--on-surface-variant);
+  font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .5px;
+  text-decoration: none !important;
+  position: relative;
+  min-width: 0;
+}
+.nav-item__ind {
+  position: relative;
+  display: grid; place-items: center;
+  width: 64px; height: 32px; border-radius: 16px;
+  transition: background-color var(--motion-dur) var(--motion-ease);
+}
+.nav-item__ind::before { /* state layer */
+  content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--on-surface); opacity: 0;
+  transition: opacity 120ms;
+}
+.nav-item:hover .nav-item__ind::before { opacity: .08; }
+.nav-item:active .nav-item__ind::before { opacity: .12; }
+.nav-item[aria-current="page"] { color: var(--on-surface); font-weight: 600; }
+.nav-item[aria-current="page"] .nav-item__ind { background: var(--secondary-container); color: var(--on-secondary-container); }
+.nav-item .badge { position: absolute; top: -2px; left: calc(50% + 8px); }
+.nav-item__label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 0 2px; }
+
+/* ── NavigationRail (desktop) ──────────────────────────────────── */
+.rail { display: none; }
+@media (min-width: 840px) {
+  .app { flex-direction: row; }
+  .bottom-nav { display: none; }
+  .rail {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    width: var(--rail-w); flex: none;
+    padding: 16px 0;
+    background: var(--surface-container);
+    position: relative; z-index: 5;
+    overflow-y: auto;
+  }
+  .rail__brand { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: var(--primary-container); color: var(--on-primary-container); margin-bottom: 12px; }
+  .rail .nav-item { width: 80px; padding: 4px 0; }
+  .rail .nav-item__ind { width: 56px; }
+  .rail__spacer { flex: 1; }
+  .rail__foot { font-size: 10px; line-height: 14px; color: var(--on-surface-variant); text-align: center; padding: 0 6px; }
+  .screen__body { padding-left: 24px; padding-right: 24px; }
+  .topbar { padding-left: 12px; padding-right: 12px; }
+}
+
+/* ── FAB slot (bottom-end of the screen) ───────────────────────── */
+.fab-slot {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 3;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+}
+@media (min-width: 840px) { .fab-slot { right: max(24px, calc((100% - var(--content-max)) / 2 - 72px)); } }
+
+/* the movable Campus Chat button (MovableChatFab) */
+.chat-fab {
+  position: fixed; z-index: 20;
+  width: 56px; height: 56px; border-radius: 16px;
+  display: grid; place-items: center;
+  background: var(--tertiary-container); color: var(--on-tertiary-container);
+  box-shadow: var(--elev-3);
+  touch-action: none; user-select: none;
+}
+.chat-fab .badge { position: absolute; top: -4px; right: -4px; }
+
+/* page entry for a cold load */
+.boot { position: fixed; inset: 0; display: grid; place-items: center; background: var(--background); color: var(--on-surface-variant); }
+
+/* app lock overlay */
+.lock {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+  padding: 24px; text-align: center;
+  background: var(--background);
+}

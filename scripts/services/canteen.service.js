@@ -3,7 +3,7 @@
  * parser + MessRepository.allocateItemCosts.
  */
 
-import { get, postForm, C } from "../core/net.js";
+import { get, postForm, C, CampusUnavailable } from "../core/net.js";
 import { ensureCanteen } from "../core/session.js";
 import { parse, q, qa, text } from "../core/html.js";
 import { regex1 } from "../core/html.js";
@@ -34,14 +34,8 @@ export async function fetchTransactions(full = false) {
         }
       }
     }
-  } catch {}
-  // Fallback to static snapshot (works off-campus, no login)
-  try {
-    const r = await fetch("data/mess.json", { cache: "no-store" });
-    const j = await r.json();
-    if (j.transactions) return j.transactions;
-  } catch {}
-  throw new Error("Could not load transactions — try on campus or open canteen ERP directly");
+  } catch (e) { if (e && e.name === "CampusUnavailable") throw e; }
+  throw new CampusUnavailable("login", C.CANTEEN_MINI);
 }
 
 /** ERP userid = employee number, e.g. sbs21ms999 → 21MS999 (port of extractEmployeeNumber). */

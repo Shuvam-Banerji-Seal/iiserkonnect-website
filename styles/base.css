@@ -1,0 +1,118 @@
+/* base.css — fonts, reset, the app's Material 3 type scale (ui/theme/Type.kt) */
+
+@font-face {
+  font-family: "Roboto Flex Local";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../assets/fonts/roboto-latin-wght-normal.woff2") format("woff2-variations"),
+       url("../assets/fonts/roboto-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Roboto Flex Local";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../assets/fonts/roboto-latin-ext-wght-normal.woff2") format("woff2-variations"),
+       url("../assets/fonts/roboto-latin-ext-wght-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  --font: "Roboto Flex Local", Roboto, "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+  /* Token.kt */
+  --sp-xxs: 2px; --sp-xs: 4px; --sp-sm: 8px; --sp-md: 12px; --sp-lg: 16px; --sp-xl: 24px; --sp-xxl: 32px; --sp-xxxl: 48px;
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 20px; --r-full: 999px;
+  /* Prism shapes: top-start & bottom-end rounded, the other two barely */
+  --prism-card: 16px 8px 16px 8px;
+  --prism-tile: 12px 8px 12px 8px;
+  --prism-dialog: 20px 12px 20px 12px;
+  --tile-h: 100px;
+
+  --elev-1: 0 1px 2px rgb(0 0 0 / .30), 0 1px 3px 1px rgb(0 0 0 / .15);
+  --elev-2: 0 1px 2px rgb(0 0 0 / .30), 0 2px 6px 2px rgb(0 0 0 / .15);
+  --elev-3: 0 4px 8px 3px rgb(0 0 0 / .15), 0 1px 3px rgb(0 0 0 / .30);
+
+  --motion-dur: 260ms;
+  --motion-ease: cubic-bezier(.2, .9, .25, 1.04);
+  --motion-press: .96;
+
+  --nav-h: 80px;
+  --rail-w: 88px;
+  --bar-h: 44px;
+  --content-max: 760px;
+  --content-wide: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: .25px;
+  color: var(--on-background);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+img, svg, video, canvas { display: block; max-width: 100%; }
+svg.ic { flex: none; display: inline-block; vertical-align: middle; }
+button, input, textarea, select { font: inherit; color: inherit; letter-spacing: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+button:disabled { cursor: default; }
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+p { margin: 0; }
+h1, h2, h3, h4 { margin: 0; font-weight: inherit; font-size: inherit; line-height: inherit; }
+ul, ol { margin: 0; padding: 0; }
+table { border-collapse: collapse; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 4px; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Material 3 type scale, Type.kt values */
+.t-display-l { font-size: 36px; line-height: 44px; font-weight: 700; letter-spacing: -.25px; }
+.t-display-m { font-size: 28px; line-height: 36px; font-weight: 700; letter-spacing: 0; }
+.t-headline-l { font-size: 24px; line-height: 32px; font-weight: 700; letter-spacing: 0; }
+.t-headline-m { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: 0; }
+.t-headline-s { font-size: 24px; line-height: 32px; font-weight: 400; letter-spacing: 0; }
+.t-title-l { font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: 0; }
+.t-title-m { font-size: 16px; line-height: 24px; font-weight: 500; letter-spacing: .15px; }
+.t-title-s { font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px; }
+.t-body-l { font-size: 16px; line-height: 24px; font-weight: 400; letter-spacing: .5px; }
+.t-body-m { font-size: 14px; line-height: 20px; font-weight: 400; letter-spacing: .25px; }
+.t-body-s { font-size: 12px; line-height: 16px; font-weight: 400; letter-spacing: .4px; }
+.t-label-l { font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: .1px; }
+.t-label-m { font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .5px; }
+.t-label-s { font-size: 10px; line-height: 14px; font-weight: 500; letter-spacing: .5px; }
+.w-bold { font-weight: 700; } .w-semi { font-weight: 600; } .w-med { font-weight: 500; }
+.c-muted { color: var(--on-surface-variant); }
+.c-primary { color: var(--primary); }
+.c-error { color: var(--error); }
+.c-good { color: var(--status-good); }
+.c-warn { color: var(--status-warn); }
+.c-bad { color: var(--status-bad); }
+.mono { font-family: var(--mono); }
+.center { text-align: center; }
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* layout helpers */
+.stack { display: flex; flex-direction: column; gap: var(--gap, 16px); }
+.stack-sm { display: flex; flex-direction: column; gap: 8px; }
+.stack-xs { display: flex; flex-direction: column; gap: 4px; }
+.row { display: flex; align-items: center; gap: var(--gap, 8px); }
+.row-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.row-between { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.grow { flex: 1 1 auto; min-width: 0; }
+.mt-sm { margin-top: 8px; } .mt-md { margin-top: 12px; } .mt-lg { margin-top: 16px; } .mt-xl { margin-top: 24px; }
+.mb-sm { margin-bottom: 8px; } .mb-md { margin-bottom: 12px; } .mb-lg { margin-bottom: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.hr { height: 1px; background: color-mix(in srgb, var(--outline-variant) 60%, transparent); border: 0; margin: 8px 0; }

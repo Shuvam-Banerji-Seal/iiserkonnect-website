@@ -21,9 +21,6 @@ export async function fetchAcademicWeek(url) {
     try {
       const j = JSON.parse(pt);
       if (j.academic) return j.academic;
-      const r = await fetch("data/calendar.json", { cache: "no-store" });
-      const jd = await r.json();
-      if (jd.academic) return jd.academic;
     } catch {}
   }
   const doc = parse(page.text, url);
@@ -87,9 +84,6 @@ export async function fetchEventsWeek(url = C.EVENTS_CAL) {
     try {
       const j = JSON.parse(pt2);
       if (j.events) return j.events;
-      const r = await fetch("data/calendar.json", { cache: "no-store" });
-      const jd = await r.json();
-      if (jd.events) return jd.events;
     } catch {}
   }
   const doc = parse(page.text, url);

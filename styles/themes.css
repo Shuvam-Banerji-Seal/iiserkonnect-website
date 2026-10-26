@@ -1,0 +1,80 @@
+/* themes.css — what the special themes change beyond colour:
+   Liquid Glass (frosted panes over a lit backdrop), Neko (cat ears, rounder
+   shapes, paw marks) and E-Ink (hairline edges, no shadows, no motion). */
+
+/* ── Liquid Glass (Theme.kt LiquidGlassBackdrop + liquidGlassPane) ── */
+.is-liquid body, .is-liquid .screen, .is-liquid .app {
+  background:
+    radial-gradient(circle 650px at 180px 60px, rgb(160 224 255 / .33), rgb(128 192 224 / .13) 45%, transparent 70%),
+    radial-gradient(circle 900px at 90% 100%, rgb(192 208 255 / .16), rgb(160 176 224 / .06) 45%, transparent 70%),
+    radial-gradient(circle 700px at 50% 45%, rgb(255 224 176 / .08), rgb(255 208 144 / .03) 45%, transparent 70%),
+    linear-gradient(160deg, rgb(255 255 255 / .06), transparent 30%, rgb(255 255 255 / .03) 60%, transparent 80%),
+    linear-gradient(180deg, #0B1420, #0F1D30 35%, #0A1220 70%, #0D1828);
+  background-attachment: fixed;
+}
+.is-liquid .topbar { background: transparent; }
+.is-liquid .bottom-nav {
+  margin: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+  border-radius: 24px; height: 72px;
+}
+.is-liquid .rail, .is-liquid .bottom-nav { background: rgb(26 38 56 / .44); }
+.is-liquid :is(.glass-low, .glass-med, .glass-high, .bottom-nav, .rail) {
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgb(217 229 255 / .28);
+  border-bottom-color: rgb(217 229 255 / .12);
+  background-image:
+    radial-gradient(circle at 62% 58%, rgb(255 255 255 / .20), rgb(255 255 255 / .07) 30%, transparent 55%),
+    linear-gradient(160deg, transparent 0 4%, rgb(255 255 255 / .13) 8%, rgb(255 255 255 / .05) 14%, transparent 22%),
+    radial-gradient(circle at 50% 50%, transparent 55%, rgb(255 255 255 / .06) 80%, rgb(255 255 255 / .10));
+  box-shadow: none;
+}
+.is-liquid .glass-low { background-color: rgb(26 38 56 / .16); }
+.is-liquid .glass-med { background-color: rgb(26 38 56 / .28); }
+.is-liquid .glass-high { background-color: rgb(26 38 56 / .44); }
+.is-liquid .settings-group__card { background-color: rgb(26 38 56 / .28); }
+.is-liquid .tile.tile--accent { background-color: var(--tile-bg); }
+.is-liquid .tile { box-shadow: none; }
+
+/* ── Neko: ears on tiles and cards, rounder everything ─────────── */
+.is-neko { --prism-card: 26px; --prism-tile: 22px; --prism-dialog: 30px; }
+.is-neko .neko-ears { position: relative; margin-top: 14px; }
+.is-neko .neko-ears::before, .is-neko .neko-ears::after {
+  content: ""; position: absolute; top: -13px; width: 15%; height: 14px;
+  background: inherit; background-color: var(--ear-bg, inherit);
+  clip-path: polygon(0 100%, 34% 30%, 46% 4%, 50% 0, 54% 4%, 66% 30%, 100% 100%);
+  pointer-events: none;
+}
+.is-neko .neko-ears::before { left: 10%; }
+.is-neko .neko-ears::after { right: 10%; }
+.is-neko .tile.neko-ears { height: calc(var(--tile-h) - 14px); }
+.is-neko .settings-group__card { overflow: visible; }
+.is-neko .settings-group__card.neko-ears { margin-top: 26px; }
+.is-neko .paw {
+  position: absolute; right: 3px; bottom: 2px; width: 22px; height: 22px;
+  color: var(--primary); opacity: .16; pointer-events: none;
+}
+.is-neko .tile { box-shadow: var(--elev-2); }
+.is-neko .icon-tile, .is-neko .tile__icon { border-radius: 50%; }
+.is-neko .btn { border-radius: 22px; }
+.is-neko .nav-item__ind { border-radius: 16px 16px 12px 12px; }
+
+/* ── E-Ink: hairline edges instead of fills, no shadows ────────── */
+.is-eink * { box-shadow: none !important; text-shadow: none !important; }
+.is-eink :is(.tile, .tile-row, .tile-chip, .home-empty, .card--high, .card--highest, .card--low, .fab, .chat-fab) { border: 1px solid var(--outline); }
+.is-eink :is(.tile, .tile-row, .tile-chip) { background: var(--surface) !important; }
+.is-eink .tile__icon { background: var(--surface-container-highest) !important; }
+.is-eink .topbar { background: var(--background); }
+.is-eink .settings-group__card { background: transparent; }
+.is-eink .card--variant { background: transparent; }
+.is-eink .icon-tile { background: transparent; color: var(--on-surface); }
+.is-eink .icon-tile--error { background: var(--on-surface); color: var(--surface); }
+.is-eink .pill--secondary, .is-eink .pill--primary { background: transparent; }
+.is-eink .bottom-nav, .is-eink .rail { background: var(--background); border-top: 1px solid var(--outline); }
+.is-eink .rail { border-top: 0; border-right: 1px solid var(--outline); }
+.is-eink .nav-item[aria-current="page"] .nav-item__ind { background: var(--on-surface); color: var(--surface); }
+.is-eink .search { border-color: var(--on-surface); }
+.is-eink .note--warn, .is-eink .error-card { background: var(--on-surface); color: var(--surface); }
+.is-eink .note--warn .ic, .is-eink .error-card .ic { color: var(--surface); }
+.is-eink .avatar { border: 1px solid var(--outline); background: var(--surface); color: var(--on-surface); }
+.is-eink .dash-card { background: transparent; border: 1px solid var(--outline); }

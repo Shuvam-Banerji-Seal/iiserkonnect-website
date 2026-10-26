@@ -3,7 +3,7 @@
  * two-step session POST) + grades (WeLearnMyProfileService port).
  */
 
-import { get, postForm, C } from "../core/net.js";
+import { get, postForm, C, CampusUnavailable } from "../core/net.js";
 import { parse, q, qa, text } from "../core/html.js";
 import { ensureGrades, gradesLoginPage, gradesSubmit } from "../core/session.js";
 
@@ -114,14 +114,8 @@ export async function fetchGrades() {
       }
       if (sems.length) return sems;
     }
-  } catch {}
-  // Fallback to static snapshot (works off-campus, no login)
-  try {
-    const r = await fetch("data/welearn.json", { cache: "no-store" });
-    const j = await r.json();
-    if (j.grades) return j.grades;
-  } catch {}
-  return [];
+  } catch (e) { if (e && e.name === "CampusUnavailable") throw e; }
+  throw new CampusUnavailable("login", C.WELEARN_MYPROFILE_GRADES);
 }
 
 function parseGradeCard(html, fallbackSem) {
