@@ -1,0 +1,13 @@
+{
+  "name": "iiserkonnect-web",
+  "private": true,
+  "description": "IISERKonnect in the browser. Static site; npm is only used to run the smoke test.",
+  "type": "module",
+  "scripts": {
+    "serve": "python3 serve.py 8123",
+    "test": "node tests/smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.64.1"
+  }
+}
