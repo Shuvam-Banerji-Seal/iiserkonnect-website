@@ -65,7 +65,7 @@ export function pickCalendarEntry({ title = "Remind me about…" } = {}) {
         const time = eventRangeText(e.start, e.end, e.allDay);
         const sub = [time, SOURCE(e), (e.location || "").trim()].filter(Boolean).join("  ·  ");
         return `<button type="button" class="pick__item" data-pick="${idx}">
-          <span class="pick__icon pick__icon--${e.source === "CAMPUS" ? "campus" : "mine"}">${icon("calendar_month", { size: 22 })}</span>
+          <span class="pick__icon pick__icon--${e.source === "CAMPUS" ? "campus" : "mine"}">${icon(e.source === "CAMPUS" ? "event" : "calendar_month", { size: 22 })}</span>
           <span class="pick__text"><span class="pick__title">${esc(e.title)}</span><span class="pick__sub">${esc(sub)}</span></span>
         </button>`;
       }).join("")}`).join("");

@@ -160,7 +160,7 @@
 
 /* ── Calendar picker ───────────────────────────────────────────── */
 .pick { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.pick__filters { justify-content: center; margin-bottom: 8px; }
+.pick__filters { justify-content: flex-start; margin-bottom: 8px; }
 .pick__sample { margin-bottom: 8px; }
 .pick__sample:empty, .pick__sample[hidden] { display: none; }
 .pick__list { min-height: 120px; }
@@ -169,9 +169,9 @@
   width: 100%; display: flex; align-items: center; gap: 14px; padding: 10px 4px; border: 0; background: none;
   color: inherit; font: inherit; text-align: left; cursor: pointer; border-radius: var(--r-md);
 }
-.pick__icon { flex: none; width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
-.pick__icon--campus { color: var(--tertiary); background: var(--tertiary-container); }
-.pick__icon--mine { color: var(--primary); background: var(--primary-container); }
+.pick__icon { flex: none; width: 28px; height: 36px; display: inline-flex; align-items: center; justify-content: flex-start; }
+.pick__icon--campus { color: var(--tertiary); }
+.pick__icon--mine { color: var(--primary); }
 .pick__text { display: flex; flex-direction: column; min-width: 0; }
 .pick__title { font-size: 16px; font-weight: 500; line-height: 22px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pick__sub { font-size: 13px; color: var(--on-surface-variant); line-height: 18px; }

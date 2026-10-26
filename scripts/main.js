@@ -115,4 +115,7 @@ function firstOpenOverlay() {
 mountChatFab();
 startNotifier();
 firstOpenOverlay();
-guardWithAppLock().then(() => startRouter());
+guardWithAppLock().then(() => startRouter()).then(() => {
+  // unread chat messages kept from an earlier visit light the Chat tab badge
+  import("./chat/engine.js").then((c) => c.updateBadge()).catch(() => {});
+});

@@ -64,7 +64,7 @@
 .chat-text { white-space: pre-wrap; }
 .chat-meta { margin-top: 2px; font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .5px; opacity: .78; display: flex; align-items: center; gap: 4px; }
 .chat-ticks { letter-spacing: -1px; display: inline-flex; align-items: center; }
-.chat-ticks.is-read { color: var(--inverse-primary); opacity: 1; }
+.chat-ticks.is-read { font-weight: 700; }
 .chat-md-body p, .chat-md-body li { margin: 0; }
 .chat-md-body ul, .chat-md-body ol { padding-left: 20px; }
 .chat-md-body code { font-family: var(--mono); font-size: 13px; padding: 1px 4px; border-radius: 4px; background: color-mix(in srgb, currentColor 12%, transparent); }
