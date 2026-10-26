@@ -142,7 +142,7 @@ export async function render(el) {
       actions: iconBtn("search", "Search notes", { "data-act": "search" }) + iconBtn("calendar_month", "Note for a calendar event", { "data-act": "from-cal" }),
     }),
     body: `<div class="stack">
-      <div data-search-host>${searching ? searchField({ id: "notes-q", placeholder: "Search notes", value: query }) : ""}</div>
+      <div data-search-host>${searching ? searchField({ id: "notes-q", placeholder: "Search notes", value: query, pill: false }) : ""}</div>
       <div data-list>${listHtml(await notes.all())}</div>
     </div>`,
     fab: fab("add", "New note", { "data-act": "new" }),
@@ -219,7 +219,7 @@ export async function render(el) {
   on(el, "click", "[data-act=search]", async () => {
     searching = !searching;
     query = "";
-    el.querySelector("[data-search-host]").innerHTML = searching ? searchField({ id: "notes-q", placeholder: "Search notes", value: "" }) : "";
+    el.querySelector("[data-search-host]").innerHTML = searching ? searchField({ id: "notes-q", placeholder: "Search notes", value: "", pill: false }) : "";
     if (searching) el.querySelector("#notes-q")?.focus();
     await paintList();
   });

@@ -326,6 +326,10 @@ select.select option { background: var(--surface-container); color: var(--on-sur
 .note--info p { color: var(--on-surface-variant); }
 .note--tertiary { background: var(--tertiary-container); color: var(--on-tertiary-container); }
 .note--primary { background: var(--primary-container); color: var(--on-primary-container); }
+.sample-banner { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; margin-bottom: 4px; border-radius: var(--r-md); background: var(--surface-container-high); color: var(--on-surface-variant); font-size: 12px; line-height: 16px; letter-spacing: .3px; }
+.sample-banner .ic { flex: none; color: var(--primary); margin-top: -1px; }
+.sample-banner strong { color: var(--on-surface); font-weight: 600; }
+.is-eink .sample-banner { background: transparent; border: 1px solid var(--outline); }
 
 .empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 48px 24px; }
 .empty__icon { color: color-mix(in srgb, var(--primary) 60%, transparent); margin-bottom: 8px; }

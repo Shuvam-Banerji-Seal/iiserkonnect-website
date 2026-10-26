@@ -116,3 +116,5 @@ table { border-collapse: collapse; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
 .hr { height: 1px; background: color-mix(in srgb, var(--outline-variant) 60%, transparent); border: 0; margin: 8px 0; }
+/* headings focused by the router for screen readers do not need a ring */
+h1[tabindex="-1"]:focus, .topbar__title:focus { outline: none; }

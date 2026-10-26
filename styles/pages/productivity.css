@@ -185,3 +185,6 @@
 @media (min-width: 840px) {
   .timer-ring { width: 320px; }
 }
+.prod-alarm__status { margin-top: 6px; font-size: 13px; line-height: 18px; color: var(--on-surface); }
+.alarm-block .note .btn--text { margin-left: -12px; align-self: flex-start; }
+.alarm-block:empty { display: none; }

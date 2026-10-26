@@ -12,6 +12,7 @@
 
 import { esc } from "./dom.js";
 import { icon } from "./icons.js";
+import { prefs } from "../core/prefs.js";
 
 export { icon, esc };
 
@@ -214,12 +215,12 @@ export function browserNote({ title, body, icon: ic = "info", tone = "info", ext
 }
 
 /** Banner shown whenever a campus screen is drawing from sample data. */
-export const sampleBanner = (what = "campus data") => browserNote({
-  icon: "cloud_off",
-  tone: "warn",
-  title: "Showing sample data",
-  body: `This browser could not reach ${what} (campus servers do not answer requests from other websites), so these are made-up example records — not yours. On the Android app this screen shows your live data.`,
-});
+export const sampleBanner = (what = "campus data") => {
+  const why = prefs.get("dataSource") === "sample"
+    ? `"Sample data only" is on (Settings → Advanced), so these are made-up examples — not your records.`
+    : `${esc(what.charAt(0).toUpperCase() + what.slice(1))} can't be reached from this browser (campus servers don't answer other websites), so these are made-up examples — not your records.`;
+  return `<div class="sample-banner" role="note">${icon("cloud_off", { size: 18 })}<p><strong>Sample data.</strong> ${why}</p></div>`;
+};
 
 export const badge = (n) => (n ? `<span class="badge">${n > 99 ? "99+" : esc(n)}</span>` : "");
 export const pill = (text, tone = "secondary") => `<span class="pill pill--${tone}">${esc(text)}</span>`;

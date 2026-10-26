@@ -31,26 +31,17 @@ export const draft = {
  */
 export function alarmBlock({ note = true } = {}) {
   const perm = permission();
-  let out = "";
-  if (note) out += browserNote({ title: "About alarms in a browser", body: ALARM_NOTE, icon: "alarm", tone: "info" });
-  if (perm === "granted") return `<div class="alarm-block" data-alarm-block data-note="${note ? 1 : 0}">${out}</div>`;
-  if (!notificationsSupported()) {
-    out += browserNote({
-      title: "Notifications are not supported here",
-      body: "This browser has no notifications API, so alarms can only show as a message inside the open page.",
-      icon: "notifications_off", tone: "warn",
-    });
-  } else {
-    const text = perm === "denied"
-      ? "Notifications are blocked for this site, so alarms cannot pop up on your screen. Allow them in the browser's site settings."
-      : "Notifications are off, so alarms cannot pop up on your screen.";
-    out += `<div class="prod-card prod-card--alarm" role="group" aria-label="Notifications">
-      <span class="prod-card__icon">${icon("notification_add")}</span>
-      <div class="prod-card__text"><p>${esc(text)}</p></div>
-      ${button("Allow notifications", { variant: "tonal", icon: "notifications", small: true, attrs: { "data-act": "allow-notify" } })}
-    </div>`;
-  }
-  return `<div class="alarm-block" data-alarm-block data-note="${note ? 1 : 0}">${out}</div>`;
+  // One compact card: the honest alarm note, plus what notifications can do here.
+  let status = "";
+  if (!notificationsSupported()) status = "This browser has no notifications, so alarms show only as a message inside the open page.";
+  else if (perm === "denied") status = "Notifications are blocked for this site, so alarms cannot pop up on your screen. Allow them in the browser's site settings (the icon left of the address).";
+  else if (perm !== "granted") status = "Notifications are off, so alarms cannot pop up on your screen yet.";
+  if (!note && !status) return `<div class="alarm-block" data-alarm-block data-note="0"></div>`;
+  const extra = status
+    ? `<p class="prod-alarm__status">${esc(status)}</p>${perm === "default" ? button("Allow notifications", { variant: "text", icon: "notifications", small: true, attrs: { "data-act": "allow-notify" } }) : ""}`
+    : "";
+  const body = note ? ALARM_NOTE : "";
+  return `<div class="alarm-block" data-alarm-block data-note="${note ? 1 : 0}">${browserNote({ title: note ? "About alarms in a browser" : "Notifications", body, icon: "alarm", tone: "info", extra })}</div>`;
 }
 
 /** Wire the "Allow notifications" button under `root`; redraws every alarm block below it. */

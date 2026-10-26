@@ -20,7 +20,9 @@
 .profile-card__avatar > span, .profile-card__avatar > img {
   width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
   display: grid; place-items: center;
-  background: var(--primary-container); color: var(--on-primary-container);
+  /* layered on the page colour: some themes' containers are translucent */
+  background: linear-gradient(var(--primary-container), var(--primary-container)), var(--background);
+  color: var(--on-primary-container);
   font-size: 36px; line-height: 44px; font-weight: 700;
 }
 .profile-card__name { margin-top: 12px; font-size: 24px; line-height: 32px; font-weight: 700; color: var(--on-surface); }
