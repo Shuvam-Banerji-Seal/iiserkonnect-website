@@ -1,0 +1,13 @@
+{
+  "_note": "Made-up sample data for the web demo. Notice titles and links are invented.",
+  "student": [
+    { "year": "2025", "title": "Sample notice: hostel room allotment schedule", "link": "https://example.org/sample-notices/hostel.pdf", "type": "PDF" },
+    { "year": "2025", "title": "Sample notice: winter break dates", "link": null, "type": null },
+    { "year": "2024", "title": "Sample notice: scholarship application window", "link": "https://example.org/sample-notices/scholarship.doc", "type": "DOC" },
+    { "year": "2024", "title": "Sample notice: library hours during examinations", "link": "https://example.org/sample-notices/library", "type": "Link" }
+  ],
+  "admin": [
+    { "year": "2025", "title": "Sample office order: committee constitution", "link": "https://example.org/sample-notices/order.pdf", "type": "PDF" },
+    { "year": "2024", "title": "Sample office order: purchase procedure update", "link": "https://example.org/sample-notices/purchase.pdf", "type": "PDF" }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "_note": "Made-up sample data for the web demo. Titles are real public books; copy counts, call numbers and locations are invented.",
+  "newArrivals": [
+    { "title": "Introduction to Quantum Mechanics", "author": "David J. Griffiths", "callNumber": "530.12 GRI", "itemUrl": "" },
+    { "title": "Linear Algebra Done Right", "author": "Sheldon Axler", "callNumber": "512.5 AXL", "itemUrl": "" },
+    { "title": "Introduction to Algorithms", "author": "Thomas H. Cormen et al.", "callNumber": "005.1 COR", "itemUrl": "" },
+    { "title": "Campbell Biology", "author": "Lisa A. Urry et al.", "callNumber": "574 CAM", "itemUrl": "" },
+    { "title": "Organic Chemistry", "author": "Jonathan Clayden et al.", "callNumber": "547 CLA", "itemUrl": "" }
+  ],
+  "catalogue": [
+    { "title": "Introduction to Quantum Mechanics", "author": "David J. Griffiths", "callNumber": "530.12 GRI", "itemUrl": "sample:1", "publication": "Cambridge University Press, 2018", "isbn": "", "subjects": ["Quantum theory"], "availableCopies": 2, "totalCopies": 3, "availabilityText": "2 of the 3 copies are available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [
+      { "location": "Central Library, Stacks", "barcode": "SAMPLE-0001", "status": "Available", "callNumber": "530.12 GRI", "volume": "" },
+      { "location": "Physics Reading Room", "barcode": "SAMPLE-0002", "status": "Checked out", "callNumber": "530.12 GRI", "volume": "" },
+      { "location": "Central Library, Stacks", "barcode": "SAMPLE-0003", "status": "Available", "callNumber": "530.12 GRI", "volume": "" }
+    ], "notes": "Sample record." },
+    { "title": "Linear Algebra Done Right", "author": "Sheldon Axler", "callNumber": "512.5 AXL", "itemUrl": "sample:2", "publication": "Springer, 2015", "isbn": "", "subjects": ["Algebra, Linear"], "availableCopies": 0, "totalCopies": 2, "availabilityText": "none of the 2 copies are available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [
+      { "location": "Central Library, Stacks", "barcode": "SAMPLE-0004", "status": "Checked out", "callNumber": "512.5 AXL", "volume": "" },
+      { "location": "Central Library, Stacks", "barcode": "SAMPLE-0005", "status": "Checked out", "callNumber": "512.5 AXL", "volume": "" }
+    ], "notes": "Sample record." },
+    { "title": "Introduction to Algorithms", "author": "Thomas H. Cormen et al.", "callNumber": "005.1 COR", "itemUrl": "sample:3", "publication": "MIT Press, 2009", "isbn": "", "subjects": ["Computer algorithms"], "availableCopies": 1, "totalCopies": 1, "availabilityText": "1 copy is available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [
+      { "location": "Computer Science Section", "barcode": "SAMPLE-0006", "status": "Available", "callNumber": "005.1 COR", "volume": "" }
+    ], "notes": "Sample record." },
+    { "title": "Campbell Biology", "author": "Lisa A. Urry et al.", "callNumber": "574 CAM", "itemUrl": "sample:4", "publication": "Pearson, 2020", "isbn": "", "subjects": ["Biology"], "availableCopies": 3, "totalCopies": 4, "availabilityText": "3 of the 4 copies are available", "itemClass": "Reference", "language": "English", "format": "Books", "copies": [
+      { "location": "Central Library, Reference", "barcode": "SAMPLE-0007", "status": "Available", "callNumber": "574 CAM", "volume": "Vol. 1" }
+    ], "notes": "Reference copy: in-library use only (sample record)." },
+    { "title": "Organic Chemistry", "author": "Jonathan Clayden et al.", "callNumber": "547 CLA", "itemUrl": "sample:5", "publication": "Oxford University Press, 2012", "isbn": "", "subjects": ["Organic chemistry"], "availableCopies": 1, "totalCopies": 2, "availabilityText": "1 of the 2 copies is available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [
+      { "location": "Chemical Sciences Section", "barcode": "SAMPLE-0008", "status": "Available", "callNumber": "547 CLA", "volume": "" }
+    ], "notes": "Sample record." },
+    { "title": "Fundamentals of Ecology", "author": "Eugene P. Odum", "callNumber": "577 ODU", "itemUrl": "sample:6", "publication": "Saunders, 1971", "isbn": "", "subjects": ["Ecology"], "availableCopies": 0, "totalCopies": 1, "availabilityText": "No available copies", "itemClass": "Books", "language": "English", "format": "Books", "copies": [], "notes": "Sample record." },
+    { "title": "Principles of Physical Chemistry", "author": "Horia Metiu", "callNumber": "541 MET", "itemUrl": "sample:7", "publication": "CRC Press, 2006", "isbn": "", "subjects": ["Physical chemistry"], "availableCopies": 2, "totalCopies": 2, "availabilityText": "2 of the 2 copies are available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [
+      { "location": "Chemical Sciences Section", "barcode": "SAMPLE-0009", "status": "Available", "callNumber": "541 MET", "volume": "" }
+    ], "notes": "Sample record." },
+    { "title": "Calculus: Early Transcendentals", "author": "James Stewart", "callNumber": "515 STE", "itemUrl": "sample:8", "publication": "Cengage, 2015", "isbn": "", "subjects": ["Calculus"], "availableCopies": 1, "totalCopies": 3, "availabilityText": "1 of the 3 copies is available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [], "notes": "Sample record." },
+    { "title": "Elementary Number Theory", "author": "David M. Burton", "callNumber": "512.7 BUR", "itemUrl": "sample:9", "publication": "McGraw-Hill, 2011", "isbn": "", "subjects": ["Number theory"], "availableCopies": 1, "totalCopies": 1, "availabilityText": "1 copy is available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [], "notes": "Sample record." },
+    { "title": "Sample Philosophy Reader (sample entry)", "author": "Sample Author", "callNumber": "193 SAM", "itemUrl": "sample:10", "publication": "Sample Publisher, 1900", "isbn": "", "subjects": ["Philosophy"], "availableCopies": 1, "totalCopies": 1, "availabilityText": "1 copy is available", "itemClass": "Books", "language": "German", "format": "Books", "copies": [], "notes": "Sample record." },
+    { "title": "Bengali Grammar Primer (sample entry)", "author": "Sample Author", "callNumber": "491 SAM", "itemUrl": "sample:11", "publication": "Sample Publisher, 1990", "isbn": "", "subjects": ["Bengali language"], "availableCopies": 1, "totalCopies": 1, "availabilityText": "1 copy is available", "itemClass": "Books", "language": "Bengali", "format": "Books", "copies": [], "notes": "Sample record." },
+    { "title": "Statistical Inference", "author": "George Casella, Roger L. Berger", "callNumber": "519.5 CAS", "itemUrl": "sample:12", "publication": "Cengage, 2001", "isbn": "", "subjects": ["Mathematical statistics"], "availableCopies": 2, "totalCopies": 2, "availabilityText": "2 of the 2 copies are available", "itemClass": "Books", "language": "English", "format": "Books", "copies": [], "notes": "Sample record." }
+  ]
+}

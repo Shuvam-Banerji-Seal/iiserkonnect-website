@@ -1,0 +1,28 @@
+{
+  "_note": "Made-up sample data for the web demo. Names, departments and extensions are fictional.",
+  "pilotNumber": "+91-33-6136-0000",
+  "sections": [
+    {
+      "id": "sample-academic", "title": "Sample Academic Office",
+      "contacts": [
+        { "name": "Sample Registrar Office", "extension": "1101", "location": "Admin Block, Ground Floor" },
+        { "name": "Sample Examinations Cell", "extension": "1104", "location": "Admin Block, First Floor" },
+        { "name": "Sample Academic Coordinator", "extension": "1107", "location": "Admin Block, Room 12" }
+      ]
+    },
+    {
+      "id": "sample-physics", "title": "Sample Department of Physics",
+      "contacts": [
+        { "name": "Sample Department Office", "extension": "2201", "location": "Physics Building" },
+        { "name": "Sample Lab Technician", "extension": "2214", "location": "Optics Lab" }
+      ]
+    },
+    {
+      "id": "sample-hostel", "title": "Sample Hostel Office",
+      "contacts": [
+        { "name": "Sample Warden Office", "extension": "3301", "location": "Hostel Block A" },
+        { "name": "Sample Mess Office", "extension": "3310", "location": "Mess Hall" }
+      ]
+    }
+  ]
+}

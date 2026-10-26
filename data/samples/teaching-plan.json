@@ -1,0 +1,65 @@
+{
+  "_note": "Made-up sample data for the web demo. Courses, instructors and syllabus text are fictional.",
+  "semesters": [
+    {
+      "label": "Autumn 2025", "season": "Autumn", "year": 2025,
+      "departments": ["CH", "PH", "MA"],
+      "courses": [
+        {
+          "slNo": 1, "code": "CH2101", "name": "Sample Organic Chemistry", "type": "Theory", "credits": 3,
+          "instructors": ["Sample Instructor A"], "level": 2, "programme": "Sample BS-MS Programme",
+          "url": "sample://autumn-2025/CH2101",
+          "syllabus": "1. Structure and bonding: hybridisation, resonance, and molecular orbitals.\n2. Stereochemistry: chirality, enantiomers and diastereomers.\n3. Reaction mechanisms: nucleophilic substitution and elimination.\n4. Carbonyl chemistry: addition, condensation and enolate reactions.",
+          "references": "Sample Textbook of Organic Chemistry (fictional title).",
+          "creditOptions": [{ "programme": "Sample BS-MS", "semesterNo": "3", "courseChoice": "Core" }]
+        },
+        {
+          "slNo": 2, "code": "PH2103", "name": "Sample Electrodynamics", "type": "Theory", "credits": 4,
+          "instructors": ["Sample Instructor B", "Sample Instructor C"], "level": 2, "programme": "Sample BS-MS Programme",
+          "url": "sample://autumn-2025/PH2103",
+          "syllabus": "Unit 1: Electrostatics and Gauss's law.\nUnit 2: Magnetostatics and Ampere's law.\nUnit 3: Electromagnetic induction and Maxwell's equations.\nUnit 4: Electromagnetic waves in vacuum and media.",
+          "references": "Sample lecture notes (fictional).",
+          "creditOptions": [{ "programme": "Sample BS-MS", "semesterNo": "3", "courseChoice": "Core" }]
+        },
+        {
+          "slNo": 3, "code": "MA2102", "name": "Sample Real Analysis", "type": "Theory", "credits": 4,
+          "instructors": ["Sample Instructor D"], "level": 2, "programme": "Sample BS-MS Programme",
+          "url": "sample://autumn-2025/MA2102",
+          "syllabus": "- Sequences and series: convergence tests.\n- Continuity and uniformity.\n- Differentiation: mean value theorem and Taylor's theorem.\n- Riemann integration and the fundamental theorem of calculus.",
+          "references": "Sample analysis text (fictional).",
+          "creditOptions": []
+        },
+        {
+          "slNo": 4, "code": "CH2151", "name": "Sample Organic Chemistry Lab", "type": "Laboratory", "credits": 2,
+          "instructors": ["Sample Instructor A"], "level": 2, "programme": "Sample BS-MS Programme",
+          "url": "sample://autumn-2025/CH2151",
+          "syllabus": "Experiment 1: Recrystallisation and melting point.\nExperiment 2: Thin-layer chromatography.\nExperiment 3: Preparation of an ester.",
+          "references": "",
+          "creditOptions": []
+        }
+      ]
+    },
+    {
+      "label": "Spring 2025", "season": "Spring", "year": 2025,
+      "departments": ["CH", "PH"],
+      "courses": [
+        {
+          "slNo": 1, "code": "PH1102", "name": "Sample Mechanics", "type": "Theory", "credits": 3,
+          "instructors": ["Sample Instructor E"], "level": 1, "programme": "Sample BS-MS Programme",
+          "url": "sample://spring-2025/PH1102",
+          "syllabus": "1. Newton's laws and inertial frames.\n2. Work, energy and conservation laws.\n3. Central forces and orbits.\n4. Rotational dynamics and angular momentum.",
+          "references": "Sample mechanics notes (fictional).",
+          "creditOptions": []
+        },
+        {
+          "slNo": 2, "code": "CH1101", "name": "Sample General Chemistry", "type": "Theory", "credits": 3,
+          "instructors": ["Sample Instructor F"], "level": 1, "programme": "Sample BS-MS Programme",
+          "url": "sample://spring-2025/CH1101",
+          "syllabus": "Module 1: Atomic structure and periodicity.\nModule 2: Chemical bonding.\nModule 3: Thermochemistry and equilibrium.",
+          "references": "",
+          "creditOptions": []
+        }
+      ]
+    }
+  ]
+}

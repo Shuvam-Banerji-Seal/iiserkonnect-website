@@ -1,0 +1,37 @@
+{
+  "_note": "Made-up sample data for the web demo. Paper titles, authors and eprint numbers are invented; PDF links point to a reserved example domain.",
+  "latest": [
+    { "eprintId": "9001", "title": "Sample Study of Thermal Transport in Layered Materials", "authors": ["Sample Author One", "Sample Author Two"], "year": "2025", "typeLine": "Article" },
+    { "eprintId": "9002", "title": "A Sample Note on Graph Colourings", "authors": ["Sample Author Three"], "year": "2025", "typeLine": "Conference paper" },
+    { "eprintId": "9003", "title": "Sample Observations of Stellar Populations", "authors": ["Sample Author Four", "Sample Author Five"], "year": "2024", "typeLine": "Article" }
+  ],
+  "divisions": [
+    { "id": "dps", "name": "Department of Physical Sciences" },
+    { "id": "dcs", "name": "Department of Chemical Sciences" },
+    { "id": "dbs", "name": "Department of Biological Sciences" }
+  ],
+  "years": {
+    "dps": ["2025", "2024"],
+    "dcs": ["2025"],
+    "dbs": ["2024"]
+  },
+  "papers": {
+    "dps|2025": [
+      { "eprintId": "9001", "title": "Sample Study of Thermal Transport in Layered Materials", "authors": ["Sample Author One", "Sample Author Two"], "year": "2025", "typeLine": "Article" }
+    ],
+    "dps|2024": [
+      { "eprintId": "9003", "title": "Sample Observations of Stellar Populations", "authors": ["Sample Author Four", "Sample Author Five"], "year": "2024", "typeLine": "Article" }
+    ],
+    "dcs|2025": [
+      { "eprintId": "9004", "title": "Sample Catalytic Pathways in Aqueous Solution", "authors": ["Sample Author Six"], "year": "2025", "typeLine": "Article" }
+    ],
+    "dbs|2024": [
+      { "eprintId": "9005", "title": "Sample Survey of Gut Microbiota Diversity", "authors": ["Sample Author Seven"], "year": "2024", "typeLine": "Thesis" }
+    ]
+  },
+  "details": {
+    "9001": { "eprintId": "9001", "title": "Sample Study of Thermal Transport in Layered Materials", "authors": ["Sample Author One", "Sample Author Two"], "year": "2025", "typeLine": "Article", "abstractText": "This is a made-up abstract for the web demo. It stands in for the paper summary that the Android app reads from the repository page.", "pdfUrl": "https://example.org/sample-papers/9001.pdf" },
+    "9002": { "eprintId": "9002", "title": "A Sample Note on Graph Colourings", "authors": ["Sample Author Three"], "year": "2025", "typeLine": "Conference paper", "abstractText": "", "pdfUrl": null },
+    "9003": { "eprintId": "9003", "title": "Sample Observations of Stellar Populations", "authors": ["Sample Author Four", "Sample Author Five"], "year": "2024", "typeLine": "Article", "abstractText": "Another made-up abstract, for the demo only.", "pdfUrl": "https://example.org/sample-papers/9003.pdf" }
+  }
+}
